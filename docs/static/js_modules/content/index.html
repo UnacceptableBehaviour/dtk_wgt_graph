@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>    
+    <head>
+        <title>cs_canvas_test</title>
+        <!--vs latest: canvas-sketch: 0.7.5,  canvas-sketch-util: 1.10.0-->
+        <script src="https://unpkg.com/canvas-sketch@latest/dist/canvas-sketch.umd.js"></script>
+        <script src="https://unpkg.com/tweakpane@3.0.8/dist/tweakpane.js"></script>
+        
+        <!--<script src="https://unpkg.com/canvas-sketch-util@latest/random.js"></script>-->
+        <!--<script src="https://unpkg.com/canvas-sketch-util@latest/math.js"></script>-->
+    </head>
+    <body>
+        <div class="container" id="cs_canvas_test_parent">
+            <title>visualized math equations for motion</title>
+            <p>visualized math equations for motion - cs_canvas_test</p>
+            <div class="container" id="cs_canvas_test">
+                <!--<script src='require_random.js' type='module'></script>-->
+                <!--<script src='u7_fp_diffusion.js' type='module'></script>-->
+                <!--<script src='u9_fp_random_target.js'></script>--> <!--no import allowed-->
+                
+                <!--lib support in file-->
+                <!--<script src='u7_fp_diffusion.js'></script>--> <!--WORKS-->                
+                <!--<script src='u8_fp_flock.js'></script> --><!--WORKS-->
+                <!--<script src='u9_fp_random_target.js' type='module'></script>--> <!--http-server from dir--> <!--WORKS-->
+                <!--<script src='u10_fp_math_functions.js'></script>--> <!--WORKS-->
+                
+                <!--lib support in js_module-->
+                <script src='u7_fp_diffusion.js' type='module'></script> <!--type='module' make this fail don't understand why-->
+                <!--<script src='u8_fp_flock.js' type='module'></script>--> <!--WORKS-->
+                <!--<script src='u9_fp_random_target.js' type='module'></script>--> <!--WORKS-->
+                <!--<script src='u9_fp_random_target_port.js' type='module'></script>--> <!--WORKS ??-->
+            </div>    
+        </div>
+    </body>
+</html>
+
+

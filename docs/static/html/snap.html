@@ -1,0 +1,98 @@
+<div class="container" id="snap_page_parent">
+    <div class="container" id="snap_page">
+        <h2>Snap Recipe</h2>
+        <br>
+        TAKE SNAP OF SNACK - RECORD ACTIVITY w/ PHOTO
+        <br>
+        
+        
+        <!--  -->
+        <!-- Background -->
+        <!-- 2016 https://www.html5rocks.com/en/tutorials/getusermedia/intro/ -->
+        
+        <!-- Tutorial -->
+        <!-- https://blog.prototypr.io/make-a-camera-web-app-tutorial-part-1-ec284af8dddf -->
+        
+        <!-- Applying filters -->
+        <!-- https://blog.teamtreehouse.com/accessing-the-device-camera-with-getusermedia -->
+        
+        <!-- JS Promises / streaming - more advanced -->
+        <!-- https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia#Browser_compatibility -->
+        
+        <!-- https://blog.addpipe.com/correct-syntax-html-media-capture/ -->
+        <!-- capturing image or video directly -->
+        CAPTURE VIDEO<input type="file" name="video" accept="video/*" capture="capture">
+        <br>
+        <button type="submit" class="btn btn-outline-secondary">SNAP</button>
+        <br>
+        
+        
+        <form method="POST" enctype="multipart/form-data" action="/diary_w_image">
+          CAPTURE IMAGE<input id="image_input" type="file" name="video" accept="image/*" capture="capture">
+          <br>
+          <!-- getting file image -->
+          IMAGE FILE<input type="file" name="video" accept="image/*" ><input type=submit value=Upload>
+        </form>
+        
+        <hr> <!--  -->
+        
+        DISPLAYING: <div id='image_name'>20170918_164301_banh_xeo.jpg</div>
+        <img src="static/images/20170918_164301_banh_xeo.jpg" width="100%" height="auto">
+        <hr> <!--  -->    
+        
+        
+        
+        
+        <!-- getting multiple file images -->    
+        MULTIPLE FILES<input type="file" name="video" accept="image/*" capture="filesystem" multiple>
+        <br>
+        
+        IMAGE & VIDEO<input type="file" name="video" accept="video/*,image/*" capture="capture">
+        
+        <hr> <!--  -->    
+        <p>
+        <label for="profile_pic">Profile Pic: </label>
+        <input multiple id="profile_pic" name="profile_pic" type="file">
+        </p>
+        
+        <hr> <!--  -->    
+        <p>
+        <label for="pictures_upload">Pictures: </label>
+        <input multiple id="pictures_upload" name="pictures[]" type="file">
+        </p>
+        
+        <hr> <!--  -->    
+        
+        
+        
+        <hr> <!--  -->    
+        <video autoplay></video>
+        <hr>
+        <hr>
+        
+        
+        <script>
+        
+          function hasGetUserMedia() {
+            return !!(navigator.mediaDevices &&
+              navigator.mediaDevices.getUserMedia);
+          }
+          
+          if (hasGetUserMedia()) {
+            // Good to go!
+          } else {
+            // alert('getUserMedia() is not supported by your browser');
+          }
+          
+          
+          const constraints = {
+            video: true
+          };
+          
+          const video = document.querySelector('video');
+          
+          navigator.mediaDevices.getUserMedia(constraints).then((stream) => {video.srcObject = stream});
+          
+        </script>
+    </div>
+</div>

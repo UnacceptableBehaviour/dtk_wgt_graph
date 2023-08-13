@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>canvas</title>
+        
+        <!-- Basic declarations and Meta descriptions -->
+        <meta charset="utf-8">
+        <link rel="icon" href="static/images/icons/icon-128x128.png">
+        <meta name="viewport"    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="mood-mapper" content="pwa mood & food tracker">
+        <meta name="theme-color" content="#C30085"/>        
+
+        <!-- Web app manifest -->
+        <link rel="manifest" href="static/manifest.json">
+        
+        <!-- iOS -->
+        <link rel="apple-touch-icon"                       href="static/images/icons/icon-192x192.png">
+        <meta name="apple-mobile-web-app-capable"          content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection"                      content="telephone=no">
+        
+        <!-- Custom CSS -->
+        <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">-->
+        <link rel="stylesheet" href="static/css/styles.css">
+        <!--use local version <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
+        <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">-->
+        <link rel="stylesheet" href="static/css/bootstrap.min.css">
+        
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>    
+        <script src="https://use.fontawesome.com/releases/v5.7.0/js/all.js"></script>-->
+        <script src='static/js_modules/dtk_storage.js'></script>
+        <!--<script src="https://unpkg.com/canvas-sketch@latest/dist/canvas-sketch.umd.js"></script>-->
+        <script src="https://unpkg.com/tweakpane@3.0.8/dist/tweakpane.js"></script>
+        
+        <!--Service Worker Github Pages-->
+        <!--https://gist.github.com/kosamari/7c5d1e8449b2fbc97d372675f16b566e-->
+        <script>
+          if ('serviceWorker' in navigator) {            
+            window.addEventListener('load', () => {
+              navigator.serviceWorker.register('/js_canvas_IO_docs/service_worker.js', {scope: '/js_canvas_IO_docs/'})
+                  .then((reg) => {
+                    console.log('SW registered - scope:', reg.scope); // reg.scope: http://localhost:50999/                    
+                    console.log('Service worker registered.', reg);              
+                  });
+            });
+          } else {
+            console.log("serviceWorker NOT in navigator");
+          }          
+        </script>        
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    </head>
+    
+    
+
+    <body>
+
+
+        <div class="container pwa_page" id="pwa_navbar">
+        <!--<div class="row padding pwa_page" id="pwa_navbar">-->
+          <div class="btn-group" name="nav_search_bar" id="nav_buttons"> <!-- https://www.w3schools.com/bootstrap/bootstrap_button_groups.asp -->
+            <!--<button id='b_nav_0'>B0</button>-->
+          </div>
+        </div>
+        <div class="pwa_page" id="pwa_page">
+        </div>
+        
+        <!--Navbar & JS modules/pages-->
+<!--        <script src="static/js_modules/navbarMod.js" type="module"></script>
+        <script src="static/js_modules/module_page_home.js" type="module"></script>
+        <script src="static/js_modules/module_page_tracker.js" type="module"></script>
+        <script src="static/js_modules/module_page_snap.js" type="module"></script>
+        <script src="static/js_modules/module_page_weigh_in.js" type="module"></script>
+        <script src="static/js_modules/module_page_mathPaint.js" type="module"></script>-->
+        <script src="static/js_modules/app.js" type="module"></script>
+        
+        <div class="container pwa_page" id="pwa_page_footer">
+        </div>
+    </body>
+</html>
+
+
