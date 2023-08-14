@@ -3,6 +3,7 @@
 .AppleDouble
 
 scratch/
+venv/
 
 # Logs
 logs
