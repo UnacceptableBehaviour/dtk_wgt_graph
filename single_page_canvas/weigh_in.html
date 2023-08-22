@@ -1,0 +1,49 @@
+<div class="container" id="weigh_in_page_parent">
+  <div class="row padding" id="weigh_in_page">
+    <div  id='weigh-in-input-row' class="container-fluid">
+      
+      <div class="input-group">
+        
+        <input id='weigh-in-weight-inrow' class="form-control" type="text" placeholder='weight'>
+    
+        <input id='weigh-in-pc-fat-inrow' class="form-control" type="text" placeholder='fat %'>
+        
+        <input id='weigh-in-pc-water-inrow' class="form-control"type="text" placeholder='water %'>        
+        
+      </div>
+    
+    </div>
+    
+    <div class="container-fluid">
+      <h4 id='page-display-title'>
+        daily weigh in
+        <button id='but-weigh-in-record' type="button" class="btn btn-outline-danger float-right">RECORD</button>  
+      </h4>
+      
+    </div>
+    
+    <br>
+    <div id="weigh-in-chart" class="container container-fluid">
+      <h6>weigh in chart</h6>
+      <div >
+        <img
+            id="weigh-in-chart-svg"
+            src='static/images/svg/graph.svg'
+            alt="place holder weight chart"
+            align="centre"
+            width="100%"
+        />
+      </div>
+    </div>
+    
+    <!--REMOVE DEBUG-->
+    <table id='debug-weigh-in-table'>
+      <tbody>
+      <td id='dbg_wt'>weight: **.*</td>
+      <td id='dbg_f'>fat: **.*</td>
+      <td id='dbg_w'>water: **.*</td>   
+      </tbody>
+    </table>
+    <!--REMOVE DEBUG-->
+  <div/>
+<div/> 

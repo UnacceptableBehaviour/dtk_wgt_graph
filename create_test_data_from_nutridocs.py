@@ -34,7 +34,8 @@ if ('-h' in sys.argv) or ('--h' in sys.argv) or ('-help' in sys.argv) or ('--hel
 
 
 DATA_FILE_JSON = Path('./docs/static/data/dtk_data.json')
-DATA_FILE_JS = Path('./docs/static/js_modules/content/dtk_data.js')
+#DATA_FILE_JS = Path('./docs/static/js_modules/content/dtk_data.js')
+DATA_FILE_JS = Path('./single_page_canvas/dtk_data.js')
 
 # with open(DATA_FILE_JSON, 'r') as f:
 #     record = json.load(f)
