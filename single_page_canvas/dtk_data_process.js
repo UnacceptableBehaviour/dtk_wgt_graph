@@ -12,7 +12,7 @@ console.log(sortedArray);
 // interpolate data from start/end points of gap
 function scanForGaps(){
     console.log(`scanning for gaps - [${Object.keys(dtk_test_record).length}]`);
-    return dtk_test_record;
+    return sortedArray;
 }
 
 function addRollingAverageData(){
