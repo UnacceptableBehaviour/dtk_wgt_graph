@@ -1,6 +1,14 @@
 
-
+/* remove circle with dot in from radio group */
 .btn-group input[type=radio] {
-    display: none;
-  }
-  
+  display: none;
+}
+
+.bt-nav-space {                     /* pushes button out to each side */
+  /* height: 34px; */
+  flex-grow: 1;
+}
+
+.period-window {
+  width:fit-content;
+}

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="static/css/data_chart.css">
 </head>
 <body>
-    <div class="container" id="weigh_in_page_parent">
+    <div class="" id="weigh_in_page_parent">
         <div class="row padding" id="weigh_in_page">
           <div  id='weigh-in-input-row' class="container-fluid">
             
@@ -23,41 +23,38 @@
           
           </div>
           
-          <div class="container-fluid">
+          <div class="d-inline-flex">
             <h4 id='page-display-title'>
-              daily weigh in
-              <button id='but-weigh-in-record' type="button" class="btn btn-outline-danger float-right">RECORD</button>  
+              daily weigh in              
             </h4>
-            
+            <button id='but-weigh-in-record' type="button" class="btn btn-outline-danger ms-auto">RECORD</button>  
           </div>
           
           <br>
           <div id="weigh-in-chart" class="container container-fluid">
             <h6>weigh in chart</h6>
-            <div class="d-flex">
+            <div class="d-inline-flex w-100">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-secondary">
+                    <label class="btn btn-secondary period-window">
                         <input type="radio" name="options" id="option2" autocomplete="off"> 7D
                     </label>
-                    <label class="btn btn-secondary">
+                    <label class="btn btn-secondary period-window">
                         <input type="radio" name="options" id="option3" autocomplete="off"> 14D
                     </label>
-                    <label class="btn btn-secondary">
+                    <label class="btn btn-secondary period-window">
                         <input type="radio" name="options" id="option3" autocomplete="off"> 1M
                     </label>
-                    <label class="btn btn-secondary">
+                    <label class="btn btn-secondary period-window">
                         <input type="radio" name="options" id="option3" autocomplete="off"> 3M
                     </label>
-                    <label class="btn btn-secondary">
+                    <label class="btn btn-secondary period-window">
                         <input type="radio" name="options" id="option3" autocomplete="off"> 6M
                      </label>
-                     <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="option3" autocomplete="off"> 1Y
-                     </label>
-                     <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="option3" autocomplete="off"> 2Y
+                     <label class="btn btn-secondary period-window">
+                        <input type="radio" name="options" id="option3" autocomplete="off"> All
                      </label>
                 </div>
+                <inline class="bt-nav-space"></inline>
                 <div class="btn-group ml-3">
                     <button type="button" class="btn btn-outline-secondary"><</button>
                     <button type="button" class="btn btn-outline-secondary">></button>
