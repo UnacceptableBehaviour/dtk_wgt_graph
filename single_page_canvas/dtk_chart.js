@@ -45,37 +45,37 @@ class DisplayObject {
     this.h = this.display.canvas.height * (this.h_pc / 100);
   }
 
-  draw(dspObj){
+  draw(){
     this.scaleCoords();
     this.ctx.save();
-    if (dspObj.border) { // boundingBox
-      this.drawLineCentre2Obj(dspObj);
-      //console.log(`doName: ${dspObj.doName}, x: ${dspObj.x}, y: ${dspObj.y}, w: ${dspObj.w}, h: ${dspObj.h}, ink:${dspObj.col_ink}, bbox:${dspObj.col_bbox}`); 
+    if (this.border) { // boundingBox
+      this.drawLineCentre2Obj();
+      //console.log(`doName: ${this.doName}, x: ${this.x}, y: ${this.y}, w: ${this.w}, h: ${this.h}, ink:${this.col_ink}, bbox:${this.col_bbox}`); 
 
       // border - guideline for now
       this.ctx.beginPath();
-      this.ctx.strokeStyle = dspObj.col_bbox;      
+      this.ctx.strokeStyle = this.col_bbox;      
       this.ctx.lineWidth = 1;
-      this.ctx.rect(dspObj.x, dspObj.y, dspObj.w, dspObj.h);
+      this.ctx.rect(this.x, this.y, this.w, this.h);
       this.ctx.stroke();
     }
-    if (dspObj.titleOn) {      
+    if (this.titleOn) {      
       //placeCentreText(this.ctx, text, xl, xr, y, color, fontSize, lnW = 2)
-      dspObj.placeCentreText(this.ctx, dspObj.doName, dspObj.x, dspObj.x + dspObj.w, dspObj.y + dspObj.h, dspObj.col_ink, dspObj.fontSz);
+      this.placeCentreText(this.ctx, this.doName, this.x, this.x + this.w, this.y + this.h, this.col_ink, this.fontSz);
     }
-    if (dspObj.markers) {
+    if (this.markers) {
       // show rect place
-      //drawCircle(dspObj.x, dspObj.y, 6, 'cyan');
+      //drawCircle(this.x, this.y, 6, 'cyan');
       this.ctx.beginPath();
       this.ctx.fillStyle = 'cyan';
-      this.ctx.arc(dspObj.x, dspObj.y, 6, 0, 2*Math.PI);
+      this.ctx.arc(this.x, this.y, 6, 0, 2*Math.PI);
       this.ctx.fill();
       
       // show translate place
-      //drawCircle(dspObj.x + dspObj.w/2, dspObj.y + dspObj.h/2, 6, 'orange');
+      //drawCircle(this.x + this.w/2, this.y + this.h/2, 6, 'orange');
       this.ctx.beginPath();
       this.ctx.fillStyle = 'orange';
-      this.ctx.arc(dspObj.x + dspObj.w/2, dspObj.y + dspObj.h/2, 6, 0, Math.PI*2);
+      this.ctx.arc(this.x + this.w/2, this.y + this.h/2, 6, 0, Math.PI*2);
       this.ctx.fill();
 
       // show origin
@@ -130,13 +130,13 @@ class DisplayObject {
     ctx.restore();
   }  
 
-  drawLineCentre2Obj(dspObj){
-    let x_c = dspObj.display.canvas.width / 2;
-    let y_c = dspObj.display.canvas.height / 2;
+  drawLineCentre2Obj(){
+    let x_c = this.display.canvas.width / 2;
+    let y_c = this.display.canvas.height / 2;
     this.ctx.beginPath();
     this.ctx.moveTo(x_c, y_c);
-    this.ctx.lineTo(dspObj.x, dspObj.y);
-    this.ctx.strokeStyle = dspObj.col_ink;
+    this.ctx.lineTo(this.x, this.y);
+    this.ctx.strokeStyle = this.col_ink;
     this.ctx.lineWidth = 4;
     this.ctx.stroke();
   }
@@ -174,8 +174,8 @@ class VertLabelBar extends DisplayObject {
     this.dark         = dark;
   }  // olive navy maroon lime  
 
-  draw(dspObj){
-    super.draw(dspObj);
+  draw(){
+    super.draw();
     const ctx = this.display.canvas.getContext("2d");
     ctx.fillStyle = "red";
     ctx.fillRect(20, 20, 150, 100);
@@ -293,7 +293,8 @@ class Canvas {
 
   clearDisplay() {
     // opacity controls the trail effect in animation set to 1 to remove
-    this.ctx.fillStyle = 'rgba(255, 255, 255, .4)';
+    //this.ctx.fillStyle = 'rgba(255, 255, 255, .4)';
+    this.ctx.fillStyle = 'rgba(255, 255, 255, 1)';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.strokeStyle = 'black';
     this.ctx.strokeRect(0, 0, this.canvas.width, this.canvas.height);
@@ -301,13 +302,10 @@ class Canvas {
 
   update(zList){
     for (let dspObj of zList){
-      this.renderComponent(dspObj);
+      dspObj.draw();
     }
   }
 
-  renderComponent(dspObj){
-    dspObj.draw(dspObj);
-  }
 }
 
 
