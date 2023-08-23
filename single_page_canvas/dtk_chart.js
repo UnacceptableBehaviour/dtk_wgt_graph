@@ -4,14 +4,14 @@ import { dtk_chart_info } from './dtk_data_process.js';
 export var chart_settings = {
   cnv_width: 400,
   cnv_height: 400,
-  chartWidthDays: 7,
-  fontSz: 10,
+  chartWidthDays: 14,
+  fontSize: 10,
 }
 
 var progressChart;
 
 class DisplayObject {
-  constructor({display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, font_sz=10, col_bbox='magenta', dbgOn=true} = {}){
+  constructor({display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, fontSize=10, col_bbox='magenta', dbgOn=true} = {}){
 		this.display = display;
     this.ctx = display.ctx;
     this.doName = doName;
@@ -28,7 +28,7 @@ class DisplayObject {
     this.col_bk = col_bk;
     this.alpha = alpha;
     this.col_bbox = col_bbox;
-    this.fontSz = font_sz;
+    this.fontSize = fontSize;
 
     // debug
     this.dbgOn = dbgOn;
@@ -61,7 +61,7 @@ class DisplayObject {
     }
     if (this.titleOn) {      
       //placeCentreText(this.ctx, text, xl, xr, y, color, fontSize, lnW = 2)
-      this.placeCentreText(this.ctx, this.doName, this.x, this.x + this.w, this.y + this.h, this.col_ink, this.fontSz);
+      this.placeCentreText(this.ctx, this.doName, this.x, this.x + this.w, this.y + this.h, this.col_ink, this.fontSize);
     }
     if (this.markers) {
       // show rect place
@@ -88,6 +88,29 @@ class DisplayObject {
     }    
     this.ctx.restore();
   }
+
+  placeCentreTextNoMk(ctx=null, text, xl, xr, y, color, fontSize) {    
+    if (ctx==null){ ctx = this.ctx };
+    //   |                                 |      < fontSize(epth)
+    //   xl             texts              xr
+    //                    |
+    //                    ^ markMidddle
+    ctx.save();
+    
+    // font def
+    ctx.font = `${fontSize}px Arial`;
+    ctx.textBaseline = 'middle'; // hanging
+    ctx.textAlign = 'center';
+      
+    let markMiddle = xl + (xr - xl) / 2;
+    let textMetrics = ctx.measureText(text);
+    let textStart = markMiddle;   
+  
+    // place text between if it fits below if not
+    ctx.fillStyle = color;
+    ctx.fillText(text, textStart, y+fontSize);
+    ctx.restore();
+  }  
 
   placeCentreText(ctx=null, text, xl, xr, y, color, fontSize, lnW = 2) {    
     if (ctx==null){ ctx = this.ctx };
@@ -152,7 +175,7 @@ class DisplayObject {
 
 class VertLabelBar extends DisplayObject {
   // display rolling average for period length
-  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, font_sz, col_bbox, dbgOn} = {},
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
                 label='#', pwPos=1, periodWindow=7, dark=null  )
   {
     if (dark === null) dark = pwPos % 2;   // 0=dark 1=light
@@ -166,7 +189,7 @@ class VertLabelBar extends DisplayObject {
     h_pc = 100;
     super({ display:display, doName:doName, 
       x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, rad:rad, 
-      col_ink:col_ink, col_bk:col_bk, alpha:alpha, font_sz:font_sz, col_bbox:col_bbox, dbgOn:dbgOn});
+      col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
 
     this.label        = label;
     this.pwPos        = pwPos;
@@ -177,37 +200,39 @@ class VertLabelBar extends DisplayObject {
   draw(){
     super.draw();
     const ctx = this.display.canvas.getContext("2d");
-    ctx.fillStyle = "red";
-    ctx.fillRect(20, 20, 150, 100);
-
+    ctx.fillStyle = this.col_ink;
+    ctx.globalAlpha = this.alpha;
+    ctx.fillRect(this.x, this.y, this.w, this.h);
+    ctx.globalAlpha = 1;
+    this.placeCentreTextNoMk(ctx, this.label, this.x, this.x + this.w, this.y + (this.h - (this.h/20)), this.col_ink, this.fontSize )
     console.log(`VertLabelBar ${this.label} - dark:${this.dark} - alpha:${this.alpha}  \tx:${this.x_pc}, y:${this.y_pc}, w:${this.w_pc}, h:${this.h_pc},`);
   }
 }
 
 class SummaryBar extends DisplayObject {
   // display rolling average for period length
-  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, font_sz, col_bbox, dbgOn} = {},
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
                 nix_time_day, ave_for_period, ave_last_period, min, max, pos_LR='right' )
   {
     super({ display:display, doName:doName, 
             x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, rad:rad, 
-            col_ink:col_ink, col_bk:col_bk, alpha:alpha, font_sz:font_sz, col_bbox:col_bbox, dbgOn:dbgOn});
+            col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
     
   }  // olive navy maroon lime  
 }
 
 class DtkChart extends DisplayObject { // hold curent state
-  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, font_sz, col_bbox, dbgOn} = {},
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
                 settings, )
   {         
     super({ display:display, doName:doName, 
             x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, rad:rad, 
-            col_ink:col_ink, col_bk:col_bk, alpha:alpha, font_sz:font_sz, col_bbox:col_bbox, dbgOn:dbgOn})
+            col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn})
     
     this.zList = [this];
     let dsObjConfig = { display:display, doName:doName, 
                         x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, rad:rad, 
-                        col_ink:col_ink, col_bk:col_bk, alpha:alpha, font_sz:font_sz, col_bbox:col_bbox, dbgOn:dbgOn}
+                        col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn}
 
     dsObjConfig = Object.assign(dsObjConfig, {doName:'a1', x_pc:10, y_pc:10, w_pc:10, h_pc:10, rad:0, col_ink:'lime', col_bbox:'magenta'});
     let a1 = new DisplayObject(dsObjConfig);
@@ -227,18 +252,19 @@ class DtkChart extends DisplayObject { // hold curent state
 
     dsObjConfig = { display:display, doName:'sBar', 
                     x_pc:80, y_pc:0, w_pc:20, h_pc:100, rad:0, 
-                    col_ink:'maroon', col_bk:col_bk, alpha:alpha, font_sz:font_sz, col_bbox:'magenta', dbgOn:true}
+                    col_ink:'maroon', col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:'magenta', dbgOn:true}
     let sBar = new SummaryBar(dsObjConfig);
     this.zList.push(sBar);
 
-    let periodWindow = 7
+    let periodWindow = chart_settings.chartWidthDays;
     for (let pwPos = 1; pwPos < periodWindow+1; pwPos++){
       dsObjConfig = { display:display, doName:'vBar', 
       //x_pc:80, y_pc:0, w_pc:20, h_pc:100, rad:0, 
-      col_ink:'black', col_bk:col_bk, alpha:0.5, font_sz:font_sz, col_bbox:'cyan', dbgOn:true};
+      col_ink:'black', col_bk:col_bk, alpha:0.1, fontSize:fontSize, col_bbox:'cyan', dbgOn:true};
 
+      // TODO replace `${pwPos}` w/ date
       // label='#', pwPos=1, periodWindow=7, dark=null 
-      let vBar = new VertLabelBar(dsObjConfig, `V${pwPos}`, pwPos, periodWindow );
+      let vBar = new VertLabelBar(dsObjConfig, `${pwPos}`, pwPos, periodWindow );
       this.zList.push(vBar);      
     }
 
@@ -359,7 +385,7 @@ export function createDtkChart({cnv_width = 400, cnv_height = 400, parent = docu
     { display: display,
       doName:'dtkProgress',
       x:0, y:0, w:cnv_width, h:cnv_height, rad:0, 
-      col_ink:'black', col_bk:'white', alpha:'100', font_sz:10, col_bbox:'olive', dbgOn:true },
+      col_ink:'black', col_bk:'white', alpha:'100', fontSize:10, col_bbox:'olive', dbgOn:true },
     chart_settings ) ;
 
   progressChart.update(); // pass in state: 7day, 14d, 21d, 1m, 3m, 6m, 1y, 2y, plus new dimensions
