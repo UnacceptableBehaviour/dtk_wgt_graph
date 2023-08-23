@@ -54,11 +54,9 @@ class DisplayObject {
 
       // border - guideline for now
       this.ctx.beginPath();
-      this.ctx.strokeStyle = dspObj.col_bbox;
-      //this.ctx.strokeStyle = dspObj.col_ink;
+      this.ctx.strokeStyle = dspObj.col_bbox;      
       this.ctx.lineWidth = 1;
-      this.ctx.rect(dspObj.x,dspObj.y, dspObj.w,dspObj.h);
-      //this.ctx.fillRect(dspObj.x, dspObj.y, dspObj.w, dspObj.h);
+      this.ctx.rect(dspObj.x, dspObj.y, dspObj.w, dspObj.h);
       this.ctx.stroke();
     }
     if (dspObj.titleOn) {      
@@ -147,9 +145,43 @@ class DisplayObject {
     this.ctx.beginPath();
     this.ctx.arc(x, y, w, rad_start, rad_end);
     this.ctx.closePath();
-    this.ctx.fillStyle = dspObj.col_bk;
+    this.ctx.fillStyle = col;
     this.ctx.fill();
   }  
+}
+
+class VertLabelBar extends DisplayObject {
+  // display rolling average for period length
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, font_sz, col_bbox, dbgOn} = {},
+                label='#', pwPos=1, periodWindow=7, dark=null  )
+  {
+    if (dark === null) dark = pwPos % 2;   // 0=dark 1=light
+    if (dark > 0) dark = 1;
+    
+    alpha = alpha * dark;
+    
+    x_pc = (pwPos-1) * (100 / periodWindow);
+    y_pc = 0;
+    w_pc = (100 / periodWindow);
+    h_pc = 100;
+    super({ display:display, doName:doName, 
+      x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, rad:rad, 
+      col_ink:col_ink, col_bk:col_bk, alpha:alpha, font_sz:font_sz, col_bbox:col_bbox, dbgOn:dbgOn});
+
+    this.label        = label;
+    this.pwPos        = pwPos;
+    this.periodWindow = periodWindow;    
+    this.dark         = dark;
+  }  // olive navy maroon lime  
+
+  draw(dspObj){
+    super.draw(dspObj);
+    const ctx = this.display.canvas.getContext("2d");
+    ctx.fillStyle = "red";
+    ctx.fillRect(20, 20, 150, 100);
+
+    console.log(`VertLabelBar ${this.label} - dark:${this.dark} - alpha:${this.alpha}  \tx:${this.x_pc}, y:${this.y_pc}, w:${this.w_pc}, h:${this.h_pc},`);
+  }
 }
 
 class SummaryBar extends DisplayObject {
@@ -159,7 +191,7 @@ class SummaryBar extends DisplayObject {
   {
     super({ display:display, doName:doName, 
             x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, rad:rad, 
-            col_ink:col_ink, col_bk:col_bk, alpha:alpha, font_sz:font_sz, col_bbox:col_bbox, dbgOn:dbgOn})
+            col_ink:col_ink, col_bk:col_bk, alpha:alpha, font_sz:font_sz, col_bbox:col_bbox, dbgOn:dbgOn});
     
   }  // olive navy maroon lime  
 }
@@ -194,11 +226,21 @@ class DtkChart extends DisplayObject { // hold curent state
     this.zList.push(a4);
 
     dsObjConfig = { display:display, doName:'sBar', 
-                    //x:360, y:0, w:40, h:400, rad:0, 
                     x_pc:80, y_pc:0, w_pc:20, h_pc:100, rad:0, 
                     col_ink:'maroon', col_bk:col_bk, alpha:alpha, font_sz:font_sz, col_bbox:'magenta', dbgOn:true}
-    let sBar = new SummaryBar(dsObjConfig)
+    let sBar = new SummaryBar(dsObjConfig);
     this.zList.push(sBar);
+
+    let periodWindow = 7
+    for (let pwPos = 1; pwPos < periodWindow+1; pwPos++){
+      dsObjConfig = { display:display, doName:'vBar', 
+      //x_pc:80, y_pc:0, w_pc:20, h_pc:100, rad:0, 
+      col_ink:'black', col_bk:col_bk, alpha:0.5, font_sz:font_sz, col_bbox:'cyan', dbgOn:true};
+
+      // label='#', pwPos=1, periodWindow=7, dark=null 
+      let vBar = new VertLabelBar(dsObjConfig, `V${pwPos}`, pwPos, periodWindow );
+      this.zList.push(vBar);      
+    }
 
   } // olive navy maroon lime
 
