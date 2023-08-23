@@ -4,7 +4,7 @@ import { dtk_chart_info } from './dtk_data_process.js';
 export var chart_settings = {
   cnv_width: 400,
   cnv_height: 400,
-  chartWidthDays: 14,
+  chartWidthDays: 21,
   fontSize: 10,
 }
 
@@ -176,7 +176,7 @@ class DisplayObject {
 class VertLabelBar extends DisplayObject {
   // display rolling average for period length
   constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
-                label='#', pwPos=1, periodWindow=7, dark=null  )
+                label_top='#',label_bot='#', pwPos=1, periodWindow=7, dark=null  )
   {
     if (dark === null) dark = pwPos % 2;   // 0=dark 1=light
     if (dark > 0) dark = 1;
@@ -191,7 +191,8 @@ class VertLabelBar extends DisplayObject {
       x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, rad:rad, 
       col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
 
-    this.label        = label;
+    this.label_top    = label_top;
+    this.label_bot    = label_bot;
     this.pwPos        = pwPos;
     this.periodWindow = periodWindow;    
     this.dark         = dark;
@@ -203,9 +204,10 @@ class VertLabelBar extends DisplayObject {
     ctx.fillStyle = this.col_ink;
     ctx.globalAlpha = this.alpha;
     ctx.fillRect(this.x, this.y, this.w, this.h);
-    ctx.globalAlpha = 1;
-    this.placeCentreTextNoMk(ctx, this.label, this.x, this.x + this.w, this.y + (this.h - (this.h/20)), this.col_ink, this.fontSize )
-    console.log(`VertLabelBar ${this.label} - dark:${this.dark} - alpha:${this.alpha}  \tx:${this.x_pc}, y:${this.y_pc}, w:${this.w_pc}, h:${this.h_pc},`);
+    ctx.globalAlpha = 1;                                        // TODO - sort propert geometry calculation out for text placement
+    this.placeCentreTextNoMk(ctx, this.label_top, this.x, this.x + this.w, this.y + (this.h - (this.h/this.fontSize)-this.fontSize), this.col_ink, this.fontSize );
+    this.placeCentreTextNoMk(ctx, this.label_bot, this.x, this.x + this.w, this.y + (this.h - (this.h/this.fontSize)+this.fontSize), this.col_ink, this.fontSize );
+    //console.log(`VertLabelBar ${this.label} - dark:${this.dark} - alpha:${this.alpha}  \tx:${this.x_pc}, y:${this.y_pc}, w:${this.w_pc}, h:${this.h_pc},`);
   }
 }
 
@@ -217,7 +219,7 @@ class SummaryBar extends DisplayObject {
     super({ display:display, doName:doName, 
             x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, rad:rad, 
             col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
-    
+        
   }  // olive navy maroon lime  
 }
 
@@ -228,7 +230,28 @@ class DtkChart extends DisplayObject { // hold curent state
     super({ display:display, doName:doName, 
             x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, rad:rad, 
             col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn})
-    
+
+    let days = chart_settings.chartWidthDays;
+    let dayIdxStart = dtk_chart_info.length - days - 1;
+    let dayIdxEnd = dtk_chart_info.length; 
+    for (let i = dayIdxStart; i < dayIdxEnd; i++){
+      console.log(`dtk[${i}] - ${dtk_chart_info[i].dtk_weight}`);
+      console.log(dtk_chart_info[i]);
+    }
+
+    // 1568764800000: {
+    //   dtk_pc_fat: "38.3",
+    //   dtk_pc_h2o: "44.8",
+    //   dtk_rcp: {
+    //     dt_date: 1568764800000,
+    //     dt_date_readable: "2019 09 18",
+    //     dt_day: "day",
+    //   },
+    //   dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    //   dtk_weight: "105.7",
+    // }            
+
+
     this.zList = [this];
     let dsObjConfig = { display:display, doName:doName, 
                         x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, rad:rad, 
@@ -257,21 +280,26 @@ class DtkChart extends DisplayObject { // hold curent state
     this.zList.push(sBar);
 
     let periodWindow = chart_settings.chartWidthDays;
-    for (let pwPos = 1; pwPos < periodWindow+1; pwPos++){
+    let indexStart = dtk_chart_info.length - periodWindow;
+
+    for (let pwPos = 0; pwPos < periodWindow; pwPos++){
       dsObjConfig = { display:display, doName:'vBar', 
       //x_pc:80, y_pc:0, w_pc:20, h_pc:100, rad:0, 
       col_ink:'black', col_bk:col_bk, alpha:0.1, fontSize:fontSize, col_bbox:'cyan', dbgOn:true};
-
-      // TODO replace `${pwPos}` w/ date
-      // label='#', pwPos=1, periodWindow=7, dark=null 
-      let vBar = new VertLabelBar(dsObjConfig, `${pwPos}`, pwPos, periodWindow );
+      
+      let dataIdxOffset = indexStart+pwPos;
+      let dayShort = dtk_chart_info[dataIdxOffset].dtk_rcp.dt_day.slice(0,2);;
+      let dayNum = dtk_chart_info[dataIdxOffset].dtk_rcp.dt_date_readable.slice(-2); // last 2 chars
+      let vBar = new VertLabelBar(dsObjConfig, dayShort, dayNum, pwPos+1, periodWindow );
       this.zList.push(vBar);      
     }
+
+  
+
 
   } // olive navy maroon lime
 
   update(){
-    console.log(`DtkChart.border: ${this.border} <`);
     this.display.sync(this);
   }
 
@@ -285,8 +313,6 @@ class DtkChart extends DisplayObject { // hold curent state
     this.display.canvas.height = winInnerHeight / 2;
     this.display.canvas.style.position = 'absolute';
     this.display.canvas.style.left = "0px";        
-    console.log(`resizeCanvas: x:${winInnerWidth}, y:${winInnerHeight / 2}`);
-
     this.update();
   }
 
@@ -359,7 +385,7 @@ const runAnimation = animation => {
 var rafScheduled = false;
 window.addEventListener('resize', () => {
   // Perform actions in response to window resize
-  console.log('Window was resized');
+  //console.log('Window was resized');
   progressChart.resizeCanvas()
   // if (rafScheduled == false) {
   //   rafScheduled = true;
