@@ -213,6 +213,36 @@ class VertLabelBar extends DisplayObject {
   }
 }
 
+class VertLabelBars extends DisplayObject {
+  // display rolling average for period length
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {} )
+  {
+    super({ display:display, doName:doName, 
+      x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, rad:rad, 
+      col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
+    this.fontSize = fontSize;
+  }
+
+  draw(){
+    super.draw();
+    let periodWindow = chartSettings.chartWidthDays;
+    let indexStart = dtkChartInfo.length - periodWindow;
+
+    for (let pwPos = 0; pwPos < periodWindow; pwPos++){
+      let dsObjConfig = { display:this.display, doName:'vBar', 
+      //x_pc:80, y_pc:0, w_pc:20, h_pc:100, rad:0, 
+      col_ink:'black', col_bk:'white', alpha:0.1, fontSize:this.fontSize, col_bbox:'cyan', dbgOn:false};
+      
+      let dataIdxOffset = indexStart+pwPos;
+      let dayShort = dtkChartInfo[dataIdxOffset].dtk_rcp.dt_day.slice(0,2);;
+      let dayNum = dtkChartInfo[dataIdxOffset].dtk_rcp.dt_date_readable.slice(-2); // last 2 chars
+      let vBar = new VertLabelBar(dsObjConfig, dayShort, dayNum, pwPos+1, periodWindow );
+      vBar.draw();
+    }
+  }
+}
+
+
 class SummaryBar extends DisplayObject {
   // display rolling average for period length
   constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
@@ -261,40 +291,32 @@ class DtkChart extends DisplayObject { // hold curent state
 
     dsObjConfig = Object.assign(dsObjConfig, {doName:'a1', x_pc:10, y_pc:10, w_pc:10, h_pc:10, rad:0, col_ink:'lime', col_bbox:'magenta'});
     let a1 = new DisplayObject(dsObjConfig);
-    this.zList.push(a1);
+    //this.zList.push(a1);
 
     dsObjConfig = Object.assign(dsObjConfig, {doName:'a2', x_pc:10, y_pc:80, w_pc:10, h_pc:10, rad:0, col_ink:'yellowgreen', col_bbox:'magenta'});
     let a2 = new DisplayObject(dsObjConfig);
-    this.zList.push(a2);
+    //this.zList.push(a2);
 
     dsObjConfig = Object.assign(dsObjConfig, {doName:'a3', x_pc:80, y_pc:80, w_pc:10, h_pc:10, rad:0, col_ink:'purple', col_bbox:'magenta'});
     let a3 = new DisplayObject(dsObjConfig);
-    this.zList.push(a3);
+    //this.zList.push(a3);
 
     dsObjConfig = Object.assign(dsObjConfig, {doName:'a4', x_pc:80, y_pc:10, w_pc:10, h_pc:10, rad:0, col_ink:'orangered', col_bbox:'magenta'});
     let a4 = new DisplayObject(dsObjConfig);
-    this.zList.push(a4);
+    //this.zList.push(a4);
 
     dsObjConfig = { display:display, doName:'sBar', 
                     x_pc:80, y_pc:0, w_pc:20, h_pc:100, rad:0, 
                     col_ink:'maroon', col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:'magenta', dbgOn:true}
     let sBar = new SummaryBar(dsObjConfig);
-    this.zList.push(sBar);
+    //this.zList.push(sBar);
 
-    let periodWindow = chartSettings.chartWidthDays;
-    let indexStart = dtkChartInfo.length - periodWindow;
+    dsObjConfig = { display:display, doName:'vBarS', 
+                    x_pc:0, y_pc:0, w_pc:100, h_pc:100, rad:0, 
+                    col_ink:'orangeRed', col_bk:col_bk, alpha:alpha, fontSize:chartSettings.fontSize, col_bbox:'purple', dbgOn:true}
+    let verticalLabelBars = new VertLabelBars(dsObjConfig);
+    this.zList.push(verticalLabelBars);
 
-    for (let pwPos = 0; pwPos < periodWindow; pwPos++){
-      dsObjConfig = { display:display, doName:'vBar', 
-      //x_pc:80, y_pc:0, w_pc:20, h_pc:100, rad:0, 
-      col_ink:'black', col_bk:col_bk, alpha:0.1, fontSize:fontSize, col_bbox:'cyan', dbgOn:false};
-      
-      let dataIdxOffset = indexStart+pwPos;
-      let dayShort = dtkChartInfo[dataIdxOffset].dtk_rcp.dt_day.slice(0,2);;
-      let dayNum = dtkChartInfo[dataIdxOffset].dtk_rcp.dt_date_readable.slice(-2); // last 2 chars
-      let vBar = new VertLabelBar(dsObjConfig, dayShort, dayNum, pwPos+1, periodWindow );
-      this.zList.push(vBar);      
-    }
   } // olive navy maroon lime
 
   update(){
