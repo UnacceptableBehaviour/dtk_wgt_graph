@@ -25,4 +25,4 @@ function processDataSet(){
     return addRollingAverageData();
 }
 
-export let dtkChartInfo = processDataSet()
+export let dtkChartData = processDataSet()

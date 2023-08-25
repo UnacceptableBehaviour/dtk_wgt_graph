@@ -1,6 +1,6 @@
 //import { collidingBalls } from './collision_canvas.js';
 import { createDtkChart, updateChart, chartSettings } from './dtk_chart.js';
-import { dtkChartInfo } from './dtk_data_process.js';
+import { dtkChartData } from './dtk_data_process.js';
 
 // note on using import - module syntax
 // https://bobbyhadz.com/blog/javascript-syntaxerror-cannot-use-import-statement-outside-module
@@ -32,7 +32,7 @@ periodWindowButtons.addEventListener('click', (e) => {
     if (e.target.id === 'but-win-mov-fwd'){
         // TODO if the window half over just set to last day - chartSettings.chartWidthDays        
         chartSettings.indexStart += chartSettings.chartWidthDays;
-        if (chartSettings.indexStart + chartSettings.chartWidthDays > dtkChartInfo.length) chartSettings.indexStart = dtkChartInfo.length - 1;
+        if (chartSettings.indexStart + chartSettings.chartWidthDays > dtkChartData.length) chartSettings.indexStart = dtkChartData.length - 1;
         console.log(`chartSettings.indexStart: ${chartSettings.indexStart}`);
         dtkChart.update();
     }

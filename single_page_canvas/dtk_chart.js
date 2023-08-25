@@ -1,7 +1,7 @@
-import { dtkChartInfo } from './dtk_data_process.js';
+import { dtkChartData } from './dtk_data_process.js';
 
 const CHART_WIDTH_DAYS_DEFAULT = 21;
-const INDEX_START_DEFAULT = dtkChartInfo.length - CHART_WIDTH_DAYS_DEFAULT
+const INDEX_START_DEFAULT = dtkChartData.length - CHART_WIDTH_DAYS_DEFAULT
 export var chartSettings = {
   cnv_width: 400,
   cnv_height: 400,
@@ -226,7 +226,7 @@ class VertLabelBars extends DisplayObject {
   draw(){
     super.draw();
     let periodWindow = chartSettings.chartWidthDays;
-    let indexStart = dtkChartInfo.length - periodWindow;
+    let indexStart = dtkChartData.length - periodWindow;
 
     for (let pwPos = 0; pwPos < periodWindow; pwPos++){
       let dsObjConfig = { display:this.display, doName:'vBar', 
@@ -234,13 +234,14 @@ class VertLabelBars extends DisplayObject {
       col_ink:'black', col_bk:'white', alpha:0.1, fontSize:this.fontSize, col_bbox:'cyan', dbgOn:false};
       
       let dataIdxOffset = indexStart+pwPos;
-      let dayShort = dtkChartInfo[dataIdxOffset].dtk_rcp.dt_day.slice(0,2);;
-      let dayNum = dtkChartInfo[dataIdxOffset].dtk_rcp.dt_date_readable.slice(-2); // last 2 chars
+      let dayShort = dtkChartData[dataIdxOffset].dtk_rcp.dt_day.slice(0,2);;
+      let dayNum = dtkChartData[dataIdxOffset].dtk_rcp.dt_date_readable.slice(-2); // last 2 chars
       let vBar = new VertLabelBar(dsObjConfig, dayShort, dayNum, pwPos+1, periodWindow );
       vBar.draw();
     }
   }
 }
+
 
 
 class SummaryBar extends DisplayObject {
@@ -264,11 +265,11 @@ class DtkChart extends DisplayObject { // hold curent state
             col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn})
 
     let days = chartSettings.chartWidthDays;
-    let dayIdxStart = dtkChartInfo.length - days - 1;
-    let dayIdxEnd = dtkChartInfo.length; 
+    let dayIdxStart = dtkChartData.length - days - 1;
+    let dayIdxEnd = dtkChartData.length; 
     for (let i = dayIdxStart; i < dayIdxEnd; i++){
-      console.log(`dtk[${i}] - ${dtkChartInfo[i].dtk_weight}`);
-      console.log(dtkChartInfo[i]);
+      console.log(`dtk[${i}] - ${dtkChartData[i].dtk_weight}`);
+      console.log(dtkChartData[i]);
     }
 
     // 1568764800000: {
