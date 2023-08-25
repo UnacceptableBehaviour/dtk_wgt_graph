@@ -1,5 +1,6 @@
 //import { collidingBalls } from './collision_canvas.js';
-import { createDtkChart, updateChart, chart_settings } from './dtk_chart.js';
+import { createDtkChart, updateChart, chartSettings } from './dtk_chart.js';
+import { dtkChartInfo } from './dtk_data_process.js';
 
 // note on using import - module syntax
 // https://bobbyhadz.com/blog/javascript-syntaxerror-cannot-use-import-statement-outside-module
@@ -7,16 +8,43 @@ import { createDtkChart, updateChart, chart_settings } from './dtk_chart.js';
 // use .mjs in node?
 // https://exerror.com/uncaught-syntaxerror-cannot-use-import-statement-outside-a-module-when-importing-ecmascript-6/
 
+var dtkChart;
 
 console.log('createDtkChart(); - - - S');
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', (e) => {
     const divCanv = document.getElementById('weigh-in-chart-canv');
-    createDtkChart({width: 400, height: 400, parent: divCanv});
+    dtkChart = createDtkChart({width: 400, height: 400, parent: divCanv});
 });
 console.log('createDtkChart(); - - - E');
 
-  
+var periodWindowButtons = document.getElementById('btn-period-window');
+periodWindowButtons.addEventListener('click', (e) => {
+    console.log(`periodWindowButtons: ${e.target.id}`);
+    console.log(e.target.value);
+    console.log(e);
+    if (e.target.id.includes('but-win-set')){
+        if (chartSettings.chartWidthDays != e.target.value){ // no repaint unless needed
+            chartSettings.chartWidthDays = e.target.value;        
+            console.log(`chartSettings.chartWidthDays: ${chartSettings.chartWidthDays}`);
+            dtkChart.update(); 
+        }
+    }
+    if (e.target.id === 'but-win-mov-fwd'){
+        // TODO if the window half over just set to last day - chartSettings.chartWidthDays        
+        chartSettings.indexStart += chartSettings.chartWidthDays;
+        if (chartSettings.indexStart + chartSettings.chartWidthDays > dtkChartInfo.length) chartSettings.indexStart = dtkChartInfo.length - 1;
+        console.log(`chartSettings.indexStart: ${chartSettings.indexStart}`);
+        dtkChart.update();
+    }
+    if (e.target.id === 'but-win-mov-bak'){
+        // TODO if the window half over just set to last day - chartSettings.chartWidthDays
+        if (chartSettings.indexStart + chartSettings.chartWidthDays < 0 ) chartSettings.indexStart = 0;
+        chartSettings.indexStart -= chartSettings.chartWidthDays;
+        console.log(`chartSettings.indexStart: ${chartSettings.indexStart}`);
+        dtkChart.update();
+    }
 
+});
 
 
 // So FOUR ways to schedule work:

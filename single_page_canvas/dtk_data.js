@@ -1,4 +1,4 @@
-export let dtk_test_record = {
+export let dtkTestRecord = {
   1563494400000: {
     dtk_pc_fat: "39.1",
     dtk_pc_h2o: "44.2",
@@ -4625,6 +4625,28 @@ export let dtk_test_record = {
     },
     dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
     dtk_weight: "106.4",
+  },
+  1692835200000: {
+    dtk_pc_fat: "50.0",
+    dtk_pc_h2o: "34.3",
+    dtk_rcp: {
+      dt_date: 1692835200000,
+      dt_date_readable: "2023 08 24",
+      dt_day: "thu",
+    },
+    dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    dtk_weight: "107.2",
+  },
+  1692921600000: {
+    dtk_pc_fat: "49.0",
+    dtk_pc_h2o: "35.0",
+    dtk_rcp: {
+      dt_date: 1692921600000,
+      dt_date_readable: "2023 08 25",
+      dt_day: "fri",
+    },
+    dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    dtk_weight: "105.6",
   },
   1564531200000: {
     dtk_pc_fat: "37.6",

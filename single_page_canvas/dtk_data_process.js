@@ -1,9 +1,9 @@
-import { dtk_test_record } from './dtk_data.js';
+import { dtkTestRecord } from './dtk_data.js';
 
 
-const sortedArray = Object.keys(dtk_test_record)
+const sortedArray = Object.keys(dtkTestRecord)
 .sort((a, b) => a - b)
-.map(key => dtk_test_record[key]);
+.map(key => dtkTestRecord[key]);
 
 console.log(sortedArray);
 
@@ -11,18 +11,18 @@ console.log(sortedArray);
 // scanForGaps - insert missing days into data
 // interpolate data from start/end points of gap
 function scanForGaps(){
-    console.log(`scanning for gaps - [${Object.keys(dtk_test_record).length}]`);
+    console.log(`scanning for gaps - [${Object.keys(dtkTestRecord).length}]`);
     return sortedArray;
 }
 
 function addRollingAverageData(){
-    console.log(`adding rolling average data - [${Object.keys(dtk_test_record).length}]`);
+    console.log(`adding rolling average data - [${Object.keys(dtkTestRecord).length}]`);
     return scanForGaps();
 }
 
 function processDataSet(){
-    console.log(`processDataSet - [${Object.keys(dtk_test_record).length}]`);
+    console.log(`processDataSet - [${Object.keys(dtkTestRecord).length}]`);
     return addRollingAverageData();
 }
 
-export let dtk_chart_info = processDataSet()
+export let dtkChartInfo = processDataSet()

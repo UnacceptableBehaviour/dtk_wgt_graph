@@ -1,10 +1,12 @@
-import { dtk_chart_info } from './dtk_data_process.js';
+import { dtkChartInfo } from './dtk_data_process.js';
 
-
-export var chart_settings = {
+const CHART_WIDTH_DAYS_DEFAULT = 21;
+const INDEX_START_DEFAULT = dtkChartInfo.length - CHART_WIDTH_DAYS_DEFAULT
+export var chartSettings = {
   cnv_width: 400,
   cnv_height: 400,
-  chartWidthDays: 21,
+  indexStart: INDEX_START_DEFAULT,
+  chartWidthDays: CHART_WIDTH_DAYS_DEFAULT,
   fontSize: 10,
 }
 
@@ -231,12 +233,12 @@ class DtkChart extends DisplayObject { // hold curent state
             x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, rad:rad, 
             col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn})
 
-    let days = chart_settings.chartWidthDays;
-    let dayIdxStart = dtk_chart_info.length - days - 1;
-    let dayIdxEnd = dtk_chart_info.length; 
+    let days = chartSettings.chartWidthDays;
+    let dayIdxStart = dtkChartInfo.length - days - 1;
+    let dayIdxEnd = dtkChartInfo.length; 
     for (let i = dayIdxStart; i < dayIdxEnd; i++){
-      console.log(`dtk[${i}] - ${dtk_chart_info[i].dtk_weight}`);
-      console.log(dtk_chart_info[i]);
+      console.log(`dtk[${i}] - ${dtkChartInfo[i].dtk_weight}`);
+      console.log(dtkChartInfo[i]);
     }
 
     // 1568764800000: {
@@ -279,24 +281,20 @@ class DtkChart extends DisplayObject { // hold curent state
     let sBar = new SummaryBar(dsObjConfig);
     this.zList.push(sBar);
 
-    let periodWindow = chart_settings.chartWidthDays;
-    let indexStart = dtk_chart_info.length - periodWindow;
+    let periodWindow = chartSettings.chartWidthDays;
+    let indexStart = dtkChartInfo.length - periodWindow;
 
     for (let pwPos = 0; pwPos < periodWindow; pwPos++){
       dsObjConfig = { display:display, doName:'vBar', 
       //x_pc:80, y_pc:0, w_pc:20, h_pc:100, rad:0, 
-      col_ink:'black', col_bk:col_bk, alpha:0.1, fontSize:fontSize, col_bbox:'cyan', dbgOn:true};
+      col_ink:'black', col_bk:col_bk, alpha:0.1, fontSize:fontSize, col_bbox:'cyan', dbgOn:false};
       
       let dataIdxOffset = indexStart+pwPos;
-      let dayShort = dtk_chart_info[dataIdxOffset].dtk_rcp.dt_day.slice(0,2);;
-      let dayNum = dtk_chart_info[dataIdxOffset].dtk_rcp.dt_date_readable.slice(-2); // last 2 chars
+      let dayShort = dtkChartInfo[dataIdxOffset].dtk_rcp.dt_day.slice(0,2);;
+      let dayNum = dtkChartInfo[dataIdxOffset].dtk_rcp.dt_date_readable.slice(-2); // last 2 chars
       let vBar = new VertLabelBar(dsObjConfig, dayShort, dayNum, pwPos+1, periodWindow );
       this.zList.push(vBar);      
     }
-
-  
-
-
   } // olive navy maroon lime
 
   update(){
@@ -412,7 +410,7 @@ export function createDtkChart({cnv_width = 400, cnv_height = 400, parent = docu
       doName:'dtkProgress',
       x:0, y:0, w:cnv_width, h:cnv_height, rad:0, 
       col_ink:'black', col_bk:'white', alpha:'100', fontSize:10, col_bbox:'olive', dbgOn:true },
-    chart_settings ) ;
+    chartSettings ) ;
 
   progressChart.update(); // pass in state: 7day, 14d, 21d, 1m, 3m, 6m, 1y, 2y, plus new dimensions
 
@@ -421,6 +419,7 @@ export function createDtkChart({cnv_width = 400, cnv_height = 400, parent = docu
   //   progressChart.update();
   //   display.sync();  
   // });
+  return progressChart;
 };
 
 

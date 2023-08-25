@@ -123,7 +123,7 @@ record_to_json = json.dumps(record)
 with open(DATA_FILE_JSON, 'w') as f:
     f.write(record_to_json)
 
-record_js = f"export let dtk_test_record = {record_to_json};"
+record_js = f"export let dtkTestRecord = {record_to_json};"
 
 with open(DATA_FILE_JS, 'w') as f:
     f.write(record_js)
