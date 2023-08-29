@@ -1,21 +1,25 @@
 import { dtkChartData } from './dtk_data_process.js';
 
-const CHART_WIDTH_DAYS_DEFAULT = 21;
-const INDEX_START_DEFAULT = dtkChartData.length - CHART_WIDTH_DAYS_DEFAULT
+const CHART_WIDTH_DAYS_DEFAULT = 7;
+const INDEX_END_DEFAULT = parseInt(dtkChartData.length);
+const INDEX_START_DEFAULT = parseInt(INDEX_END_DEFAULT - CHART_WIDTH_DAYS_DEFAULT);
 export var chartSettings = {
   cnv_width: 400,
   cnv_height: 400,
-  indexStart: INDEX_START_DEFAULT,
+  startIndex: INDEX_START_DEFAULT,        // DEPRACATED calc index from END
+  endIndex:   INDEX_END_DEFAULT,
   chartWidthDays: CHART_WIDTH_DAYS_DEFAULT,
   fontSize: 10,
+  availableDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
+  selectedDataSources:  ['dtk_weight'],
 }
 
 var progressChart;
 
 class DisplayObject {
-  constructor({display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, fontSize=10, col_bbox='magenta', dbgOn=true} = {}){
+  constructor({display, doName, x_pc, y_pc, w_pc, h_pc, x1_pc, y1_pc, radius_pc, arc_rad, col_ink, col_bk, alpha, fontSize=10, col_bbox='magenta', dbgOn=true} = {}){
 		this.display = display;
-    this.ctx = display.ctx;
+    this.ctx = this.display.canvas.getContext("2d");
     this.doName = doName;
     this.x_pc = x_pc;
     this.x = this.display.canvas.width * (this.x_pc / 100);
@@ -25,7 +29,12 @@ class DisplayObject {
     this.w = this.display.canvas.width * (this.w_pc / 100);
     this.h_pc = h_pc;
     this.h = this.display.canvas.height * (this.h_pc / 100);
-    this.rad = rad;
+    this.x1_pc = x1_pc;
+    this.x1 = this.display.canvas.width * (this.x1_pc / 100);
+    this.y1_pc = y1_pc;
+    this.y1 = this.display.canvas.height * (this.y1_pc / 100);
+    this.radius_pc = radius_pc;
+    this.arc_rad = arc_rad;
     this.col_ink = col_ink;
     this.col_bk = col_bk;
     this.alpha = alpha;
@@ -35,7 +44,7 @@ class DisplayObject {
     // debug
     this.dbgOn = dbgOn;
     this.border = dbgOn;
-    this.titleOn = dbgOn;
+    this.titleOn = true;//dbgOn;
     this.markers = dbgOn;
     this.textEdgeMarkers = dbgOn;
   }
@@ -45,6 +54,8 @@ class DisplayObject {
     this.y = this.display.canvas.height * (this.y_pc / 100);
     this.w = this.display.canvas.width * (this.w_pc / 100);
     this.h = this.display.canvas.height * (this.h_pc / 100);
+    this.x1 = this.display.canvas.width * (this.x1_pc / 100);
+    this.y1 = this.display.canvas.height * (this.y1_pc / 100);
   }
 
   draw(){
@@ -64,6 +75,9 @@ class DisplayObject {
     if (this.titleOn) {      
       //placeCentreText(this.ctx, text, xl, xr, y, color, fontSize, lnW = 2)
       this.placeCentreText(this.ctx, this.doName, this.x, this.x + this.w, this.y + this.h, this.col_ink, this.fontSize);
+      console.log(`title: ${this.doName} :ON`);
+    } else {      
+      console.log(`title: ${this.doName} :OFF`);
     }
     if (this.markers) {
       // show rect place
@@ -91,7 +105,7 @@ class DisplayObject {
     this.ctx.restore();
   }
 
-  placeCentreTextNoMk(ctx=null, text, xl, xr, y, color, fontSize) {    
+  placeCentreTextNoMk(ctx=null, text, xl, xr, y, color, fontSize, align='center') {    
     if (ctx==null){ ctx = this.ctx };
     //   |                                 |      < fontSize(epth)
     //   xl             texts              xr
@@ -102,7 +116,7 @@ class DisplayObject {
     // font def
     ctx.font = `${fontSize}px Arial`;
     ctx.textBaseline = 'middle'; // hanging
-    ctx.textAlign = 'center';
+    ctx.textAlign = align;  // 'left' 'center'
       
     let markMiddle = xl + (xr - xl) / 2;
     let textMetrics = ctx.measureText(text);
@@ -177,7 +191,7 @@ class DisplayObject {
 
 class VertLabelBar extends DisplayObject {
   // display rolling average for period length
-  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
                 label_top='#',label_bot='#', pwPos=1, periodWindow=7, dark=null  )
   {
     if (dark === null) dark = pwPos % 2;   // 0=dark 1=light
@@ -190,7 +204,7 @@ class VertLabelBar extends DisplayObject {
     w_pc = (100 / periodWindow);
     h_pc = 100;
     super({ display:display, doName:doName, 
-      x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, rad:rad, 
+      x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, arc_rad:arc_rad, 
       col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
 
     this.label_top    = label_top;
@@ -215,25 +229,26 @@ class VertLabelBar extends DisplayObject {
 
 class VertLabelBars extends DisplayObject {
   // display rolling average for period length
-  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {} )
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {} )
   {
     super({ display:display, doName:doName, 
-      x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, rad:rad, 
+      x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, arc_rad:arc_rad, 
       col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
-    this.fontSize = fontSize;
+      this.fontSize = fontSize;
   }
 
   draw(){
     super.draw();
-    let periodWindow = chartSettings.chartWidthDays;
-    let indexStart = dtkChartData.length - periodWindow;
+    let periodWindow  = chartSettings.chartWidthDays;
+    let endIndex      = chartSettings.endIndex;
+    let startIndex    = endIndex - periodWindow;
 
     for (let pwPos = 0; pwPos < periodWindow; pwPos++){
       let dsObjConfig = { display:this.display, doName:'vBar', 
-      //x_pc:80, y_pc:0, w_pc:20, h_pc:100, rad:0, 
+      //x_pc:80, y_pc:0, w_pc:20, h_pc:100, arc_rad:0, 
       col_ink:'black', col_bk:'white', alpha:0.1, fontSize:this.fontSize, col_bbox:'cyan', dbgOn:false};
       
-      let dataIdxOffset = indexStart+pwPos;
+      let dataIdxOffset = startIndex+pwPos;
       let dayShort = dtkChartData[dataIdxOffset].dtk_rcp.dt_day.slice(0,2);;
       let dayNum = dtkChartData[dataIdxOffset].dtk_rcp.dt_date_readable.slice(-2); // last 2 chars
       let vBar = new VertLabelBar(dsObjConfig, dayShort, dayNum, pwPos+1, periodWindow );
@@ -243,34 +258,237 @@ class VertLabelBars extends DisplayObject {
 }
 
 
+class YAxisNumbering extends DisplayObject {
+  constructor({display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
+              dtkChart)
+  {
+      super({ display, doName,
+              x_pc, y_pc, w_pc, h_pc, arc_rad,
+              col_ink, col_bk, alpha, fontSize,
+              col_bbox, dbgOn
+      });
+      this.fontSize = fontSize;
+      this.dtkChart = dtkChart;
+      this.getBoundaryValues();
+  }
+
+  getBoundaryValues() {
+      if (this.dtkChart){
+          const {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange} = this.dtkChart;
+          Object.assign(this, {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange});
+      }
+  }
+
+  getIntegersBetween(a, b) { // [103, 104, 105, 106, 107]
+    let start = Math.ceil(a);
+    let end = Math.floor(b);
+    let result = [];
+    for (let i = start; i <= end; i++) {
+        result.push(i);
+    }
+    return result;
+  }
+
+  getIntegersBetweenReverse(a, b) { // [107, 106, 105, 104, 103]
+    let start = Math.ceil(a);
+    let end = Math.floor(b);
+    let result = [];
+    for (let i = end; i >= start; i--) {
+        result.push(i);
+    }
+    return result;
+  }  
+
+  draw(){
+    // this.yAxisMinVal = y = 100%
+    // this.yAxisMaxVal = y = 0%
+    // this.yAxisRange  = canvas 100%
+    this.getBoundaryValues();
+
+    let labels = this.getIntegersBetweenReverse(this.yAxisMinVal, this.yAxisMaxVal); // REF in func no PASS
+    
+    super.draw();
+    let ctx = this.display.canvas.getContext("2d");
+    let cH = this.display.canvas.height;
+
+    let noOfhMarks = labels.length;    
+    let yScaling = cH / (this.yAxisRange);
+    let offset = yScaling / 2;
+
+    let x1 = 0;
+    let y1 = offset;
+    let x2 = 20;
+
+    for (let mkNo = 0; mkNo < noOfhMarks; mkNo++ ){
+      console.log(`cH:${cH} scaling[${yScaling}] - lab:${labels[mkNo]}`);
+      console.log(`mkNo:${mkNo} > x1: ${x1}, y1: ${y1}  to  x2: ${x2}, y1: ${y1} lab:${labels[mkNo]}`);
+      ctx.beginPath();
+      y1 = offset + (yScaling * mkNo);  
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y1);
+      ctx.strokeStyle = this.col_ink;
+      ctx.lineWidth = 2;
+      ctx.stroke();      
+    }
+    
+  }
+}
+
+
+class DataPoint extends DisplayObject {
+  static CIRCLE   = 1;
+  static SQUARE   = 2;
+  static DIAMOND  = 3;
+  static CROSS    = 4;
+  static CROSSX   = 5;
+
+  // display rolling average for period length
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
+                yVal, pointType=DataPoint.CIRCLE )
+  {
+    super({ display:display, doName:doName, 
+      x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, arc_rad:arc_rad, 
+      col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
+    
+    this.fontSize   = fontSize;
+    this.pointType  = pointType;
+    this.yVal       = yVal;
+  }
+
+  draw(){
+    super.draw(); // scale x_pc,y_pc
+    if (this.pointType == DataPoint.CIRCLE) {
+      this.drawCircle(this.x,this.y,this.w/2,this.col_ink);
+    } else if (this.pointType == DataPoint.SQUARE) {
+      this.drawCircle(this.x,this.y,this.w/2,this.col_ink);
+    } else if (this.pointType == DataPoint.DIAMOND) {
+      this.drawCircle(this.x,this.y,this.w/2,this.col_ink);
+    } else if (this.pointType == DataPoint.CROSS) {
+      this.drawCircle(this.x,this.y,this.w/2,this.col_ink);
+    } else if (this.pointType == DataPoint.CROSSX) {
+      this.drawCircle(this.x,this.y,this.w/2,this.col_ink);
+    }
+    // TODO write value next to plot point
+    //this.placeCentreTextNoMk(ctx=null, text, xl, xr, y, color, fontSize, align='center')
+    
+  }
+}
+
+class DataPlot extends DisplayObject {
+  // display rolling average for period length
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
+                dtkChart, dataSourceKey, label='#' )
+  {
+    super({ display:display, doName:doName, 
+      x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, arc_rad:arc_rad, 
+      col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
+
+    //          / - - - dataSourceKey
+    // {       /
+    //   dtk_pc_fat: "38.3",
+    //   dtk_pc_h2o: "44.8",
+    //   dtk_rcp: {
+    //     dt_date: 1568764800000,
+    //     dt_date_readable: "2019 09 18",
+    //     dt_day: "day",
+    //   },
+    //   dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    //   dtk_weight: "105.7",
+    // }       
+    this.dtkChart       = dtkChart;
+    this.dataSourceKey  = dataSourceKey;
+
+    this.label          = label;
+    this.coOrdsPc       = [];
+
+    this.periodWindow   = null;   // no of days in the display chart
+    this.endIndex       = null;
+    this.startIndex     = null;
+    this.xIncrement_pc  = null;
+    
+    this.dataMin        = null;
+    this.dataMax        = null;
+    this.yAxisMinVal    = null;    
+    this.yAxisMaxVal    = null;
+    this.yAxisRange     = null;    
+    
+    this.getBoundaryValues();
+    
+    this.radius_pc      = this.xIncrement_pc / 6;
+
+    console.log(`min: ${this.yAxisMinVal}, max: ${this.yAxisMaxVal}, range: ${this.yAxisRange} <`);
+  }  // olive navy maroon lime  
+
+  getBoundaryValues(){
+    if (this.dtkChart){
+      this.periodWindow   = this.dtkChart.periodWindow;   // no of days in the display chart
+      this.endIndex       = this.dtkChart.endIndex;
+      this.startIndex     = this.dtkChart.startIndex;
+      this.xIncrement_pc  = this.dtkChart.xIncrement_pc;
+      
+      this.dataMin        = this.dtkChart.dataMin;
+      this.dataMax        = this.dtkChart.dataMax;
+      this.yAxisMinVal    = this.dtkChart.yAxisMinVal;
+      this.yAxisMaxVal    = this.dtkChart.yAxisMaxVal;
+      this.yAxisRange     = this.dtkChart.yAxisRange;
+    }
+  }
+
+  // 
+  draw(){
+    super.draw();
+    this.getBoundaryValues();
+
+    let xPos = this.xIncrement_pc / 2;    
+    for (let pwPos = this.startIndex; pwPos < this.endIndex; pwPos++){
+      // place in range (range 104.0 to 108.0) 105.2 = 1.2
+      let yVal  = dtkChartData[pwPos][this.dataSourceKey] - this.yAxisMinVal; 
+      // this.yAxisRange (range 104.0 to 108.0) range = 4.0
+      let y_pc  = 100 - ((yVal / this.yAxisRange) * 100);   // 100 - y_pc to invert because 0,0 is at the top!
+
+      let dsObjConfig = { display:this.display, doName:`${yVal}`, 
+          x_pc:xPos, y_pc:y_pc, radius_pc:this.radius_pc, 
+          col_ink:'black', col_bk:'white', alpha:1, col_bbox:'cyan', dbgOn:true};
+
+      let point = new DataPoint(dsObjConfig, yVal);
+      point.draw();
+      xPos += this.xIncrement_pc;
+    }
+  }
+}
 
 class SummaryBar extends DisplayObject {
   // display rolling average for period length
-  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
                 nix_time_day, ave_for_period, ave_last_period, min, max, pos_LR='right' )
   {
     super({ display:display, doName:doName, 
-            x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, rad:rad, 
+            x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, arc_rad:arc_rad, 
             col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
         
   }  // olive navy maroon lime  
 }
 
 class DtkChart extends DisplayObject { // hold curent state
-  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
-                settings, )
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
+                settings )
   {         
     super({ display:display, doName:doName, 
-            x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, rad:rad, 
+            x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, arc_rad:arc_rad, 
             col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn})
 
-    let days = chartSettings.chartWidthDays;
-    let dayIdxStart = dtkChartData.length - days - 1;
-    let dayIdxEnd = dtkChartData.length; 
-    for (let i = dayIdxStart; i < dayIdxEnd; i++){
-      console.log(`dtk[${i}] - ${dtkChartData[i].dtk_weight}`);
-      console.log(dtkChartData[i]);
-    }
+    // this.periodWindow   = null;   // no of days in the display chart
+    // this.endIndex       = null;
+    // this.startIndex     = null;
+    // this.xIncrement_pc  = null;
+    
+    // this.dataMin        = null;
+    // this.dataMax        = null;
+    // this.yAxisMinVal    = null;    
+    // this.yAxisMaxVal    = null;
+    // this.yAxisRange     = null;
+
+    this.calculateBoundaries(); // calculates above values
 
     // 1568764800000: {
     //   dtk_pc_fat: "38.3",
@@ -287,40 +505,99 @@ class DtkChart extends DisplayObject { // hold curent state
 
     this.zList = [this];
     let dsObjConfig = { display:display, doName:doName, 
-                        x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, rad:rad, 
+                        x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, arc_rad:arc_rad, 
                         col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn}
 
-    dsObjConfig = Object.assign(dsObjConfig, {doName:'a1', x_pc:10, y_pc:10, w_pc:10, h_pc:10, rad:0, col_ink:'lime', col_bbox:'magenta'});
+    dsObjConfig = Object.assign(dsObjConfig, {doName:'a1', x_pc:10, y_pc:10, w_pc:10, h_pc:10, arc_rad:0, col_ink:'lime', col_bbox:'magenta'});
     let a1 = new DisplayObject(dsObjConfig);
-    //this.zList.push(a1);
+    this.zList.push(a1);
 
-    dsObjConfig = Object.assign(dsObjConfig, {doName:'a2', x_pc:10, y_pc:80, w_pc:10, h_pc:10, rad:0, col_ink:'yellowgreen', col_bbox:'magenta'});
+    dsObjConfig = Object.assign(dsObjConfig, {doName:'a2', x_pc:10, y_pc:80, w_pc:10, h_pc:10, arc_rad:0, col_ink:'yellowgreen', col_bbox:'magenta'});
     let a2 = new DisplayObject(dsObjConfig);
-    //this.zList.push(a2);
+    this.zList.push(a2);
 
-    dsObjConfig = Object.assign(dsObjConfig, {doName:'a3', x_pc:80, y_pc:80, w_pc:10, h_pc:10, rad:0, col_ink:'purple', col_bbox:'magenta'});
+    dsObjConfig = Object.assign(dsObjConfig, {doName:'a3', x_pc:80, y_pc:80, w_pc:10, h_pc:10, arc_rad:0, col_ink:'purple', col_bbox:'magenta'});
     let a3 = new DisplayObject(dsObjConfig);
-    //this.zList.push(a3);
+    this.zList.push(a3);
 
-    dsObjConfig = Object.assign(dsObjConfig, {doName:'a4', x_pc:80, y_pc:10, w_pc:10, h_pc:10, rad:0, col_ink:'orangered', col_bbox:'magenta'});
+    dsObjConfig = Object.assign(dsObjConfig, {doName:'a4', x_pc:80, y_pc:10, w_pc:10, h_pc:10, arc_rad:0, col_ink:'orangered', col_bbox:'magenta'});
     let a4 = new DisplayObject(dsObjConfig);
-    //this.zList.push(a4);
+    this.zList.push(a4);
 
     dsObjConfig = { display:display, doName:'sBar', 
-                    x_pc:80, y_pc:0, w_pc:20, h_pc:100, rad:0, 
+                    //x_pc:80, y_pc:0, w_pc:20, h_pc:100, arc_rad:0, 
+                    x_pc:80, y_pc:0, w_pc:20, h_pc:80, arc_rad:0, 
                     col_ink:'maroon', col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:'magenta', dbgOn:true}
     let sBar = new SummaryBar(dsObjConfig);
-    //this.zList.push(sBar);
+    this.zList.push(sBar);
 
     dsObjConfig = { display:display, doName:'vBarS', 
-                    x_pc:0, y_pc:0, w_pc:100, h_pc:100, rad:0, 
+                    x_pc:0, y_pc:0, w_pc:100, h_pc:100, arc_rad:0, 
                     col_ink:'orangeRed', col_bk:col_bk, alpha:alpha, fontSize:chartSettings.fontSize, col_bbox:'purple', dbgOn:true}
     let verticalLabelBars = new VertLabelBars(dsObjConfig);
     this.zList.push(verticalLabelBars);
 
+    // get ylimits of each data source so composite plots match yAxisNumbering
+    // for dataSource in dataSources: new DataPlot(dataSource);
+    let dataSource = chartSettings.selectedDataSources[0];
+
+    dsObjConfig = { display:display, doName:'pData', 
+                    x_pc:0, y_pc:0, w_pc:100, h_pc:90, arc_rad:0, 
+                    col_ink:'blue', col_bk:col_bk, alpha:alpha, fontSize:chartSettings.fontSize, col_bbox:'purple', dbgOn:false}
+
+    let singlePlot = new DataPlot(dsObjConfig, dataSource, 'test label');
+    this.zList.push(singlePlot);
+
+    
+    dsObjConfig = { display:display, doName:'yAxNum', 
+                    x_pc:0, y_pc:0, w_pc:15, h_pc:100, arc_rad:0, 
+                    //x_pc:0, y_pc:0, w_pc:15, h_pc:80, arc_rad:0, 
+                    col_ink:'blue', col_bk:col_bk, alpha:alpha, fontSize:chartSettings.fontSize, col_bbox:'orange', dbgOn:true}
+    let yAxisNumbering = new YAxisNumbering(dsObjConfig, this);
+    this.zList.push(yAxisNumbering);    
+
   } // olive navy maroon lime
 
+  calculateBoundaries() {
+    // iterate through datasources to calculate composite limits/boundaries
+    let dataSources = chartSettings.selectedDataSources;
+    let dataSourceKey = dataSources[0];
+
+    // scan data for min & max to scale data
+    this.periodWindow   = chartSettings.chartWidthDays;    
+    this.endIndex       = chartSettings.endIndex;
+    this.startIndex     = this.endIndex - this.periodWindow;
+    this.xIncrement_pc  = (100 / this.periodWindow);
+    
+    let min = parseFloat(dtkChartData[this.startIndex][dataSourceKey]);
+    let max = parseFloat(dtkChartData[this.startIndex][dataSourceKey]);
+    
+    for (let i = this.startIndex; i < this.endIndex; i++){
+      console.log(`[i]: [${i}] <`);
+      console.log(dtkChartData[i]);
+      let dataPoint = parseFloat(dtkChartData[i][dataSourceKey]);
+      if (min > dataPoint) min = dataPoint;
+      if (max < dataPoint) max = dataPoint;
+    }
+
+    // when iterating data sources 
+    // TODO H - comapare with current values before settign new ones
+
+    this.dataMin      = min;          // mark axis values starting at whole number between dataMin & AxisMin
+    this.yAxisMinVal  = min -1;
+    this.dataMax      = max;
+    this.yAxisMaxVal  = max +1;
+    this.yAxisRange   = this.yAxisMaxVal - this.yAxisMinVal;
+
+    console.log(`periodWindow: ${this.periodWindow}\tstartIndex:  ${this.startIndex}\tthis.endIndex: ${this.endIndex}`);
+    console.log(`dataMax:      ${this.dataMax}\tyAxisMaxVal: ${this.yAxisMaxVal}`);
+    console.log(`dataMin:      ${this.dataMin}\tyAxisMinVal: ${this.yAxisMinVal}`);
+    // console.log(`myvar:${myvar}`);
+  }
+
+
   update(){
+    this.calculateBoundaries();
     this.display.sync(this);
   }
 
@@ -431,7 +708,7 @@ export function createDtkChart({cnv_width = 400, cnv_height = 400, parent = docu
   progressChart = new DtkChart(  
     { display: display,
       doName:'dtkProgress',
-      x:0, y:0, w:cnv_width, h:cnv_height, rad:0, 
+      x:0, y:0, w:cnv_width, h:cnv_height,
       col_ink:'black', col_bk:'white', alpha:'100', fontSize:10, col_bbox:'olive', dbgOn:true },
     chartSettings ) ;
 
