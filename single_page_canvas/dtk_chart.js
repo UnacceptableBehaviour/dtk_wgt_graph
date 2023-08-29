@@ -104,8 +104,9 @@ class DisplayObject {
     }    
     this.ctx.restore();
   }
-
-  placeCentreTextNoMk(ctx=null, text, xl, xr, y, color, fontSize, align='center') {    
+  
+  // const baselines = ["top","hanging","middle","alphabetic","ideographic","bottom"];
+  placeCentreTextNoMk(ctx=null, text, xl, xr, y, color, fontSize, align='center', baseline='middle') {    
     if (ctx==null){ ctx = this.ctx };
     //   |                                 |      < fontSize(epth)
     //   xl             texts              xr
@@ -115,7 +116,7 @@ class DisplayObject {
     
     // font def
     ctx.font = `${fontSize}px Arial`;
-    ctx.textBaseline = 'middle'; // hanging
+    ctx.textBaseline = baseline; // hanging
     ctx.textAlign = align;  // 'left' 'center'
       
     let markMiddle = xl + (xr - xl) / 2;
@@ -267,7 +268,7 @@ class YAxisNumbering extends DisplayObject {
               col_ink, col_bk, alpha, fontSize,
               col_bbox, dbgOn
       });
-      this.fontSize = fontSize;
+      this.fontSize = fontSize + 4;
       this.dtkChart = dtkChart;
       this.getBoundaryValues();
   }
@@ -303,6 +304,7 @@ class YAxisNumbering extends DisplayObject {
     // this.yAxisMinVal = y = 100%
     // this.yAxisMaxVal = y = 0%
     // this.yAxisRange  = canvas 100%
+
     this.getBoundaryValues();
 
     let labels = this.getIntegersBetweenReverse(this.yAxisMinVal, this.yAxisMaxVal); // REF in func no PASS
@@ -310,25 +312,35 @@ class YAxisNumbering extends DisplayObject {
     super.draw();
     let ctx = this.display.canvas.getContext("2d");
     let cH = this.display.canvas.height;
+    let cW = this.display.canvas.width;
 
     let noOfhMarks = labels.length;    
     let yScaling = cH / (this.yAxisRange);
     let offset = yScaling / 2;
 
-    let x1 = 0;
+
     let y1 = offset;
-    let x2 = 20;
+    let x2 = cW;
 
     for (let mkNo = 0; mkNo < noOfhMarks; mkNo++ ){
+      let yLabelText = labels[mkNo]; //baselines[mkNo+2];
+      //console.log(ctx.measureText(yLabelText));
+      let x1 = ctx.measureText(yLabelText).width + this.fontSize;
+
       console.log(`cH:${cH} scaling[${yScaling}] - lab:${labels[mkNo]}`);
       console.log(`mkNo:${mkNo} > x1: ${x1}, y1: ${y1}  to  x2: ${x2}, y1: ${y1} lab:${labels[mkNo]}`);
+      ctx.globalAlpha = this.alpha;
       ctx.beginPath();
       y1 = offset + (yScaling * mkNo);  
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y1);
       ctx.strokeStyle = this.col_ink;
-      ctx.lineWidth = 2;
-      ctx.stroke();      
+      ctx.lineWidth = 1;      
+      ctx.setLineDash([5, 15]); // dash gap - eg [5, 10, 15, 20]
+      ctx.stroke();
+      this.placeCentreTextNoMk(ctx, yLabelText, 0, x1, y1 - this.fontSize, this.col_ink, this.fontSize, 'center', 'middle');
+      ctx.globalAlpha = 1;
+      ctx.setLineDash([]);
     }
     
   }
@@ -552,7 +564,7 @@ class DtkChart extends DisplayObject { // hold curent state
     dsObjConfig = { display:display, doName:'yAxNum', 
                     x_pc:0, y_pc:0, w_pc:15, h_pc:100, arc_rad:0, 
                     //x_pc:0, y_pc:0, w_pc:15, h_pc:80, arc_rad:0, 
-                    col_ink:'blue', col_bk:col_bk, alpha:alpha, fontSize:chartSettings.fontSize, col_bbox:'orange', dbgOn:true}
+                    col_ink:'black', col_bk:col_bk, alpha:0.5, fontSize:chartSettings.fontSize, col_bbox:'orange', dbgOn:true}
     let yAxisNumbering = new YAxisNumbering(dsObjConfig, this);
     this.zList.push(yAxisNumbering);    
 
