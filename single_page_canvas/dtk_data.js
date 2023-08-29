@@ -4624,7 +4624,7 @@ export let dtkTestRecord = {
       dt_day: "wed",
     },
     dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
-    dtk_weight: "106.4",
+    dtk_weight: "108.0",
   },
   1692835200000: {
     dtk_pc_fat: "50.0",
@@ -4635,7 +4635,7 @@ export let dtkTestRecord = {
       dt_day: "thu",
     },
     dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
-    dtk_weight: "107.2",
+    dtk_weight: "107.0",
   },
   1692921600000: {
     dtk_pc_fat: "49.0",
@@ -4646,7 +4646,7 @@ export let dtkTestRecord = {
       dt_day: "fri",
     },
     dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
-    dtk_weight: "105.6",
+    dtk_weight: "106.0",
   },
   1693008000000: {
     dtk_pc_fat: "48.4",
@@ -4658,6 +4658,39 @@ export let dtkTestRecord = {
     },
     dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
     dtk_weight: "105.0",
+  },
+  1693094400000: {
+    dtk_pc_fat: "48.6",
+    dtk_pc_h2o: "34.6",
+    dtk_rcp: {
+      dt_date: 1693094400000,
+      dt_date_readable: "2023 08 27",
+      dt_day: "sun",
+    },
+    dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    dtk_weight: "104.0",
+  },
+  1693180800000: {
+    dtk_pc_fat: "48.4",
+    dtk_pc_h2o: "35.4",
+    dtk_rcp: {
+      dt_date: 1693180800000,
+      dt_date_readable: "2023 08 28",
+      dt_day: "mon",
+    },
+    dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    dtk_weight: "103.0",
+  },
+  1693267200000: {
+    dtk_pc_fat: "47.8",
+    dtk_pc_h2o: "35.9",
+    dtk_rcp: {
+      dt_date: 1693267200000,
+      dt_date_readable: "2023 08 29",
+      dt_day: "tue",
+    },
+    dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    dtk_weight: "102.0",
   },
   1564531200000: {
     dtk_pc_fat: "37.6",

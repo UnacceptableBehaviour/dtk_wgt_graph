@@ -62,7 +62,7 @@ class DisplayObject {
     this.scaleCoords();
     this.ctx.save();
     if (this.border) { // boundingBox
-      this.drawLineCentre2Obj();
+      //this.drawLineCentre2Obj();
       //console.log(`doName: ${this.doName}, x: ${this.x}, y: ${this.y}, w: ${this.w}, h: ${this.h}, ink:${this.col_ink}, bbox:${this.col_bbox}`); 
 
       // border - guideline for now
@@ -75,9 +75,9 @@ class DisplayObject {
     if (this.titleOn) {      
       //placeCentreText(this.ctx, text, xl, xr, y, color, fontSize, lnW = 2)
       this.placeCentreText(this.ctx, this.doName, this.x, this.x + this.w, this.y + this.h, this.col_ink, this.fontSize);
-      console.log(`title: ${this.doName} :ON`);
+      //console.log(`title: ${this.doName} :ON`);
     } else {      
-      console.log(`title: ${this.doName} :OFF`);
+      //console.log(`title: ${this.doName} :OFF`);
     }
     if (this.markers) {
       // show rect place
@@ -263,21 +263,21 @@ class YAxisNumbering extends DisplayObject {
   constructor({display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
               dtkChart)
   {
-      super({ display, doName,
-              x_pc, y_pc, w_pc, h_pc, arc_rad,
-              col_ink, col_bk, alpha, fontSize,
-              col_bbox, dbgOn
-      });
-      this.fontSize = fontSize + 4;
-      this.dtkChart = dtkChart;
-      this.getBoundaryValues();
+    super({ display, doName,
+            x_pc, y_pc, w_pc, h_pc, arc_rad,
+            col_ink, col_bk, alpha, fontSize,
+            col_bbox, dbgOn
+    });
+    this.fontSize = fontSize + 4;
+    this.dtkChart = dtkChart;
+    this.getBoundaryValues();
   }
 
   getBoundaryValues() {
-      if (this.dtkChart){
-          const {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange} = this.dtkChart;
-          Object.assign(this, {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange});
-      }
+    if (this.dtkChart){
+      const {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange} = this.dtkChart;
+      Object.assign(this, {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange});
+    }
   }
 
   getIntegersBetween(a, b) { // [103, 104, 105, 106, 107]
@@ -316,7 +316,7 @@ class YAxisNumbering extends DisplayObject {
 
     let noOfhMarks = labels.length;    
     let yScaling = cH / (this.yAxisRange);
-    let offset = yScaling / 2;
+    let offset = 0; //yScaling / 2;
 
 
     let y1 = offset;
@@ -327,8 +327,8 @@ class YAxisNumbering extends DisplayObject {
       //console.log(ctx.measureText(yLabelText));
       let x1 = ctx.measureText(yLabelText).width + this.fontSize;
 
-      console.log(`cH:${cH} scaling[${yScaling}] - lab:${labels[mkNo]}`);
-      console.log(`mkNo:${mkNo} > x1: ${x1}, y1: ${y1}  to  x2: ${x2}, y1: ${y1} lab:${labels[mkNo]}`);
+      //console.log(`cH:${cH} scaling[${yScaling}] - lab:${labels[mkNo]}`);
+      //console.log(`mkNo:${mkNo} > x1: ${x1}, y1: ${y1}  to  x2: ${x2}, y1: ${y1} lab:${labels[mkNo]}`);
       ctx.globalAlpha = this.alpha;
       ctx.beginPath();
       y1 = offset + (yScaling * mkNo);  
@@ -355,13 +355,14 @@ class DataPoint extends DisplayObject {
   static CROSSX   = 5;
 
   // display rolling average for period length
-  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, radius_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
                 yVal, pointType=DataPoint.CIRCLE )
   {
-    super({ display:display, doName:doName, 
-      x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, arc_rad:arc_rad, 
-      col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
-    
+    super({ display, doName,
+      x_pc, y_pc, w_pc, h_pc, radius_pc, arc_rad,
+      col_ink, col_bk, alpha, fontSize,
+      col_bbox, dbgOn
+    });    
     this.fontSize   = fontSize;
     this.pointType  = pointType;
     this.yVal       = yVal;
@@ -369,6 +370,8 @@ class DataPoint extends DisplayObject {
 
   draw(){
     super.draw(); // scale x_pc,y_pc
+    let ctx = this.display.canvas.getContext("2d");
+
     if (this.pointType == DataPoint.CIRCLE) {
       this.drawCircle(this.x,this.y,this.w/2,this.col_ink);
     } else if (this.pointType == DataPoint.SQUARE) {
@@ -381,7 +384,11 @@ class DataPoint extends DisplayObject {
       this.drawCircle(this.x,this.y,this.w/2,this.col_ink);
     }
     // TODO write value next to plot point
-    //this.placeCentreTextNoMk(ctx=null, text, xl, xr, y, color, fontSize, align='center')
+    let xl = this.x + this.radius_pc*4;
+    let pointLabelText = `${this.yVal.toFixed(1)}`;
+    let xr = xl + ctx.measureText(pointLabelText).width;
+    this.placeCentreTextNoMk(ctx, pointLabelText, xl, xr, this.y - this.fontSize, this.col_ink, this.fontSize, 'center', 'middle');
+
     
   }
 }
@@ -389,11 +396,13 @@ class DataPoint extends DisplayObject {
 class DataPlot extends DisplayObject {
   // display rolling average for period length
   constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
-                dtkChart, dataSourceKey, label='#' )
+                dtkChart, dataSourceKey, label='#', pointType=DataPoint.CIRCLE  )
   {
-    super({ display:display, doName:doName, 
-      x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, arc_rad:arc_rad, 
-      col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
+    super({ display, doName,
+      x_pc, y_pc, w_pc, h_pc, arc_rad,
+      col_ink, col_bk, alpha, fontSize,
+      col_bbox, dbgOn
+    });
 
     //          / - - - dataSourceKey
     // {       /
@@ -409,60 +418,45 @@ class DataPlot extends DisplayObject {
     // }       
     this.dtkChart       = dtkChart;
     this.dataSourceKey  = dataSourceKey;
-
-    this.label          = label;
-    this.coOrdsPc       = [];
-
-    this.periodWindow   = null;   // no of days in the display chart
-    this.endIndex       = null;
-    this.startIndex     = null;
-    this.xIncrement_pc  = null;
-    
-    this.dataMin        = null;
-    this.dataMax        = null;
-    this.yAxisMinVal    = null;    
-    this.yAxisMaxVal    = null;
-    this.yAxisRange     = null;    
-    
-    this.getBoundaryValues();
-    
+    this.label          = label;    
+    this.getBoundaryValues();    
     this.radius_pc      = this.xIncrement_pc / 6;
 
     console.log(`min: ${this.yAxisMinVal}, max: ${this.yAxisMaxVal}, range: ${this.yAxisRange} <`);
   }  // olive navy maroon lime  
 
-  getBoundaryValues(){
+  getBoundaryValues() {
     if (this.dtkChart){
-      this.periodWindow   = this.dtkChart.periodWindow;   // no of days in the display chart
-      this.endIndex       = this.dtkChart.endIndex;
-      this.startIndex     = this.dtkChart.startIndex;
-      this.xIncrement_pc  = this.dtkChart.xIncrement_pc;
-      
-      this.dataMin        = this.dtkChart.dataMin;
-      this.dataMax        = this.dtkChart.dataMax;
-      this.yAxisMinVal    = this.dtkChart.yAxisMinVal;
-      this.yAxisMaxVal    = this.dtkChart.yAxisMaxVal;
-      this.yAxisRange     = this.dtkChart.yAxisRange;
+      const {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange} = this.dtkChart;
+      Object.assign(this, {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange});
     }
   }
-
+  
   // 
   draw(){
-    super.draw();
     this.getBoundaryValues();
+    console.log(`xIncrement_pc: ${this.xIncrement_pc}, dataMin: ${this.dataMin}, dataMax: ${this.dataMax},\nyAxisRange: ${this.yAxisRange}, yAxisMinVal: ${this.yAxisMinVal}, yAxisMaxVal: ${this.yAxisMaxVal}`);
+    
+    super.draw();
 
-    let xPos = this.xIncrement_pc / 2;    
+    //console.log(`cH:${cH} scaling[${yScaling}] - lab:${labels[mkNo]}`);
+    
+    //console.log(`pwPos:${pwPos} > yVal: ${yVal}  x2: ${x2}, y1: ${y1} lab:${labels[mkNo]} , y1: ${y1}`);
+
+    let xPos = this.xIncrement_pc / 3;    
     for (let pwPos = this.startIndex; pwPos < this.endIndex; pwPos++){
       // place in range (range 104.0 to 108.0) 105.2 = 1.2
-      let yVal  = dtkChartData[pwPos][this.dataSourceKey] - this.yAxisMinVal; 
+      let yVal = parseFloat(dtkChartData[pwPos][this.dataSourceKey]);
+      let yPos_pc  = yVal - this.yAxisMinVal; 
       // this.yAxisRange (range 104.0 to 108.0) range = 4.0
-      let y_pc  = 100 - ((yVal / this.yAxisRange) * 100);   // 100 - y_pc to invert because 0,0 is at the top!
+      let y_pc  = 100 - ((yPos_pc / this.yAxisRange) * 100);   // 100 - y_pc to invert because 0,0 is at the top!
 
-      let dsObjConfig = { display:this.display, doName:`${yVal}`, 
+      let dsObjConfig = { display:this.display, doName:`${yPos_pc}`, 
           x_pc:xPos, y_pc:y_pc, radius_pc:this.radius_pc, 
-          col_ink:'black', col_bk:'white', alpha:1, col_bbox:'cyan', dbgOn:true};
+          col_ink:'black', col_bk:'white', alpha:1, fontSize:this.fontSize,
+          col_bbox:'cyan', dbgOn:true};
 
-      let point = new DataPoint(dsObjConfig, yVal);
+      let point = new DataPoint(dsObjConfig, yVal, this.pointType);
       point.draw();
       xPos += this.xIncrement_pc;
     }
@@ -520,28 +514,28 @@ class DtkChart extends DisplayObject { // hold curent state
                         x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, arc_rad:arc_rad, 
                         col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn}
 
-    dsObjConfig = Object.assign(dsObjConfig, {doName:'a1', x_pc:10, y_pc:10, w_pc:10, h_pc:10, arc_rad:0, col_ink:'lime', col_bbox:'magenta'});
-    let a1 = new DisplayObject(dsObjConfig);
-    this.zList.push(a1);
+    // dsObjConfig = Object.assign(dsObjConfig, {doName:'a1', x_pc:10, y_pc:10, w_pc:10, h_pc:10, arc_rad:0, col_ink:'lime', col_bbox:'magenta'});
+    // let a1 = new DisplayObject(dsObjConfig);
+    // this.zList.push(a1);
 
-    dsObjConfig = Object.assign(dsObjConfig, {doName:'a2', x_pc:10, y_pc:80, w_pc:10, h_pc:10, arc_rad:0, col_ink:'yellowgreen', col_bbox:'magenta'});
-    let a2 = new DisplayObject(dsObjConfig);
-    this.zList.push(a2);
+    // dsObjConfig = Object.assign(dsObjConfig, {doName:'a2', x_pc:10, y_pc:80, w_pc:10, h_pc:10, arc_rad:0, col_ink:'yellowgreen', col_bbox:'magenta'});
+    // let a2 = new DisplayObject(dsObjConfig);
+    // this.zList.push(a2);
 
-    dsObjConfig = Object.assign(dsObjConfig, {doName:'a3', x_pc:80, y_pc:80, w_pc:10, h_pc:10, arc_rad:0, col_ink:'purple', col_bbox:'magenta'});
-    let a3 = new DisplayObject(dsObjConfig);
-    this.zList.push(a3);
+    // dsObjConfig = Object.assign(dsObjConfig, {doName:'a3', x_pc:80, y_pc:80, w_pc:10, h_pc:10, arc_rad:0, col_ink:'purple', col_bbox:'magenta'});
+    // let a3 = new DisplayObject(dsObjConfig);
+    // this.zList.push(a3);
 
-    dsObjConfig = Object.assign(dsObjConfig, {doName:'a4', x_pc:80, y_pc:10, w_pc:10, h_pc:10, arc_rad:0, col_ink:'orangered', col_bbox:'magenta'});
-    let a4 = new DisplayObject(dsObjConfig);
-    this.zList.push(a4);
+    // dsObjConfig = Object.assign(dsObjConfig, {doName:'a4', x_pc:80, y_pc:10, w_pc:10, h_pc:10, arc_rad:0, col_ink:'orangered', col_bbox:'magenta'});
+    // let a4 = new DisplayObject(dsObjConfig);
+    // this.zList.push(a4);
 
     dsObjConfig = { display:display, doName:'sBar', 
                     //x_pc:80, y_pc:0, w_pc:20, h_pc:100, arc_rad:0, 
                     x_pc:80, y_pc:0, w_pc:20, h_pc:80, arc_rad:0, 
                     col_ink:'maroon', col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:'magenta', dbgOn:true}
     let sBar = new SummaryBar(dsObjConfig);
-    this.zList.push(sBar);
+    //this.zList.push(sBar);
 
     dsObjConfig = { display:display, doName:'vBarS', 
                     x_pc:0, y_pc:0, w_pc:100, h_pc:100, arc_rad:0, 
@@ -554,16 +548,15 @@ class DtkChart extends DisplayObject { // hold curent state
     let dataSource = chartSettings.selectedDataSources[0];
 
     dsObjConfig = { display:display, doName:'pData', 
-                    x_pc:0, y_pc:0, w_pc:100, h_pc:90, arc_rad:0, 
+                    x_pc:0, y_pc:0, w_pc:100, h_pc:100, arc_rad:0, 
                     col_ink:'blue', col_bk:col_bk, alpha:alpha, fontSize:chartSettings.fontSize, col_bbox:'purple', dbgOn:false}
 
-    let singlePlot = new DataPlot(dsObjConfig, dataSource, 'test label');
+    let singlePlot = new DataPlot(dsObjConfig, this, dataSource, 'test label');
     this.zList.push(singlePlot);
 
     
     dsObjConfig = { display:display, doName:'yAxNum', 
                     x_pc:0, y_pc:0, w_pc:15, h_pc:100, arc_rad:0, 
-                    //x_pc:0, y_pc:0, w_pc:15, h_pc:80, arc_rad:0, 
                     col_ink:'black', col_bk:col_bk, alpha:0.5, fontSize:chartSettings.fontSize, col_bbox:'orange', dbgOn:true}
     let yAxisNumbering = new YAxisNumbering(dsObjConfig, this);
     this.zList.push(yAxisNumbering);    
