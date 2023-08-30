@@ -33,15 +33,25 @@ periodWindowButtons.addEventListener('click', (e) => {
         console.log(`chartSettings.endIndex: ${chartSettings.endIndex} + chartSettings.chartWidthDays:${chartSettings.chartWidthDays}`);
         chartSettings.endIndex = parseInt(chartSettings.endIndex) + parseInt(chartSettings.chartWidthDays);
         console.log(`chartSettings.endIndex AFTER ADD: ${chartSettings.endIndex}`);
-        if (chartSettings.endIndex > dtkChartData.length) chartSettings.endIndex = dtkChartData.length;
+        
+        if (chartSettings.endIndex > dtkChartData.length){
+            chartSettings.endIndex = dtkChartData.length;
+            chartSettings.startIndex = chartSettings.endIndex - chartSettings.chartWidthDays;
+        }            
+        
         console.log(`chartSettings.endIndex: ${chartSettings.endIndex}`);
         dtkChart.update();
     }
     if (e.target.id === 'but-win-mov-bak'){        
         console.log(`chartSettings.endIndex: ${chartSettings.endIndex} + chartSettings.chartWidthDays:${chartSettings.chartWidthDays}`);
-        chartSettings.endIndex -= chartSettings.chartWidthDays;
+        chartSettings.endIndex = parseInt(chartSettings.endIndex) - parseInt(chartSettings.chartWidthDays);
         console.log(`chartSettings.endIndex AFTER SUB: ${chartSettings.endIndex}`);
-        if (chartSettings.endIndex - chartSettings.chartWidthDays < 0 ) chartSettings.endIndex = chartSettings.chartWidthDays;
+
+        if (parseInt(chartSettings.startIndex) < 0 ){
+            chartSettings.startIndex = 0;
+            chartSettings.endIndex = chartSettings.chartWidthDays;
+        }
+
         console.log(`chartSettings.endIndex: ${chartSettings.endIndex}`);
         dtkChart.update();
     }

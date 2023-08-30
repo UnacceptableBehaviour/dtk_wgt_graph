@@ -6,7 +6,7 @@ const INDEX_START_DEFAULT = parseInt(INDEX_END_DEFAULT - CHART_WIDTH_DAYS_DEFAUL
 export var chartSettings = {
   cnv_width: 400,
   cnv_height: 400,
-  startIndex: INDEX_START_DEFAULT,        // DEPRACATED calc index from END
+  startIndex: INDEX_START_DEFAULT,
   endIndex:   INDEX_END_DEFAULT,
   chartWidthDays: CHART_WIDTH_DAYS_DEFAULT,
   fontSize: 10,
@@ -44,7 +44,7 @@ class DisplayObject {
     // debug
     this.dbgOn = dbgOn;
     this.border = dbgOn;
-    this.titleOn = true;//dbgOn;
+    this.titleOn = dbgOn;
     this.markers = dbgOn;
     this.textEdgeMarkers = dbgOn;
   }
@@ -311,15 +311,10 @@ class YAxisNumbering extends DisplayObject {
     
     super.draw();
     let ctx = this.display.canvas.getContext("2d");
-    let cH = this.display.canvas.height;
+    //let cH = this.display.canvas.height;
     let cW = this.display.canvas.width;
 
-    let noOfhMarks = labels.length;    
-    let yScaling = cH / (this.yAxisRange);
-    let offset = 0; //yScaling / 2;
-
-
-    let y1 = offset;
+    let noOfhMarks = labels.length;      
     let x2 = cW;
 
     for (let mkNo = 0; mkNo < noOfhMarks; mkNo++ ){
@@ -327,23 +322,29 @@ class YAxisNumbering extends DisplayObject {
       //console.log(ctx.measureText(yLabelText));
       let x1 = ctx.measureText(yLabelText).width + this.fontSize;
 
-      //console.log(`cH:${cH} scaling[${yScaling}] - lab:${labels[mkNo]}`);
-      //console.log(`mkNo:${mkNo} > x1: ${x1}, y1: ${y1}  to  x2: ${x2}, y1: ${y1} lab:${labels[mkNo]}`);
+      let yVal = parseFloat(yLabelText);
+      let yPosFromRangeMin = yVal - this.yAxisMinVal; 
+
+      let yPosFromMin_pc  = (yPosFromRangeMin / this.yAxisRange) * 100;
+      // this.yAxisRange (range 104.0 to 108.0) range = 4.0
+      this.y_pc  = 100 - yPosFromMin_pc;  
+      this.scaleCoords(); // convert y_pc to y
+
       ctx.globalAlpha = this.alpha;
       ctx.beginPath();
-      y1 = offset + (yScaling * mkNo);  
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y1);
+      ctx.moveTo(x1, this.y);
+      ctx.lineTo(x2, this.y);
       ctx.strokeStyle = this.col_ink;
       ctx.lineWidth = 1;      
       ctx.setLineDash([5, 15]); // dash gap - eg [5, 10, 15, 20]
       ctx.stroke();
-      this.placeCentreTextNoMk(ctx, yLabelText, 0, x1, y1 - this.fontSize, this.col_ink, this.fontSize, 'center', 'middle');
+      this.placeCentreTextNoMk(ctx, yLabelText, 0, x1, this.y - this.fontSize, this.col_ink, this.fontSize, 'center', 'middle');
       ctx.globalAlpha = 1;
       ctx.setLineDash([]);
     }
     
   }
+
 }
 
 
@@ -419,6 +420,7 @@ class DataPlot extends DisplayObject {
     this.dtkChart       = dtkChart;
     this.dataSourceKey  = dataSourceKey;
     this.label          = label;    
+    this.pointType      = pointType;
     this.getBoundaryValues();    
     this.radius_pc      = this.xIncrement_pc / 6;
 
@@ -443,22 +445,24 @@ class DataPlot extends DisplayObject {
     
     //console.log(`pwPos:${pwPos} > yVal: ${yVal}  x2: ${x2}, y1: ${y1} lab:${labels[mkNo]} , y1: ${y1}`);
 
-    let xPos = this.xIncrement_pc / 3;    
+    let x_pc = this.xIncrement_pc / 3;    
     for (let pwPos = this.startIndex; pwPos < this.endIndex; pwPos++){
       // place in range (range 104.0 to 108.0) 105.2 = 1.2
       let yVal = parseFloat(dtkChartData[pwPos][this.dataSourceKey]);
-      let yPos_pc  = yVal - this.yAxisMinVal; 
-      // this.yAxisRange (range 104.0 to 108.0) range = 4.0
-      let y_pc  = 100 - ((yPos_pc / this.yAxisRange) * 100);   // 100 - y_pc to invert because 0,0 is at the top!
+      let yPosFromRangeMin = yVal - this.yAxisMinVal; 
 
-      let dsObjConfig = { display:this.display, doName:`${yPos_pc}`, 
-          x_pc:xPos, y_pc:y_pc, radius_pc:this.radius_pc, 
+      let yPosFromMin_pc  = (yPosFromRangeMin / this.yAxisRange) * 100;
+      // this.yAxisRange (range 104.0 to 108.0) range = 4.0
+      let y_pc  = 100 - yPosFromMin_pc;   // 100 - y_pc to invert because 0,0 is at the top!
+
+      let dsObjConfig = { display:this.display, doName:`${y_pc}`, 
+          x_pc:x_pc, y_pc:y_pc, radius_pc:this.radius_pc, 
           col_ink:'black', col_bk:'white', alpha:1, fontSize:this.fontSize,
           col_bbox:'cyan', dbgOn:true};
 
       let point = new DataPoint(dsObjConfig, yVal, this.pointType);
       point.draw();
-      xPos += this.xIncrement_pc;
+      x_pc += this.xIncrement_pc;
     }
   }
 }
