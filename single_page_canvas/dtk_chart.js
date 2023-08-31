@@ -11,7 +11,11 @@ export var chartSettings = {
   chartWidthDays: CHART_WIDTH_DAYS_DEFAULT,
   fontSize: 10,
   availableDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
-  selectedDataSources:  ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
+  //selectedDataSources:  ['dtk_pc_h2o'],
+  //selectedDataSources:  ['dtk_pc_fat'], 
+  //selectedDataSources:  ['dtk_weight'], 
+  //selectedDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
+  selectedDataSources: ['dtk_pc_fat', 'dtk_pc_h2o'],
   col_ink: {dtk_weight: 'rgb(255, 132, 0)', 
             dtk_pc_fat: 'rgb(219, 0, 0)',
             dtk_pc_h2o: 'rgb(0, 132, 233)', 
@@ -618,6 +622,7 @@ class DtkChart extends DisplayObject { // hold curent state
     // this.yAxisMaxVal    = null;
     // this.yAxisRange     = null;
 
+    // get ylimits of each data source so composite plots match yAxisNumbering
     this.calculateBoundaries(); // calculates above values
 
     // 1568764800000: {
@@ -667,18 +672,19 @@ class DtkChart extends DisplayObject { // hold curent state
     let verticalLabelBars = new VertLabelBars(dsObjConfig);
     this.zList.push(verticalLabelBars);
 
-    // get ylimits of each data source so composite plots match yAxisNumbering
-    // for dataSource in dataSources: new DataPlot(dataSource);
 
-    let dataSource = chartSettings.selectedDataSources[0];
+    for (let dsIdx = 0; dsIdx < chartSettings.selectedDataSources.length; dsIdx++) {
+      let dataSourceKey = chartSettings.selectedDataSources[dsIdx];
 
-    dsObjConfig = { display:display, doName:'pData', 
-                    x_pc:0, y_pc:0, w_pc:100, h_pc:100, arc_rad:0, 
-                    col_ink:'blue', col_bk:col_bk, alpha:alpha, fontSize:chartSettings.fontSize, col_bbox:'purple', dbgOn:false}
+      let dataSourceInk = chartSettings.col_ink[dataSourceKey];
 
-    let singlePlot = new DataPlot(dsObjConfig, this, dataSource, 'test label');
-    this.zList.push(singlePlot);
+      dsObjConfig = { display:display, doName:'pData', 
+                      x_pc:0, y_pc:0, w_pc:100, h_pc:100, arc_rad:0, 
+                      col_ink:dataSourceInk, col_bk:col_bk, alpha:alpha, fontSize:chartSettings.fontSize, col_bbox:'purple', dbgOn:false}
 
+      let singlePlot = new DataPlot(dsObjConfig, this, dataSourceKey, 'test label');
+      this.zList.push(singlePlot);
+    }
     
     dsObjConfig = { display:display, doName:'yAxNum', 
                     x_pc:0, y_pc:0, w_pc:15, h_pc:100, arc_rad:0, 
@@ -689,37 +695,43 @@ class DtkChart extends DisplayObject { // hold curent state
   } // olive navy maroon lime
 
   calculateBoundaries() {
-    // iterate through datasources to calculate composite limits/boundaries
-    let dataSources = chartSettings.selectedDataSources;
-    let dataSourceKey = dataSources[0];
-
     // scan data for min & max to scale data
     this.periodWindow   = chartSettings.chartWidthDays;    
     this.endIndex       = chartSettings.endIndex;
     this.startIndex     = this.endIndex - this.periodWindow;
     this.xIncrement_pc  = (100 / this.periodWindow);
-    
-    let min = parseFloat(dtkChartData[this.startIndex][dataSourceKey]);
-    let max = parseFloat(dtkChartData[this.startIndex][dataSourceKey]);
-    
-    for (let i = this.startIndex; i < this.endIndex; i++){
-      console.log(`[i]: [${i}] <`);
-      console.log(dtkChartData[i]);
-      let dataPoint = parseFloat(dtkChartData[i][dataSourceKey]);
-      if (min > dataPoint) min = dataPoint;
-      if (max < dataPoint) max = dataPoint;
+
+
+    this.dataMax      = parseFloat(dtkChartData[this.startIndex][chartSettings.selectedDataSources[0]]);
+    this.dataMin      = parseFloat(dtkChartData[this.startIndex][chartSettings.selectedDataSources[0]]);
+    this.yAxisMaxVal  = null;
+    this.yAxisMinVal  = null;
+    this.yAxisRange   = null;
+
+    // iterate through datasources to calculate composite limits/boundaries
+    for (let dsIdx = 0; dsIdx < chartSettings.selectedDataSources.length; dsIdx++) {
+      let dataSourceKey = chartSettings.selectedDataSources[dsIdx];
+      
+      let min = parseFloat(dtkChartData[this.startIndex][dataSourceKey]);
+      let max = parseFloat(dtkChartData[this.startIndex][dataSourceKey]);
+      
+      for (let i = this.startIndex; i < this.endIndex; i++){
+        console.log(`[i]: [${i}] <`);
+        console.log(dtkChartData[i]);
+        let dataPoint = parseFloat(dtkChartData[i][dataSourceKey]);
+        if (min > dataPoint) min = dataPoint;
+        if (max < dataPoint) max = dataPoint;
+      }
+
+      if (this.dataMin > min) this.dataMin = min;
+      if (this.dataMax < max) this.dataMax = max;
+
+      let dataRange = this.dataMax - this.dataMin;
+      
+      this.yAxisMaxVal  = this.dataMax + (0.1 * dataRange); 
+      this.yAxisMinVal  = this.dataMin - (0.2 * dataRange); // 0.3 instead of 0.1 to allow for labelling
+      this.yAxisRange   = this.yAxisMaxVal - this.yAxisMinVal;
     }
-
-    // when iterating data sources 
-    // TODO H - comapare with current values before settign new ones
-
-    // mark axis values starting at whole number between dataMin & AxisMin    
-    let dataRange = max - min;
-    this.dataMax      = max;
-    this.yAxisMaxVal  = max + (0.1 * dataRange); 
-    this.dataMin      = min;
-    this.yAxisMinVal  = min - (0.2 * dataRange); // 0.3 instead of 0.1 to allow for labelling
-    this.yAxisRange   = this.yAxisMaxVal - this.yAxisMinVal;
 
     console.log(`periodWindow: ${this.periodWindow}\tstartIndex:  ${this.startIndex}\tthis.endIndex: ${this.endIndex}`);
     console.log(`dataMax:      ${this.dataMax}\tyAxisMaxVal: ${this.yAxisMaxVal}`);
