@@ -4703,6 +4703,17 @@ export let dtkTestRecord = {
     dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
     dtk_weight: "103.6",
   },
+  1693440000000: {
+    dtk_pc_fat: "47.3",
+    dtk_pc_h2o: "36.2",
+    dtk_rcp: {
+      dt_date: 1693440000000,
+      dt_date_readable: "2023 08 31",
+      dt_day: "thu",
+    },
+    dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    dtk_weight: "103.5",
+  },
   1564531200000: {
     dtk_pc_fat: "37.6",
     dtk_pc_h2o: "45.3",

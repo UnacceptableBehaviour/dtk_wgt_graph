@@ -11,7 +11,20 @@ export var chartSettings = {
   chartWidthDays: CHART_WIDTH_DAYS_DEFAULT,
   fontSize: 10,
   availableDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
-  selectedDataSources:  ['dtk_weight'],
+  selectedDataSources:  ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
+  col_ink: {dtk_weight: 'rgb(255, 132, 0)', 
+            dtk_pc_fat: 'rgb(219, 0, 0)',
+            dtk_pc_h2o: 'rgb(0, 132, 233)', 
+            dtk_frame:  'rgb(107, 214, 0)'},
+  band_ink:{dtk_weight_top: 'rgb(200, 140, 85)', 
+            dtk_weight_bot: 'rgb(250, 190, 125)', 
+            dtk_pc_fat_top: 'rgb(160, 55, 55)',
+            dtk_pc_fat_bot: 'rgb(210, 105, 105)',
+            dtk_pc_h2o_top: 'rgb(65, 130, 180)', 
+            dtk_pc_h2o_bot: 'rgb(115, 180, 230)', 
+            dtk_frame_top:  'rgb(100, 160, 60)',
+            dtk_frame_bot:  'rgb(160, 210, 110)'
+          }
 }
 
 var progressChart;
@@ -45,7 +58,7 @@ class DisplayObject {
     this.dbgOn = dbgOn;
     this.border = dbgOn;
     this.titleOn = dbgOn;
-    this.markers = dbgOn;
+    this.markers = false; //dbgOn;
     this.textEdgeMarkers = dbgOn;
   }
 
@@ -213,7 +226,7 @@ class VertLabelBar extends DisplayObject {
     this.pwPos        = pwPos;
     this.periodWindow = periodWindow;    
     this.dark         = dark;
-  }  // olive navy maroon lime  
+  }  
 
   draw(){
     super.draw();
@@ -394,6 +407,36 @@ class DataPoint extends DisplayObject {
   }
 }
 
+class ScaledLine extends DisplayObject {
+  // display rolling average for period length
+  constructor( {display, doName, x_pc, y_pc, x1_pc, y1_pc, col_ink, col_bk, alpha, dbgOn} = {},
+    lineDash=[], lineWidth=1 )
+  {
+    super({ display:display, doName:doName, 
+            x_pc:x_pc, y_pc:y_pc, x1_pc:x1_pc, y1_pc:y1_pc,
+            col_ink:col_ink, col_bk:col_bk, alpha:alpha, dbgOn:dbgOn});
+    
+    this.lineDash = lineDash;
+    this.lineWidth = lineWidth;        
+  }
+
+  draw(){
+    let ctx = this.display.canvas.getContext("2d");
+    this.scaleCoords(); // convert y_pc to y
+
+    ctx.globalAlpha = this.alpha;
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x1, this.y1);
+    ctx.strokeStyle = this.col_ink;
+    ctx.lineWidth = this.lineWidth;      
+    ctx.setLineDash(this.lineDash); // dash gap - eg [5, 10, 15, 20]
+    ctx.stroke();    
+    ctx.globalAlpha = 1;
+    ctx.setLineDash([]);
+  }
+}
+
 class DataPlot extends DisplayObject {
   // display rolling average for period length
   constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
@@ -425,7 +468,7 @@ class DataPlot extends DisplayObject {
     this.radius_pc      = this.xIncrement_pc / 6;
 
     console.log(`min: ${this.yAxisMinVal}, max: ${this.yAxisMaxVal}, range: ${this.yAxisRange} <`);
-  }  // olive navy maroon lime  
+  }  
 
   getBoundaryValues() {
     if (this.dtkChart){
@@ -445,7 +488,34 @@ class DataPlot extends DisplayObject {
     
     //console.log(`pwPos:${pwPos} > yVal: ${yVal}  x2: ${x2}, y1: ${y1} lab:${labels[mkNo]} , y1: ${y1}`);
 
-    let x_pc = this.xIncrement_pc / 3;    
+    let x_pc = this.xIncrement_pc / 3;
+    let prevX_pc = x_pc - this.xIncrement_pc;
+    let prevY_pc = parseFloat(dtkChartData[this.startIndex-1][this.dataSourceKey]);
+    for (let pwPos = this.startIndex; pwPos < this.endIndex; pwPos++){
+      // place in range (range 104.0 to 108.0) 105.2 = 1.2
+      let yVal = parseFloat(dtkChartData[pwPos][this.dataSourceKey]);
+      let yPosFromRangeMin = yVal - this.yAxisMinVal; 
+
+      let yPosFromMin_pc  = (yPosFromRangeMin / this.yAxisRange) * 100;
+      // this.yAxisRange (range 104.0 to 108.0) range = 4.0
+      let y_pc  = 100 - yPosFromMin_pc;   // 100 - y_pc to invert because 0,0 is at the top!
+
+      let dsObjConfig = { display:this.display, doName:`${y_pc}`, 
+          x_pc:prevX_pc,  y_pc:prevY_pc,
+          x1_pc:x_pc,     y1_pc:y_pc,
+          col_ink:'rgb(255, 111, 0)', col_bk:'white', alpha:1, fontSize:this.fontSize,
+          col_bbox:'cyan', dbgOn:true};
+
+      // let point = new DataPoint(dsObjConfig, yVal, this.pointType);
+      // point.draw();
+      let tl = new ScaledLine(dsObjConfig, [15,5], 2);
+      tl.draw();
+      prevX_pc = x_pc;
+      prevY_pc = y_pc;
+      x_pc += this.xIncrement_pc;
+    }
+
+    x_pc = this.xIncrement_pc / 3;
     for (let pwPos = this.startIndex; pwPos < this.endIndex; pwPos++){
       // place in range (range 104.0 to 108.0) 105.2 = 1.2
       let yVal = parseFloat(dtkChartData[pwPos][this.dataSourceKey]);
@@ -464,8 +534,58 @@ class DataPlot extends DisplayObject {
       point.draw();
       x_pc += this.xIncrement_pc;
     }
+
+    // let tl = new ScaledLine({ display:this.display, x_pc:10, y_pc:10, x1_pc:90, y1_pc:90, col_ink:'rgb(255, 111, 0)', alpha:1}, [5,5], 5);
+    // tl.draw();
+
   }
 }
+
+
+// class TargetBand extends DisplayObject {
+//   // display rolling average for period length
+//   constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
+//                 label='#',bandUpper, bandLower )
+//   {
+//     x_pc = 0;
+//     y_pc = 0;     // bandUpper
+//     w_pc = 100;
+//     h_pc = 100;   // bandUpper - bandLower
+//     super({ display:display, doName:doName, 
+//       x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, arc_rad:arc_rad, 
+//       col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
+
+//     this.label      = label;
+//     this.bandUpper  = bandUpper;
+//     this.bandLower  = bandLower;
+
+//   }  
+  
+//   getBoundaryValues() {
+//     if (this.dtkChart){
+//       const {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange} = this.dtkChart;
+//       Object.assign(this, {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange});
+//     }
+//   }
+  
+//   // 
+//   draw(){
+//     this.getBoundaryValues();
+//     console.log(`doName: ${this.doName}, label: ${this.label}, bandLower: ${this.bandLower}, bandUpper: ${this.bandUpper}\nyAxisMinVal: ${this.yAxisMinVal}, yAxisMaxVal: ${this.yAxisMaxVal}`);
+    
+//     super.draw();
+//     const ctx = this.display.canvas.getContext("2d");
+//     ctx.fillStyle = this.col_ink;
+//     ctx.globalAlpha = this.alpha;
+    
+//     ctx.fillRect(this.x, this.y, this.w, this.h);
+
+    
+    
+//     ctx.globalAlpha = 1;                                        // TODO - sort propert geometry calculation out for text placement
+//   }
+// }
+
 
 class SummaryBar extends DisplayObject {
   // display rolling average for period length
@@ -476,7 +596,7 @@ class SummaryBar extends DisplayObject {
             x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, arc_rad:arc_rad, 
             col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
         
-  }  // olive navy maroon lime  
+  }  
 }
 
 class DtkChart extends DisplayObject { // hold curent state
@@ -512,8 +632,8 @@ class DtkChart extends DisplayObject { // hold curent state
     //   dtk_weight: "105.7",
     // }            
 
-
     this.zList = [this];
+
     let dsObjConfig = { display:display, doName:doName, 
                         x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, arc_rad:arc_rad, 
                         col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn}
@@ -549,6 +669,7 @@ class DtkChart extends DisplayObject { // hold curent state
 
     // get ylimits of each data source so composite plots match yAxisNumbering
     // for dataSource in dataSources: new DataPlot(dataSource);
+
     let dataSource = chartSettings.selectedDataSources[0];
 
     dsObjConfig = { display:display, doName:'pData', 
@@ -592,10 +713,12 @@ class DtkChart extends DisplayObject { // hold curent state
     // when iterating data sources 
     // TODO H - comapare with current values before settign new ones
 
-    this.dataMin      = min;          // mark axis values starting at whole number between dataMin & AxisMin
-    this.yAxisMinVal  = min -1;
+    // mark axis values starting at whole number between dataMin & AxisMin    
+    let dataRange = max - min;
     this.dataMax      = max;
-    this.yAxisMaxVal  = max +1;
+    this.yAxisMaxVal  = max + (0.1 * dataRange); 
+    this.dataMin      = min;
+    this.yAxisMinVal  = min - (0.2 * dataRange); // 0.3 instead of 0.1 to allow for labelling
     this.yAxisRange   = this.yAxisMaxVal - this.yAxisMinVal;
 
     console.log(`periodWindow: ${this.periodWindow}\tstartIndex:  ${this.startIndex}\tthis.endIndex: ${this.endIndex}`);
