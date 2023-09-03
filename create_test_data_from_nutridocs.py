@@ -108,7 +108,8 @@ for k,f in file_LUT.items():
             
             nix_time = nix_time_ms(datetime(int(yr),int(mnth),int(dayD)))
             hr_date = hr_readable_date_from_nix(nix_time)   # pad out single digits
-            record[nix_time] = {'dtk_pc_fat': lipids,
+            record[nix_time] = {'synthetic': False,         # IE recorded not interpolated
+                                'dtk_pc_fat': lipids,
                                 'dtk_pc_h2o': h2o,
                                 'dtk_rcp': {'dt_date': nix_time,
                                             'dt_date_readable': hr_date,
