@@ -14,28 +14,28 @@ export var chartSettings = {
   //selectedDataSources:  ['dtk_pc_h2o'],
   //selectedDataSources:  ['dtk_pc_fat'], 
   //selectedDataSources:  ['dtk_weight'], 
-  //selectedDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
-  selectedDataSources: ['dtk_pc_fat', 'dtk_pc_h2o'],
+  selectedDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
+  //selectedDataSources: ['dtk_pc_fat', 'dtk_pc_h2o'],
   col_ink: {dtk_weight: 'rgb(255, 132, 0)', 
             dtk_pc_fat: 'rgb(219, 0, 0)',
             dtk_pc_h2o: 'rgb(0, 132, 233)', 
             dtk_frame:  'rgb(107, 214, 0)'},
-  band_ink:{dtk_weight_top: 'rgb(200, 140, 85)', 
-            dtk_weight_bot: 'rgb(250, 190, 125)', 
-            dtk_pc_fat_top: 'rgb(160, 55, 55)',
-            dtk_pc_fat_bot: 'rgb(210, 105, 105)',
-            dtk_pc_h2o_top: 'rgb(65, 130, 180)', 
-            dtk_pc_h2o_bot: 'rgb(115, 180, 230)', 
-            dtk_frame_top:  'rgb(100, 160, 60)',
-            dtk_frame_bot:  'rgb(160, 210, 110)'},
-  target_band:{ dtk_weight_top: 95.0,  // kg
-                dtk_weight_bot: 88.0, 
-                dtk_pc_fat_top: 22.0,   // %
-                dtk_pc_fat_bot: 6.0,
-                dtk_pc_h2o_top: 55.0, 
-                dtk_pc_h2o_bot: 50.0, 
-                dtk_frame_top:  18.0,
-                dtk_frame_bot:  22.0 }            
+  band_ink:{dtk_weight: { top: 'rgb(200, 140, 85)', 
+                          bot: 'rgb(250, 190, 125)' }, 
+            dtk_pc_fat: { top: 'rgb(160, 55, 55)',
+                          bot: 'rgb(210, 105, 105)' },
+            dtk_pc_h2o: { top: 'rgb(65, 130, 180)', 
+                          bot: 'rgb(115, 180, 230)' }, 
+            dtk_frame:  { top:  'rgb(100, 160, 60)',
+                          bot:  'rgb(160, 210, 110)'}},
+  target_band:{ dtk_weight: { top: 95.0,  // kg
+                              bot: 88.0 }, 
+                dtk_pc_fat: { top: 34.0,   // %
+                              bot: 6.0  },
+                dtk_pc_h2o: { top: 55.0, 
+                              bot: 45.0 }, 
+                dtk_frame:  { top: 18.0,
+                              bot: 22.0 } }
 }
 
 var progressChart;
@@ -81,6 +81,7 @@ class DisplayObject {
     this.x1 = this.display.canvas.width * (this.x1_pc / 100);
     this.y1 = this.display.canvas.height * (this.y1_pc / 100);
   }
+
 
   draw(){
     this.scaleCoords();
@@ -503,12 +504,7 @@ class DataPlot extends DisplayObject {
     let prevY_pc = parseFloat(dtkChartData[this.startIndex-1][this.dataSourceKey]);
     for (let pwPos = this.startIndex; pwPos < this.endIndex; pwPos++){
       // place in range (range 104.0 to 108.0) 105.2 = 1.2
-      let yVal = parseFloat(dtkChartData[pwPos][this.dataSourceKey]);
-      let yPosFromRangeMin = yVal - this.yAxisMinVal; 
-
-      let yPosFromMin_pc  = (yPosFromRangeMin / this.yAxisRange) * 100;
-      // this.yAxisRange (range 104.0 to 108.0) range = 4.0
-      let y_pc  = 100 - yPosFromMin_pc;   // 100 - y_pc to invert because 0,0 is at the top!
+      let y_pc = this.dtkChart.yPcFromyVal(parseFloat(dtkChartData[pwPos][this.dataSourceKey]));
 
       let dsObjConfig = { display:this.display, doName:`${y_pc}`, 
           x_pc:prevX_pc,  y_pc:prevY_pc,
@@ -552,49 +548,91 @@ class DataPlot extends DisplayObject {
 }
 
 
-// class TargetBand extends DisplayObject {
-//   // display rolling average for period length
-//   constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
-//                 label='#',bandUpper, bandLower )
-//   {
-//     x_pc = 0;
-//     y_pc = 0;     // bandUpper
-//     w_pc = 100;
-//     h_pc = 100;   // bandUpper - bandLower
-//     super({ display:display, doName:doName, 
-//       x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, arc_rad:arc_rad, 
-//       col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
+class TargetBand extends DisplayObject {
+  // display rolling average for period length
+  constructor( {display, doName,
+                alpha, fontSize, 
+                col_bbox, dbgOn} = {},
+                dtkChart,
+                label='#',bandUpper, bandLower,
+                upperInk, lowerInk, bandInk )
+  {
+    super({ display:display, doName:doName, 
+            alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
+    this.dtkChart = dtkChart;
+    this.x_pc = 0;
+    this.y_pc = this.dtkChart.yPcFromyVal(bandUpper);
+    this.w_pc = 100;
+    this.h_pc = this.dtkChart.yPcFromyVal(bandLower) - this.dtkChart.yPcFromyVal(bandUpper);   // bandUpper - bandLower        
+    this.label        = label;
+    this.bandUpper    = bandUpper;
+    this.bandUpper_pc = this.dtkChart.yPcFromyVal(bandUpper);
+    this.bandLower    = bandLower;
+    this.bandLower_pc = this.dtkChart.yPcFromyVal(bandLower);
 
-//     this.label      = label;
-//     this.bandUpper  = bandUpper;
-//     this.bandLower  = bandLower;
+    this.upperInk   = upperInk; 
+    this.lowerInk   = lowerInk; 
+    this.bandInk    = bandInk;
 
-//   }  
+  }  
   
-//   getBoundaryValues() {
-//     if (this.dtkChart){
-//       const {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange} = this.dtkChart;
-//       Object.assign(this, {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange});
-//     }
-//   }
+  getBoundaryValues() {
+    if (this.dtkChart){
+      const {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange} = this.dtkChart;
+      Object.assign(this, {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange});
+    }
+  }
   
-//   // 
-//   draw(){
-//     this.getBoundaryValues();
-//     console.log(`doName: ${this.doName}, label: ${this.label}, bandLower: ${this.bandLower}, bandUpper: ${this.bandUpper}\nyAxisMinVal: ${this.yAxisMinVal}, yAxisMaxVal: ${this.yAxisMaxVal}`);
+  // 
+  draw(){
+    this.getBoundaryValues();
+    console.log(`doName: ${this.doName}, label: ${this.label}, bandLower: ${this.bandLower}, bandUpper: ${this.bandUpper}\nyAxisMinVal: ${this.yAxisMinVal}, yAxisMaxVal: ${this.yAxisMaxVal}`);
     
-//     super.draw();
-//     const ctx = this.display.canvas.getContext("2d");
-//     ctx.fillStyle = this.col_ink;
-//     ctx.globalAlpha = this.alpha;
-    
-//     ctx.fillRect(this.x, this.y, this.w, this.h);
+    super.draw(); // this.scaleCoords();
+    const ctx = this.display.canvas.getContext("2d");
+    const cW = this.display.canvas.width;
+    ctx.fillStyle = this.bandInk;
+    ctx.globalAlpha = this.alpha * 0.2;
 
+    ctx.fillRect(this.x, this.y, cW, this.h);
+
+    ctx.globalAlpha = this.alpha * 0.8;
+
+    // UPPER BAND LINE
+    let xl = 0;
+    let pointLabelText = `${this.bandLower.toFixed(1)} - ${this.bandUpper.toFixed(1)}`;
+    let xr = 100;
+    // debug text
+    this.placeCentreTextNoMk(ctx, pointLabelText, xl, xr, this.y - this.fontSize *2, this.col_ink, this.fontSize, 'center', 'middle');
     
+    let dsObjConfig = { display:this.display, doName:`${this.y_pc}`, 
+                        x_pc:0,     y_pc:this.bandUpper_pc,
+                        x1_pc:100,  y1_pc:this.bandUpper_pc,          
+                        col_ink:this.upperInk, alpha:0.8, fontSize:this.fontSize,
+                        col_bbox:'cyan', dbgOn:this.dbgOn};
+
+    let uBand = new ScaledLine(dsObjConfig, [], 2);  // [] = solid line
+    uBand.draw();
+
+    // LOWER BAND LINE
+    xl = 0;
+    pointLabelText = `${this.bandLower.toFixed(1)} - ${this.bandUpper.toFixed(1)}`;
+    xr = 100;
+    // debug text
+    this.placeCentreTextNoMk(ctx, pointLabelText, xl, xr, this.y - this.fontSize *2, this.col_ink, this.fontSize, 'center', 'middle');
     
-//     ctx.globalAlpha = 1;                                        // TODO - sort propert geometry calculation out for text placement
-//   }
-// }
+    dsObjConfig = { display:this.display, doName:`${this.y_pc}`, 
+                    x_pc:0,     y_pc:this.bandLower_pc,
+                    x1_pc:100,  y1_pc:this.bandLower_pc,
+                    col_ink:this.upperInk, alpha:0.8, fontSize:this.fontSize,
+                    col_bbox:'cyan', dbgOn:this.dbgOn};
+
+    let lBand = new ScaledLine(dsObjConfig, [], 2);  // [] = solid line
+    lBand.draw();
+    
+    ctx.globalAlpha = 1;  // TODO - sort propert geometry calculation out for text placement
+  }
+}
 
 
 class SummaryBar extends DisplayObject {
@@ -686,10 +724,22 @@ class DtkChart extends DisplayObject { // hold curent state
 
       dsObjConfig = { display:display, doName:'pData', 
                       x_pc:0, y_pc:0, w_pc:100, h_pc:100, arc_rad:0, 
-                      col_ink:dataSourceInk, col_bk:col_bk, alpha:alpha, fontSize:chartSettings.fontSize, col_bbox:'purple', dbgOn:false}
+                      col_ink:dataSourceInk, col_bk:col_bk, alpha:alpha, fontSize:chartSettings.fontSize,
+                      col_bbox:'purple', dbgOn:false}
 
       let singlePlot = new DataPlot(dsObjConfig, this, dataSourceKey, 'test label');
       this.zList.push(singlePlot);
+
+      dsObjConfig = { display:display, doName:'tBand', 
+                      col_ink:dataSourceInk, col_bk:col_bk, alpha:1, fontSize:chartSettings.fontSize,
+                      col_bbox:'purple', dbgOn:false}
+
+      let targetBand = new TargetBand(dsObjConfig, this, `tBand:${dataSourceKey}`,
+      chartSettings.target_band[dataSourceKey].top, chartSettings.target_band[dataSourceKey].bot,
+      chartSettings.band_ink[dataSourceKey].top, chartSettings.band_ink[dataSourceKey].bot,
+      chartSettings.band_ink[dataSourceKey].bot);
+
+      this.zList.push(targetBand);      
     }
     
     dsObjConfig = { display:display, doName:'yAxNum', 
@@ -745,6 +795,18 @@ class DtkChart extends DisplayObject { // hold curent state
     // console.log(`myvar:${myvar}`);
   }
 
+  // call getBoundaryValues() before this! 
+  yPcFromyVal(yVal){
+    let yPosFromRangeMin = yVal - this.yAxisMinVal; 
+
+    // this.yAxisRange (range 104.0 to 108.0) range = 4.0
+    let yPosFromMin_pc  = (yPosFromRangeMin / this.yAxisRange) * 100;   
+
+     // 100 - y_pc to invert because 0,0 is at the top!
+    let y_pc  = 100 - yPosFromMin_pc;
+
+    return y_pc;
+  };  
 
   update(){
     this.calculateBoundaries();
