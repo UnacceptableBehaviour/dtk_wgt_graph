@@ -27,8 +27,15 @@ export var chartSettings = {
             dtk_pc_h2o_top: 'rgb(65, 130, 180)', 
             dtk_pc_h2o_bot: 'rgb(115, 180, 230)', 
             dtk_frame_top:  'rgb(100, 160, 60)',
-            dtk_frame_bot:  'rgb(160, 210, 110)'
-          }
+            dtk_frame_bot:  'rgb(160, 210, 110)'},
+  target_band:{ dtk_weight_top: 95.0,  // kg
+                dtk_weight_bot: 88.0, 
+                dtk_pc_fat_top: 22.0,   // %
+                dtk_pc_fat_bot: 6.0,
+                dtk_pc_h2o_top: 55.0, 
+                dtk_pc_h2o_bot: 50.0, 
+                dtk_frame_top:  18.0,
+                dtk_frame_bot:  22.0 }            
 }
 
 var progressChart;
@@ -401,12 +408,11 @@ class DataPoint extends DisplayObject {
     } else if (this.pointType == DataPoint.CROSSX) {
       this.drawCircle(this.x,this.y,this.w/2,this.col_ink);
     }
-    // TODO write value next to plot point
+
     let xl = this.x + this.radius_pc*4;
     let pointLabelText = `${this.yVal.toFixed(1)}`;
     let xr = xl + ctx.measureText(pointLabelText).width;
     this.placeCentreTextNoMk(ctx, pointLabelText, xl, xr, this.y - this.fontSize, this.col_ink, this.fontSize, 'center', 'middle');
-
     
   }
 }
@@ -506,8 +512,8 @@ class DataPlot extends DisplayObject {
 
       let dsObjConfig = { display:this.display, doName:`${y_pc}`, 
           x_pc:prevX_pc,  y_pc:prevY_pc,
-          x1_pc:x_pc,     y1_pc:y_pc,
-          col_ink:'rgb(255, 111, 0)', col_bk:'white', alpha:1, fontSize:this.fontSize,
+          x1_pc:x_pc,     y1_pc:y_pc,          
+          col_ink:chartSettings.col_ink[this.dataSourceKey], col_bk:'white', alpha:1, fontSize:this.fontSize,
           col_bbox:'cyan', dbgOn:true};
 
       // let point = new DataPoint(dsObjConfig, yVal, this.pointType);
