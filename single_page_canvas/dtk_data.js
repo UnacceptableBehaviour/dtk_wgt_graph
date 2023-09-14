@@ -1,5 +1,6 @@
 export let dtkTestRecord = {
   1563494400000: {
+    synthetic: false,
     dtk_pc_fat: "39.1",
     dtk_pc_h2o: "44.2",
     dtk_rcp: {
@@ -11,6 +12,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.9",
   },
   1599004800000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -22,6 +24,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.1",
   },
   1550188800000: {
+    synthetic: false,
     dtk_pc_fat: "47.0",
     dtk_pc_h2o: "38.6",
     dtk_rcp: {
@@ -33,6 +36,7 @@ export let dtkTestRecord = {
     dtk_weight: "119.4",
   },
   1550275200000: {
+    synthetic: false,
     dtk_pc_fat: "47.1",
     dtk_pc_h2o: "38.5",
     dtk_rcp: {
@@ -44,6 +48,7 @@ export let dtkTestRecord = {
     dtk_weight: "119.0",
   },
   1550361600000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -55,6 +60,7 @@ export let dtkTestRecord = {
     dtk_weight: "118.4",
   },
   1550448000000: {
+    synthetic: false,
     dtk_pc_fat: "46.7",
     dtk_pc_h2o: "38.8",
     dtk_rcp: {
@@ -66,6 +72,7 @@ export let dtkTestRecord = {
     dtk_weight: "118.6",
   },
   1550534400000: {
+    synthetic: false,
     dtk_pc_fat: "46.4",
     dtk_pc_h2o: "39.0",
     dtk_rcp: {
@@ -77,6 +84,7 @@ export let dtkTestRecord = {
     dtk_weight: "118.1",
   },
   1550620800000: {
+    synthetic: false,
     dtk_pc_fat: "46.3",
     dtk_pc_h2o: "39.1",
     dtk_rcp: {
@@ -88,6 +96,7 @@ export let dtkTestRecord = {
     dtk_weight: "118.3",
   },
   1550707200000: {
+    synthetic: false,
     dtk_pc_fat: "46.6",
     dtk_pc_h2o: "38.9",
     dtk_rcp: {
@@ -99,6 +108,7 @@ export let dtkTestRecord = {
     dtk_weight: "118.4",
   },
   1550880000000: {
+    synthetic: false,
     dtk_pc_fat: "45.5",
     dtk_pc_h2o: "39.7",
     dtk_rcp: {
@@ -110,6 +120,7 @@ export let dtkTestRecord = {
     dtk_weight: "117.3",
   },
   1550966400000: {
+    synthetic: false,
     dtk_pc_fat: "45.5",
     dtk_pc_h2o: "39.7",
     dtk_rcp: {
@@ -121,6 +132,7 @@ export let dtkTestRecord = {
     dtk_weight: "117.1",
   },
   1551052800000: {
+    synthetic: false,
     dtk_pc_fat: "45.5",
     dtk_pc_h2o: "39.7",
     dtk_rcp: {
@@ -132,6 +144,7 @@ export let dtkTestRecord = {
     dtk_weight: "116.9",
   },
   1551139200000: {
+    synthetic: false,
     dtk_pc_fat: "45.4",
     dtk_pc_h2o: "39.8",
     dtk_rcp: {
@@ -143,6 +156,7 @@ export let dtkTestRecord = {
     dtk_weight: "116.9",
   },
   1551225600000: {
+    synthetic: false,
     dtk_pc_fat: "45.3",
     dtk_pc_h2o: "39.8",
     dtk_rcp: {
@@ -154,6 +168,7 @@ export let dtkTestRecord = {
     dtk_weight: "116.6",
   },
   1551312000000: {
+    synthetic: false,
     dtk_pc_fat: "45.3",
     dtk_pc_h2o: "39.8",
     dtk_rcp: {
@@ -165,6 +180,7 @@ export let dtkTestRecord = {
     dtk_weight: "117.1",
   },
   0: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: { dt_date: 0, dt_date_readable: "1970 01 01", dt_day: "mon" },
@@ -172,6 +188,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.0",
   },
   1679184000000: {
+    synthetic: false,
     dtk_pc_fat: "50.3",
     dtk_pc_h2o: "34.0",
     dtk_rcp: {
@@ -183,6 +200,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.9",
   },
   1679529600000: {
+    synthetic: false,
     dtk_pc_fat: "51.4",
     dtk_pc_h2o: "33.2",
     dtk_rcp: {
@@ -194,6 +212,7 @@ export let dtkTestRecord = {
     dtk_weight: "109.4",
   },
   1679616000000: {
+    synthetic: false,
     dtk_pc_fat: "50.3",
     dtk_pc_h2o: "34.0",
     dtk_rcp: {
@@ -205,6 +224,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.9",
   },
   1679702400000: {
+    synthetic: false,
     dtk_pc_fat: "49.5",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -216,6 +236,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.3",
   },
   1679788800000: {
+    synthetic: false,
     dtk_pc_fat: "49.6",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -227,6 +248,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.0",
   },
   1679875200000: {
+    synthetic: false,
     dtk_pc_fat: "49.3",
     dtk_pc_h2o: "34.8",
     dtk_rcp: {
@@ -238,6 +260,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1679961600000: {
+    synthetic: false,
     dtk_pc_fat: "49.0",
     dtk_pc_h2o: "35.0",
     dtk_rcp: {
@@ -249,6 +272,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.9",
   },
   1680048000000: {
+    synthetic: false,
     dtk_pc_fat: "48.8",
     dtk_pc_h2o: "35.1",
     dtk_rcp: {
@@ -260,6 +284,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.8",
   },
   1680134400000: {
+    synthetic: false,
     dtk_pc_fat: "49.6",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -271,6 +296,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.5",
   },
   1625270400000: {
+    synthetic: false,
     dtk_pc_fat: "37.1",
     dtk_pc_h2o: "46.7",
     dtk_rcp: {
@@ -282,6 +308,7 @@ export let dtkTestRecord = {
     dtk_weight: "101.7",
   },
   1625356800000: {
+    synthetic: false,
     dtk_pc_fat: "38.9",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -293,6 +320,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.4",
   },
   1625443200000: {
+    synthetic: false,
     dtk_pc_fat: "38.4",
     dtk_pc_h2o: "45.8",
     dtk_rcp: {
@@ -304,6 +332,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.4",
   },
   1625616000000: {
+    synthetic: false,
     dtk_pc_fat: "37.3",
     dtk_pc_h2o: "46.6",
     dtk_rcp: {
@@ -315,6 +344,7 @@ export let dtkTestRecord = {
     dtk_weight: "101.6",
   },
   1625788800000: {
+    synthetic: false,
     dtk_pc_fat: "37.3",
     dtk_pc_h2o: "46.6",
     dtk_rcp: {
@@ -326,6 +356,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.1",
   },
   1616025600000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -337,6 +368,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.1",
   },
   1616112000000: {
+    synthetic: false,
     dtk_pc_fat: "40.1",
     dtk_pc_h2o: "43.5",
     dtk_rcp: {
@@ -348,6 +380,7 @@ export let dtkTestRecord = {
     dtk_weight: "108.2",
   },
   1616198400000: {
+    synthetic: false,
     dtk_pc_fat: "39.7",
     dtk_pc_h2o: "43.8",
     dtk_rcp: {
@@ -359,6 +392,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.9",
   },
   1616284800000: {
+    synthetic: false,
     dtk_pc_fat: "39.9",
     dtk_pc_h2o: "43.7",
     dtk_rcp: {
@@ -370,6 +404,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.9",
   },
   1616371200000: {
+    synthetic: false,
     dtk_pc_fat: "40.1",
     dtk_pc_h2o: "43.5",
     dtk_rcp: {
@@ -381,6 +416,7 @@ export let dtkTestRecord = {
     dtk_weight: "108.5",
   },
   1616457600000: {
+    synthetic: false,
     dtk_pc_fat: "39.9",
     dtk_pc_h2o: "43.7",
     dtk_rcp: {
@@ -392,6 +428,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.8",
   },
   1616544000000: {
+    synthetic: false,
     dtk_pc_fat: "38.8",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -403,6 +440,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.5",
   },
   1616630400000: {
+    synthetic: false,
     dtk_pc_fat: "39.0",
     dtk_pc_h2o: "44.3",
     dtk_rcp: {
@@ -414,6 +452,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.7",
   },
   1601078400000: {
+    synthetic: false,
     dtk_pc_fat: "37.4",
     dtk_pc_h2o: "45.5",
     dtk_rcp: {
@@ -425,6 +464,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.1",
   },
   1601164800000: {
+    synthetic: false,
     dtk_pc_fat: "37.9",
     dtk_pc_h2o: "45.1",
     dtk_rcp: {
@@ -436,6 +476,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.4",
   },
   1601251200000: {
+    synthetic: false,
     dtk_pc_fat: "37.7",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -447,6 +488,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.9",
   },
   1687305600000: {
+    synthetic: false,
     dtk_pc_fat: "49.6",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -458,6 +500,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.6",
   },
   1687392000000: {
+    synthetic: false,
     dtk_pc_fat: "49.9",
     dtk_pc_h2o: "34.4",
     dtk_rcp: {
@@ -469,6 +512,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.8",
   },
   1687478400000: {
+    synthetic: false,
     dtk_pc_fat: "49.3",
     dtk_pc_h2o: "34.8",
     dtk_rcp: {
@@ -480,6 +524,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.1",
   },
   1687564800000: {
+    synthetic: false,
     dtk_pc_fat: "49.0",
     dtk_pc_h2o: "35.0",
     dtk_rcp: {
@@ -491,6 +536,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.0",
   },
   1687651200000: {
+    synthetic: false,
     dtk_pc_fat: "48.3",
     dtk_pc_h2o: "35.5",
     dtk_rcp: {
@@ -502,6 +548,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.7",
   },
   1687737600000: {
+    synthetic: false,
     dtk_pc_fat: "48.1",
     dtk_pc_h2o: "35.7",
     dtk_rcp: {
@@ -513,6 +560,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.5",
   },
   1687824000000: {
+    synthetic: false,
     dtk_pc_fat: "47.6",
     dtk_pc_h2o: "36.0",
     dtk_rcp: {
@@ -524,6 +572,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.9",
   },
   1687910400000: {
+    synthetic: false,
     dtk_pc_fat: "36.1",
     dtk_pc_h2o: "47.5",
     dtk_rcp: {
@@ -535,6 +584,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.8",
   },
   1687132800000: {
+    synthetic: false,
     dtk_pc_fat: "34.6",
     dtk_pc_h2o: "49.6",
     dtk_rcp: {
@@ -546,6 +596,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.7",
   },
   1655337600000: {
+    synthetic: false,
     dtk_pc_fat: "38.0",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -557,6 +608,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.9",
   },
   1624060800000: {
+    synthetic: false,
     dtk_pc_fat: "38.0",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -568,6 +620,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.9",
   },
   1547856000000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -579,6 +632,7 @@ export let dtkTestRecord = {
     dtk_weight: "122.1",
   },
   1547942400000: {
+    synthetic: false,
     dtk_pc_fat: "48.4",
     dtk_pc_h2o: "37.6",
     dtk_rcp: {
@@ -590,6 +644,7 @@ export let dtkTestRecord = {
     dtk_weight: "121.5",
   },
   1548028800000: {
+    synthetic: false,
     dtk_pc_fat: "48.4",
     dtk_pc_h2o: "37.6",
     dtk_rcp: {
@@ -601,6 +656,7 @@ export let dtkTestRecord = {
     dtk_weight: "121.5",
   },
   1548115200000: {
+    synthetic: false,
     dtk_pc_fat: "47.5",
     dtk_pc_h2o: "38.2",
     dtk_rcp: {
@@ -612,6 +668,7 @@ export let dtkTestRecord = {
     dtk_weight: "120.6",
   },
   1548633600000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -623,6 +680,7 @@ export let dtkTestRecord = {
     dtk_weight: "120.1",
   },
   1548720000000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -634,6 +692,7 @@ export let dtkTestRecord = {
     dtk_weight: "119.5",
   },
   1548806400000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -645,6 +704,7 @@ export let dtkTestRecord = {
     dtk_weight: "119.3",
   },
   1548892800000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -656,6 +716,7 @@ export let dtkTestRecord = {
     dtk_weight: "118.5",
   },
   1549065600000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -667,6 +728,7 @@ export let dtkTestRecord = {
     dtk_weight: "119.9",
   },
   1598659200000: {
+    synthetic: false,
     dtk_pc_fat: "36.7",
     dtk_pc_h2o: "46.0",
     dtk_rcp: {
@@ -678,6 +740,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.1",
   },
   1598918400000: {
+    synthetic: false,
     dtk_pc_fat: "36.6",
     dtk_pc_h2o: "44.1",
     dtk_rcp: {
@@ -689,6 +752,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.3",
   },
   1599091200000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -700,6 +764,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.9",
   },
   1599177600000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -711,6 +776,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.1",
   },
   1599782400000: {
+    synthetic: false,
     dtk_pc_fat: "37.4",
     dtk_pc_h2o: "45.5",
     dtk_rcp: {
@@ -722,6 +788,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.0",
   },
   1591401600000: {
+    synthetic: false,
     dtk_pc_fat: "37.5",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -733,6 +800,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.2",
   },
   1591488000000: {
+    synthetic: false,
     dtk_pc_fat: "36.3",
     dtk_pc_h2o: "46.3",
     dtk_rcp: {
@@ -744,6 +812,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.4",
   },
   1591574400000: {
+    synthetic: false,
     dtk_pc_fat: "37.5",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -755,6 +824,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.2",
   },
   1591660800000: {
+    synthetic: false,
     dtk_pc_fat: "37.5",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -766,6 +836,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.3",
   },
   1591747200000: {
+    synthetic: false,
     dtk_pc_fat: "37.7",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -777,6 +848,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.3",
   },
   1591833600000: {
+    synthetic: false,
     dtk_pc_fat: "37.7",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -788,6 +860,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.5",
   },
   1591920000000: {
+    synthetic: false,
     dtk_pc_fat: "37.1",
     dtk_pc_h2o: "45.7",
     dtk_rcp: {
@@ -799,6 +872,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.7",
   },
   1592006400000: {
+    synthetic: false,
     dtk_pc_fat: "37.2",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -810,6 +884,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.7",
   },
   1592092800000: {
+    synthetic: false,
     dtk_pc_fat: "37.4",
     dtk_pc_h2o: "45.5",
     dtk_rcp: {
@@ -821,6 +896,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.6",
   },
   1592179200000: {
+    synthetic: false,
     dtk_pc_fat: "37.3",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -832,6 +908,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.6",
   },
   1592265600000: {
+    synthetic: false,
     dtk_pc_fat: "37.5",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -843,6 +920,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.9",
   },
   1592352000000: {
+    synthetic: false,
     dtk_pc_fat: "37.5",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -854,6 +932,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.2",
   },
   1592438400000: {
+    synthetic: false,
     dtk_pc_fat: "37.5",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -865,6 +944,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.2",
   },
   1592524800000: {
+    synthetic: false,
     dtk_pc_fat: "37.6",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -876,6 +956,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.0",
   },
   1558656000000: {
+    synthetic: false,
     dtk_pc_fat: "40.9",
     dtk_pc_h2o: "43.1",
     dtk_rcp: {
@@ -887,6 +968,7 @@ export let dtkTestRecord = {
     dtk_weight: "109.8",
   },
   1558742400000: {
+    synthetic: false,
     dtk_pc_fat: "40.1",
     dtk_pc_h2o: "43.6",
     dtk_rcp: {
@@ -898,6 +980,7 @@ export let dtkTestRecord = {
     dtk_weight: "108.9",
   },
   1558828800000: {
+    synthetic: false,
     dtk_pc_fat: "42.5",
     dtk_pc_h2o: "41.9",
     dtk_rcp: {
@@ -909,6 +992,7 @@ export let dtkTestRecord = {
     dtk_weight: "109.8",
   },
   1558915200000: {
+    synthetic: false,
     dtk_pc_fat: "41.0",
     dtk_pc_h2o: "42.9",
     dtk_rcp: {
@@ -920,6 +1004,7 @@ export let dtkTestRecord = {
     dtk_weight: "109.9",
   },
   1559001600000: {
+    synthetic: false,
     dtk_pc_fat: "40.7",
     dtk_pc_h2o: "43.1",
     dtk_rcp: {
@@ -931,6 +1016,7 @@ export let dtkTestRecord = {
     dtk_weight: "109.3",
   },
   1559088000000: {
+    synthetic: false,
     dtk_pc_fat: "40.2",
     dtk_pc_h2o: "43.4",
     dtk_rcp: {
@@ -942,6 +1028,7 @@ export let dtkTestRecord = {
     dtk_weight: "108.7",
   },
   1559174400000: {
+    synthetic: false,
     dtk_pc_fat: "39.9",
     dtk_pc_h2o: "43.7",
     dtk_rcp: {
@@ -953,6 +1040,7 @@ export let dtkTestRecord = {
     dtk_weight: "108.2",
   },
   1559260800000: {
+    synthetic: false,
     dtk_pc_fat: "39.7",
     dtk_pc_h2o: "43.8",
     dtk_rcp: {
@@ -964,6 +1052,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.8",
   },
   1559347200000: {
+    synthetic: false,
     dtk_pc_fat: "40.3",
     dtk_pc_h2o: "43.4",
     dtk_rcp: {
@@ -975,6 +1064,7 @@ export let dtkTestRecord = {
     dtk_weight: "108.7",
   },
   1559433600000: {
+    synthetic: false,
     dtk_pc_fat: "40.3",
     dtk_pc_h2o: "43.4",
     dtk_rcp: {
@@ -986,6 +1076,7 @@ export let dtkTestRecord = {
     dtk_weight: "108.8",
   },
   1559520000000: {
+    synthetic: false,
     dtk_pc_fat: "40.1",
     dtk_pc_h2o: "43.5",
     dtk_rcp: {
@@ -997,6 +1088,7 @@ export let dtkTestRecord = {
     dtk_weight: "108.4",
   },
   1559606400000: {
+    synthetic: false,
     dtk_pc_fat: "40.1",
     dtk_pc_h2o: "43.5",
     dtk_rcp: {
@@ -1008,6 +1100,7 @@ export let dtkTestRecord = {
     dtk_weight: "108.4",
   },
   1559692800000: {
+    synthetic: false,
     dtk_pc_fat: "39.6",
     dtk_pc_h2o: "43.9",
     dtk_rcp: {
@@ -1019,6 +1112,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.8",
   },
   1559779200000: {
+    synthetic: false,
     dtk_pc_fat: "39.1",
     dtk_pc_h2o: "44.2",
     dtk_rcp: {
@@ -1030,6 +1124,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.3",
   },
   1627084800000: {
+    synthetic: false,
     dtk_pc_fat: "37.2",
     dtk_pc_h2o: "46.7",
     dtk_rcp: {
@@ -1041,6 +1136,7 @@ export let dtkTestRecord = {
     dtk_weight: "101.7",
   },
   1627171200000: {
+    synthetic: false,
     dtk_pc_fat: "36.1",
     dtk_pc_h2o: "47.5",
     dtk_rcp: {
@@ -1052,6 +1148,7 @@ export let dtkTestRecord = {
     dtk_weight: "100.2",
   },
   1627257600000: {
+    synthetic: false,
     dtk_pc_fat: "37.6",
     dtk_pc_h2o: "46.4",
     dtk_rcp: {
@@ -1063,6 +1160,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.3",
   },
   1627344000000: {
+    synthetic: false,
     dtk_pc_fat: "36.9",
     dtk_pc_h2o: "46.9",
     dtk_rcp: {
@@ -1074,6 +1172,7 @@ export let dtkTestRecord = {
     dtk_weight: "101.5",
   },
   1627430400000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "47.2",
     dtk_rcp: {
@@ -1085,6 +1184,7 @@ export let dtkTestRecord = {
     dtk_weight: "100.6",
   },
   1627516800000: {
+    synthetic: false,
     dtk_pc_fat: "35.8",
     dtk_pc_h2o: "47.7",
     dtk_rcp: {
@@ -1096,6 +1196,7 @@ export let dtkTestRecord = {
     dtk_weight: "99.8",
   },
   1627603200000: {
+    synthetic: false,
     dtk_pc_fat: "35.4",
     dtk_pc_h2o: "48.0",
     dtk_rcp: {
@@ -1107,6 +1208,7 @@ export let dtkTestRecord = {
     dtk_weight: "99.2",
   },
   1627689600000: {
+    synthetic: false,
     dtk_pc_fat: "35.6",
     dtk_pc_h2o: "47.8",
     dtk_rcp: {
@@ -1118,6 +1220,7 @@ export let dtkTestRecord = {
     dtk_weight: "99.3",
   },
   1627862400000: {
+    synthetic: false,
     dtk_pc_fat: "36.0",
     dtk_pc_h2o: "47.5",
     dtk_rcp: {
@@ -1129,6 +1232,7 @@ export let dtkTestRecord = {
     dtk_weight: "100.2",
   },
   1627948800000: {
+    synthetic: false,
     dtk_pc_fat: "36.3",
     dtk_pc_h2o: "47.3",
     dtk_rcp: {
@@ -1140,6 +1244,7 @@ export let dtkTestRecord = {
     dtk_weight: "100.4",
   },
   1628035200000: {
+    synthetic: false,
     dtk_pc_fat: "35.6",
     dtk_pc_h2o: "47.8",
     dtk_rcp: {
@@ -1151,6 +1256,7 @@ export let dtkTestRecord = {
     dtk_weight: "99.5",
   },
   1628640000000: {
+    synthetic: false,
     dtk_pc_fat: "36.7",
     dtk_pc_h2o: "47.0",
     dtk_rcp: {
@@ -1162,6 +1268,7 @@ export let dtkTestRecord = {
     dtk_weight: "100.9",
   },
   1629504000000: {
+    synthetic: false,
     dtk_pc_fat: "36.7",
     dtk_pc_h2o: "47.0",
     dtk_rcp: {
@@ -1173,6 +1280,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.7",
   },
   1562284800000: {
+    synthetic: false,
     dtk_pc_fat: "39.1",
     dtk_pc_h2o: "44.2",
     dtk_rcp: {
@@ -1184,6 +1292,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.9",
   },
   1562371200000: {
+    synthetic: false,
     dtk_pc_fat: "39.1",
     dtk_pc_h2o: "44.2",
     dtk_rcp: {
@@ -1195,6 +1304,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1562457600000: {
+    synthetic: false,
     dtk_pc_fat: "39.2",
     dtk_pc_h2o: "44.2",
     dtk_rcp: {
@@ -1206,6 +1316,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.1",
   },
   1562544000000: {
+    synthetic: false,
     dtk_pc_fat: "39.1",
     dtk_pc_h2o: "44.2",
     dtk_rcp: {
@@ -1217,6 +1328,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.1",
   },
   1562630400000: {
+    synthetic: false,
     dtk_pc_fat: "39.1",
     dtk_pc_h2o: "44.2",
     dtk_rcp: {
@@ -1228,6 +1340,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.6",
   },
   1562716800000: {
+    synthetic: false,
     dtk_pc_fat: "38.5",
     dtk_pc_h2o: "44.7",
     dtk_rcp: {
@@ -1239,6 +1352,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.0",
   },
   1562803200000: {
+    synthetic: false,
     dtk_pc_fat: "38.5",
     dtk_pc_h2o: "44.7",
     dtk_rcp: {
@@ -1250,6 +1364,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.2",
   },
   1562889600000: {
+    synthetic: false,
     dtk_pc_fat: "38.5",
     dtk_pc_h2o: "44.7",
     dtk_rcp: {
@@ -1261,6 +1376,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.0",
   },
   1562976000000: {
+    synthetic: false,
     dtk_pc_fat: "38.9",
     dtk_pc_h2o: "44.4",
     dtk_rcp: {
@@ -1272,6 +1388,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1563062400000: {
+    synthetic: false,
     dtk_pc_fat: "38.9",
     dtk_pc_h2o: "44.4",
     dtk_rcp: {
@@ -1283,6 +1400,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.5",
   },
   1563148800000: {
+    synthetic: false,
     dtk_pc_fat: "38.8",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -1294,6 +1412,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1563235200000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -1305,6 +1424,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.8",
   },
   1563321600000: {
+    synthetic: false,
     dtk_pc_fat: "36.4",
     dtk_pc_h2o: "46.2",
     dtk_rcp: {
@@ -1316,6 +1436,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.2",
   },
   1595116800000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -1327,6 +1448,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1600819200000: {
+    synthetic: false,
     dtk_pc_fat: "37.4",
     dtk_pc_h2o: "45.5",
     dtk_rcp: {
@@ -1338,6 +1460,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.1",
   },
   1600560000000: {
+    synthetic: false,
     dtk_pc_fat: "37.4",
     dtk_pc_h2o: "45.5",
     dtk_rcp: {
@@ -1349,6 +1472,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.1",
   },
   1682294400000: {
+    synthetic: false,
     dtk_pc_fat: "49.6",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -1360,6 +1484,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.7",
   },
   1682380800000: {
+    synthetic: false,
     dtk_pc_fat: "50.1",
     dtk_pc_h2o: "34.2",
     dtk_rcp: {
@@ -1371,6 +1496,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.7",
   },
   1683763200000: {
+    synthetic: false,
     dtk_pc_fat: "49.5",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -1382,6 +1508,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.7",
   },
   1683849600000: {
+    synthetic: false,
     dtk_pc_fat: "49.5",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -1393,6 +1520,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.7",
   },
   1620432000000: {
+    synthetic: false,
     dtk_pc_fat: "38.6",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -1404,6 +1532,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.0",
   },
   1620518400000: {
+    synthetic: false,
     dtk_pc_fat: "38.6",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -1415,6 +1544,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.0",
   },
   1620604800000: {
+    synthetic: false,
     dtk_pc_fat: "38.6",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -1426,6 +1556,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.5",
   },
   1620691200000: {
+    synthetic: false,
     dtk_pc_fat: "39.1",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -1437,6 +1568,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.5",
   },
   1620777600000: {
+    synthetic: false,
     dtk_pc_fat: "39.4",
     dtk_pc_h2o: "45.0",
     dtk_rcp: {
@@ -1448,6 +1580,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.9",
   },
   1620864000000: {
+    synthetic: false,
     dtk_pc_fat: "40.0",
     dtk_pc_h2o: "44.6",
     dtk_rcp: {
@@ -1459,6 +1592,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.0",
   },
   1620950400000: {
+    synthetic: false,
     dtk_pc_fat: "39.7",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -1470,6 +1604,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.2",
   },
   1621036800000: {
+    synthetic: false,
     dtk_pc_fat: "39.6",
     dtk_pc_h2o: "44.9",
     dtk_rcp: {
@@ -1481,6 +1616,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.2",
   },
   1621123200000: {
+    synthetic: false,
     dtk_pc_fat: "39.8",
     dtk_pc_h2o: "44.7",
     dtk_rcp: {
@@ -1492,6 +1628,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1621209600000: {
+    synthetic: false,
     dtk_pc_fat: "39.6",
     dtk_pc_h2o: "44.9",
     dtk_rcp: {
@@ -1503,6 +1640,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.1",
   },
   1621296000000: {
+    synthetic: false,
     dtk_pc_fat: "38.9",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -1514,6 +1652,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.4",
   },
   1621382400000: {
+    synthetic: false,
     dtk_pc_fat: "38.6",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -1525,6 +1664,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.9",
   },
   1621641600000: {
+    synthetic: false,
     dtk_pc_fat: "39.2",
     dtk_pc_h2o: "45.2",
     dtk_rcp: {
@@ -1536,6 +1676,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.6",
   },
   1621728000000: {
+    synthetic: false,
     dtk_pc_fat: "39.8",
     dtk_pc_h2o: "44.7",
     dtk_rcp: {
@@ -1547,6 +1688,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.4",
   },
   1669852800000: {
+    synthetic: false,
     dtk_pc_fat: "40.9",
     dtk_pc_h2o: "43.9",
     dtk_rcp: {
@@ -1558,6 +1700,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.9",
   },
   1669939200000: {
+    synthetic: false,
     dtk_pc_fat: "39.4",
     dtk_pc_h2o: "43.6",
     dtk_rcp: {
@@ -1569,6 +1712,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.4",
   },
   1670025600000: {
+    synthetic: false,
     dtk_pc_fat: "38.8",
     dtk_pc_h2o: "44.1",
     dtk_rcp: {
@@ -1580,6 +1724,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.8",
   },
   1670112000000: {
+    synthetic: false,
     dtk_pc_fat: "39.1",
     dtk_pc_h2o: "43.9",
     dtk_rcp: {
@@ -1591,6 +1736,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.0",
   },
   1670198400000: {
+    synthetic: false,
     dtk_pc_fat: "39.5",
     dtk_pc_h2o: "43.6",
     dtk_rcp: {
@@ -1602,6 +1748,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.5",
   },
   1670284800000: {
+    synthetic: false,
     dtk_pc_fat: "38.7",
     dtk_pc_h2o: "44.2",
     dtk_rcp: {
@@ -1613,6 +1760,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.3",
   },
   1670371200000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -1624,6 +1772,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.9",
   },
   1616889600000: {
+    synthetic: false,
     dtk_pc_fat: "38.7",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -1635,6 +1784,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.0",
   },
   1616976000000: {
+    synthetic: false,
     dtk_pc_fat: "38.8",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -1646,6 +1796,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1617062400000: {
+    synthetic: false,
     dtk_pc_fat: "38.7",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -1657,6 +1808,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.0",
   },
   1617148800000: {
+    synthetic: false,
     dtk_pc_fat: "38.4",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -1668,6 +1820,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1617235200000: {
+    synthetic: false,
     dtk_pc_fat: "38.1",
     dtk_pc_h2o: "45.0",
     dtk_rcp: {
@@ -1679,6 +1832,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1617321600000: {
+    synthetic: false,
     dtk_pc_fat: "38.7",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -1690,6 +1844,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.9",
   },
   1617753600000: {
+    synthetic: false,
     dtk_pc_fat: "38.4",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -1701,6 +1856,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.9",
   },
   1617840000000: {
+    synthetic: false,
     dtk_pc_fat: "38.7",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -1712,6 +1868,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.2",
   },
   1617926400000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -1723,6 +1880,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.0",
   },
   1619568000000: {
+    synthetic: false,
     dtk_pc_fat: "39.6",
     dtk_pc_h2o: "44.9",
     dtk_rcp: {
@@ -1734,6 +1892,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.2",
   },
   1685664000000: {
+    synthetic: false,
     dtk_pc_fat: "34.6",
     dtk_pc_h2o: "49.6",
     dtk_rcp: {
@@ -1745,6 +1904,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.9",
   },
   1685750400000: {
+    synthetic: false,
     dtk_pc_fat: "34.6",
     dtk_pc_h2o: "49.6",
     dtk_rcp: {
@@ -1756,6 +1916,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1685836800000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -1767,6 +1928,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.9",
   },
   1685923200000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -1778,6 +1940,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1686009600000: {
+    synthetic: false,
     dtk_pc_fat: "49.1",
     dtk_pc_h2o: "34.9",
     dtk_rcp: {
@@ -1789,6 +1952,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.6",
   },
   1686096000000: {
+    synthetic: false,
     dtk_pc_fat: "49.6",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -1800,6 +1964,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.9",
   },
   1686182400000: {
+    synthetic: false,
     dtk_pc_fat: "50.4",
     dtk_pc_h2o: "34.0",
     dtk_rcp: {
@@ -1811,6 +1976,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.8",
   },
   1686268800000: {
+    synthetic: false,
     dtk_pc_fat: "49.9",
     dtk_pc_h2o: "34.3",
     dtk_rcp: {
@@ -1822,6 +1988,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.6",
   },
   1686355200000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -1833,6 +2000,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.1",
   },
   1686441600000: {
+    synthetic: false,
     dtk_pc_fat: "49.5",
     dtk_pc_h2o: "34.8",
     dtk_rcp: {
@@ -1844,6 +2012,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.6",
   },
   1686528000000: {
+    synthetic: false,
     dtk_pc_fat: "49.5",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -1855,6 +2024,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.5",
   },
   1686614400000: {
+    synthetic: false,
     dtk_pc_fat: "49.8",
     dtk_pc_h2o: "34.4",
     dtk_rcp: {
@@ -1866,6 +2036,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.8",
   },
   1686700800000: {
+    synthetic: false,
     dtk_pc_fat: "49.8",
     dtk_pc_h2o: "34.4",
     dtk_rcp: {
@@ -1877,6 +2048,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.9",
   },
   1686787200000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -1888,6 +2060,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1686873600000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -1899,6 +2072,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.0",
   },
   1563408000000: {
+    synthetic: false,
     dtk_pc_fat: "36.7",
     dtk_pc_h2o: "46.0",
     dtk_rcp: {
@@ -1910,6 +2084,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.5",
   },
   1563580800000: {
+    synthetic: false,
     dtk_pc_fat: "37.6",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -1921,6 +2096,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.0",
   },
   1563667200000: {
+    synthetic: false,
     dtk_pc_fat: "38.2",
     dtk_pc_h2o: "44.9",
     dtk_rcp: {
@@ -1932,6 +2108,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1563753600000: {
+    synthetic: false,
     dtk_pc_fat: "38.7",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -1943,6 +2120,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.0",
   },
   1563840000000: {
+    synthetic: false,
     dtk_pc_fat: "38.0",
     dtk_pc_h2o: "45.1",
     dtk_rcp: {
@@ -1954,6 +2132,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.3",
   },
   1563926400000: {
+    synthetic: false,
     dtk_pc_fat: "38.1",
     dtk_pc_h2o: "45.0",
     dtk_rcp: {
@@ -1965,6 +2144,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1564012800000: {
+    synthetic: false,
     dtk_pc_fat: "38.2",
     dtk_pc_h2o: "44.9",
     dtk_rcp: {
@@ -1976,6 +2156,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.9",
   },
   1564099200000: {
+    synthetic: false,
     dtk_pc_fat: "39.0",
     dtk_pc_h2o: "44.3",
     dtk_rcp: {
@@ -1987,6 +2168,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1564272000000: {
+    synthetic: false,
     dtk_pc_fat: "37.9",
     dtk_pc_h2o: "45.1",
     dtk_rcp: {
@@ -1998,6 +2180,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1564358400000: {
+    synthetic: false,
     dtk_pc_fat: "37.5",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -2009,6 +2192,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.8",
   },
   1564185600000: {
+    synthetic: false,
     dtk_pc_fat: "38.0",
     dtk_pc_h2o: "45.1",
     dtk_rcp: {
@@ -2020,6 +2204,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.4",
   },
   1555027200000: {
+    synthetic: false,
     dtk_pc_fat: "43.0",
     dtk_pc_h2o: "41.5",
     dtk_rcp: {
@@ -2031,6 +2216,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.9",
   },
   1555113600000: {
+    synthetic: false,
     dtk_pc_fat: "43.1",
     dtk_pc_h2o: "41.4",
     dtk_rcp: {
@@ -2042,6 +2228,7 @@ export let dtkTestRecord = {
     dtk_weight: "113.1",
   },
   1555200000000: {
+    synthetic: false,
     dtk_pc_fat: "43.0",
     dtk_pc_h2o: "41.5",
     dtk_rcp: {
@@ -2053,6 +2240,7 @@ export let dtkTestRecord = {
     dtk_weight: "113.6",
   },
   1555286400000: {
+    synthetic: false,
     dtk_pc_fat: "41.9",
     dtk_pc_h2o: "42.3",
     dtk_rcp: {
@@ -2064,6 +2252,7 @@ export let dtkTestRecord = {
     dtk_weight: "111.8",
   },
   1555372800000: {
+    synthetic: false,
     dtk_pc_fat: "41.8",
     dtk_pc_h2o: "42.4",
     dtk_rcp: {
@@ -2075,6 +2264,7 @@ export let dtkTestRecord = {
     dtk_weight: "111.5",
   },
   1555459200000: {
+    synthetic: false,
     dtk_pc_fat: "42.6",
     dtk_pc_h2o: "41.8",
     dtk_rcp: {
@@ -2086,6 +2276,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.0",
   },
   1555545600000: {
+    synthetic: false,
     dtk_pc_fat: "42.9",
     dtk_pc_h2o: "41.6",
     dtk_rcp: {
@@ -2097,6 +2288,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.7",
   },
   1555632000000: {
+    synthetic: false,
     dtk_pc_fat: "43.1",
     dtk_pc_h2o: "41.4",
     dtk_rcp: {
@@ -2108,6 +2300,7 @@ export let dtkTestRecord = {
     dtk_weight: "113.1",
   },
   1555718400000: {
+    synthetic: false,
     dtk_pc_fat: "43.1",
     dtk_pc_h2o: "41.4",
     dtk_rcp: {
@@ -2119,6 +2312,7 @@ export let dtkTestRecord = {
     dtk_weight: "113.1",
   },
   1555804800000: {
+    synthetic: false,
     dtk_pc_fat: "43.1",
     dtk_pc_h2o: "41.4",
     dtk_rcp: {
@@ -2130,6 +2324,7 @@ export let dtkTestRecord = {
     dtk_weight: "113.1",
   },
   1555891200000: {
+    synthetic: false,
     dtk_pc_fat: "43.8",
     dtk_pc_h2o: "40.9",
     dtk_rcp: {
@@ -2141,6 +2336,7 @@ export let dtkTestRecord = {
     dtk_weight: "114.2",
   },
   1555977600000: {
+    synthetic: false,
     dtk_pc_fat: "43.0",
     dtk_pc_h2o: "41.5",
     dtk_rcp: {
@@ -2152,6 +2348,7 @@ export let dtkTestRecord = {
     dtk_weight: "113.2",
   },
   1556064000000: {
+    synthetic: false,
     dtk_pc_fat: "42.5",
     dtk_pc_h2o: "41.9",
     dtk_rcp: {
@@ -2163,6 +2360,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.0",
   },
   1556150400000: {
+    synthetic: false,
     dtk_pc_fat: "42.6",
     dtk_pc_h2o: "41.8",
     dtk_rcp: {
@@ -2174,6 +2372,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.4",
   },
   1557360000000: {
+    synthetic: false,
     dtk_pc_fat: "41.6",
     dtk_pc_h2o: "42.5",
     dtk_rcp: {
@@ -2185,6 +2384,7 @@ export let dtkTestRecord = {
     dtk_weight: "110.8",
   },
   1557446400000: {
+    synthetic: false,
     dtk_pc_fat: "41.8",
     dtk_pc_h2o: "42.4",
     dtk_rcp: {
@@ -2196,6 +2396,7 @@ export let dtkTestRecord = {
     dtk_weight: "111.2",
   },
   1589155200000: {
+    synthetic: false,
     dtk_pc_fat: "38.5",
     dtk_pc_h2o: "44.7",
     dtk_rcp: {
@@ -2207,6 +2408,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.9",
   },
   1557619200000: {
+    synthetic: false,
     dtk_pc_fat: "42.5",
     dtk_pc_h2o: "41.9",
     dtk_rcp: {
@@ -2218,6 +2420,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.1",
   },
   1557705600000: {
+    synthetic: false,
     dtk_pc_fat: "41.8",
     dtk_pc_h2o: "42.4",
     dtk_rcp: {
@@ -2229,6 +2432,7 @@ export let dtkTestRecord = {
     dtk_weight: "111.1",
   },
   1557792000000: {
+    synthetic: false,
     dtk_pc_fat: "41.8",
     dtk_pc_h2o: "42.4",
     dtk_rcp: {
@@ -2240,6 +2444,7 @@ export let dtkTestRecord = {
     dtk_weight: "111.0",
   },
   1557878400000: {
+    synthetic: false,
     dtk_pc_fat: "41.2",
     dtk_pc_h2o: "42.8",
     dtk_rcp: {
@@ -2251,6 +2456,7 @@ export let dtkTestRecord = {
     dtk_weight: "110.6",
   },
   1557964800000: {
+    synthetic: false,
     dtk_pc_fat: "41.0",
     dtk_pc_h2o: "43.0",
     dtk_rcp: {
@@ -2262,6 +2468,7 @@ export let dtkTestRecord = {
     dtk_weight: "110.3",
   },
   1558051200000: {
+    synthetic: false,
     dtk_pc_fat: "41.3",
     dtk_pc_h2o: "42.8",
     dtk_rcp: {
@@ -2273,6 +2480,7 @@ export let dtkTestRecord = {
     dtk_weight: "110.1",
   },
   1558137600000: {
+    synthetic: false,
     dtk_pc_fat: "41.3",
     dtk_pc_h2o: "42.8",
     dtk_rcp: {
@@ -2284,6 +2492,7 @@ export let dtkTestRecord = {
     dtk_weight: "110.5",
   },
   1558224000000: {
+    synthetic: false,
     dtk_pc_fat: "41.0",
     dtk_pc_h2o: "43.0",
     dtk_rcp: {
@@ -2295,6 +2504,7 @@ export let dtkTestRecord = {
     dtk_weight: "110.1",
   },
   1558310400000: {
+    synthetic: false,
     dtk_pc_fat: "41.1",
     dtk_pc_h2o: "42.9",
     dtk_rcp: {
@@ -2306,6 +2516,7 @@ export let dtkTestRecord = {
     dtk_weight: "110.3",
   },
   1558396800000: {
+    synthetic: false,
     dtk_pc_fat: "40.3",
     dtk_pc_h2o: "43.5",
     dtk_rcp: {
@@ -2317,6 +2528,7 @@ export let dtkTestRecord = {
     dtk_weight: "109.3",
   },
   1558483200000: {
+    synthetic: false,
     dtk_pc_fat: "40.1",
     dtk_pc_h2o: "43.6",
     dtk_rcp: {
@@ -2328,6 +2540,7 @@ export let dtkTestRecord = {
     dtk_weight: "108.9",
   },
   1624147200000: {
+    synthetic: false,
     dtk_pc_fat: "38.9",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -2339,6 +2552,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.4",
   },
   1624233600000: {
+    synthetic: false,
     dtk_pc_fat: "38.9",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -2350,6 +2564,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.4",
   },
   1624320000000: {
+    synthetic: false,
     dtk_pc_fat: "38.9",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -2361,6 +2576,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.4",
   },
   1624406400000: {
+    synthetic: false,
     dtk_pc_fat: "38.0",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -2372,6 +2588,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.7",
   },
   1624492800000: {
+    synthetic: false,
     dtk_pc_fat: "37.7",
     dtk_pc_h2o: "46.3",
     dtk_rcp: {
@@ -2383,6 +2600,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.2",
   },
   1624579200000: {
+    synthetic: false,
     dtk_pc_fat: "38.1",
     dtk_pc_h2o: "46.0",
     dtk_rcp: {
@@ -2394,6 +2612,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.9",
   },
   1624665600000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -2405,6 +2624,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.3",
   },
   1624752000000: {
+    synthetic: false,
     dtk_pc_fat: "38.9",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -2416,6 +2636,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.3",
   },
   1624838400000: {
+    synthetic: false,
     dtk_pc_fat: "39.0",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -2427,6 +2648,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.3",
   },
   1624924800000: {
+    synthetic: false,
     dtk_pc_fat: "38.2",
     dtk_pc_h2o: "45.9",
     dtk_rcp: {
@@ -2438,6 +2660,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.3",
   },
   1625011200000: {
+    synthetic: false,
     dtk_pc_fat: "37.4",
     dtk_pc_h2o: "46.5",
     dtk_rcp: {
@@ -2449,6 +2672,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.1",
   },
   1625097600000: {
+    synthetic: false,
     dtk_pc_fat: "38.6",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -2460,6 +2684,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.5",
   },
   1553817600000: {
+    synthetic: false,
     dtk_pc_fat: "43.7",
     dtk_pc_h2o: "41.0",
     dtk_rcp: {
@@ -2471,6 +2696,7 @@ export let dtkTestRecord = {
     dtk_weight: "114.3",
   },
   1553904000000: {
+    synthetic: false,
     dtk_pc_fat: "43.6",
     dtk_pc_h2o: "41.1",
     dtk_rcp: {
@@ -2482,6 +2708,7 @@ export let dtkTestRecord = {
     dtk_weight: "114.3",
   },
   1553990400000: {
+    synthetic: false,
     dtk_pc_fat: "44.2",
     dtk_pc_h2o: "40.6",
     dtk_rcp: {
@@ -2493,6 +2720,7 @@ export let dtkTestRecord = {
     dtk_weight: "115.0",
   },
   1554076800000: {
+    synthetic: false,
     dtk_pc_fat: "43.1",
     dtk_pc_h2o: "41.4",
     dtk_rcp: {
@@ -2504,6 +2732,7 @@ export let dtkTestRecord = {
     dtk_weight: "113.5",
   },
   1554163200000: {
+    synthetic: false,
     dtk_pc_fat: "42.7",
     dtk_pc_h2o: "41.7",
     dtk_rcp: {
@@ -2515,6 +2744,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.8",
   },
   1554249600000: {
+    synthetic: false,
     dtk_pc_fat: "43.0",
     dtk_pc_h2o: "41.5",
     dtk_rcp: {
@@ -2526,6 +2756,7 @@ export let dtkTestRecord = {
     dtk_weight: "113.0",
   },
   1554336000000: {
+    synthetic: false,
     dtk_pc_fat: "43.5",
     dtk_pc_h2o: "41.2",
     dtk_rcp: {
@@ -2537,6 +2768,7 @@ export let dtkTestRecord = {
     dtk_weight: "113.9",
   },
   1554422400000: {
+    synthetic: false,
     dtk_pc_fat: "43.2",
     dtk_pc_h2o: "41.4",
     dtk_rcp: {
@@ -2548,6 +2780,7 @@ export let dtkTestRecord = {
     dtk_weight: "113.4",
   },
   1554508800000: {
+    synthetic: false,
     dtk_pc_fat: "43.0",
     dtk_pc_h2o: "41.5",
     dtk_rcp: {
@@ -2559,6 +2792,7 @@ export let dtkTestRecord = {
     dtk_weight: "113.1",
   },
   1554595200000: {
+    synthetic: false,
     dtk_pc_fat: "42.8",
     dtk_pc_h2o: "41.7",
     dtk_rcp: {
@@ -2570,6 +2804,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.7",
   },
   1554681600000: {
+    synthetic: false,
     dtk_pc_fat: "42.5",
     dtk_pc_h2o: "41.9",
     dtk_rcp: {
@@ -2581,6 +2816,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.2",
   },
   1554768000000: {
+    synthetic: false,
     dtk_pc_fat: "43.7",
     dtk_pc_h2o: "41.0",
     dtk_rcp: {
@@ -2592,6 +2828,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.6",
   },
   1554854400000: {
+    synthetic: false,
     dtk_pc_fat: "42.4",
     dtk_pc_h2o: "42.0",
     dtk_rcp: {
@@ -2603,6 +2840,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.1",
   },
   1554940800000: {
+    synthetic: false,
     dtk_pc_fat: "42.6",
     dtk_pc_h2o: "41.8",
     dtk_rcp: {
@@ -2614,6 +2852,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.6",
   },
   1667433600000: {
+    synthetic: false,
     dtk_pc_fat: "40.9",
     dtk_pc_h2o: "43.9",
     dtk_rcp: {
@@ -2625,6 +2864,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.9",
   },
   1667520000000: {
+    synthetic: false,
     dtk_pc_fat: "40.2",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -2636,6 +2876,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.3",
   },
   1667692800000: {
+    synthetic: false,
     dtk_pc_fat: "40.2",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -2647,6 +2888,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.4",
   },
   1669161600000: {
+    synthetic: false,
     dtk_pc_fat: "41.6",
     dtk_pc_h2o: "42.0",
     dtk_rcp: {
@@ -2658,6 +2900,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.8",
   },
   1669248000000: {
+    synthetic: false,
     dtk_pc_fat: "41.0",
     dtk_pc_h2o: "42.5",
     dtk_rcp: {
@@ -2669,6 +2912,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.9",
   },
   1669334400000: {
+    synthetic: false,
     dtk_pc_fat: "41.0",
     dtk_pc_h2o: "42.5",
     dtk_rcp: {
@@ -2680,6 +2924,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.9",
   },
   1669420800000: {
+    synthetic: false,
     dtk_pc_fat: "40.3",
     dtk_pc_h2o: "43.0",
     dtk_rcp: {
@@ -2691,6 +2936,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.8",
   },
   1637971200000: {
+    synthetic: false,
     dtk_pc_fat: "40.7",
     dtk_pc_h2o: "42.7",
     dtk_rcp: {
@@ -2702,6 +2948,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.4",
   },
   1638057600000: {
+    synthetic: false,
     dtk_pc_fat: "40.9",
     dtk_pc_h2o: "42.5",
     dtk_rcp: {
@@ -2713,6 +2960,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.4",
   },
   1638144000000: {
+    synthetic: false,
     dtk_pc_fat: "40.5",
     dtk_pc_h2o: "42.8",
     dtk_rcp: {
@@ -2724,6 +2972,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.9",
   },
   1669766400000: {
+    synthetic: false,
     dtk_pc_fat: "40.0",
     dtk_pc_h2o: "43.2",
     dtk_rcp: {
@@ -2735,6 +2984,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.2",
   },
   1551398400000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -2746,6 +2996,7 @@ export let dtkTestRecord = {
     dtk_weight: "117.5",
   },
   1551484800000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -2757,6 +3008,7 @@ export let dtkTestRecord = {
     dtk_weight: "119.4",
   },
   1551571200000: {
+    synthetic: false,
     dtk_pc_fat: "45.4",
     dtk_pc_h2o: "39.8",
     dtk_rcp: {
@@ -2768,6 +3020,7 @@ export let dtkTestRecord = {
     dtk_weight: "116.9",
   },
   1551657600000: {
+    synthetic: false,
     dtk_pc_fat: "45.5",
     dtk_pc_h2o: "39.7",
     dtk_rcp: {
@@ -2779,6 +3032,7 @@ export let dtkTestRecord = {
     dtk_weight: "117.3",
   },
   1551744000000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -2790,6 +3044,7 @@ export let dtkTestRecord = {
     dtk_weight: "115.6",
   },
   1551830400000: {
+    synthetic: false,
     dtk_pc_fat: "45.5",
     dtk_pc_h2o: "40.1",
     dtk_rcp: {
@@ -2801,6 +3056,7 @@ export let dtkTestRecord = {
     dtk_weight: "116.3",
   },
   1551916800000: {
+    synthetic: false,
     dtk_pc_fat: "45.9",
     dtk_pc_h2o: "39.4",
     dtk_rcp: {
@@ -2812,6 +3068,7 @@ export let dtkTestRecord = {
     dtk_weight: "117.6",
   },
   1552003200000: {
+    synthetic: false,
     dtk_pc_fat: "46.0",
     dtk_pc_h2o: "39.3",
     dtk_rcp: {
@@ -2823,6 +3080,7 @@ export let dtkTestRecord = {
     dtk_weight: "117.5",
   },
   1552089600000: {
+    synthetic: false,
     dtk_pc_fat: "46.3",
     dtk_pc_h2o: "39.1",
     dtk_rcp: {
@@ -2834,6 +3092,7 @@ export let dtkTestRecord = {
     dtk_weight: "117.7",
   },
   1552176000000: {
+    synthetic: false,
     dtk_pc_fat: "45.4",
     dtk_pc_h2o: "39.8",
     dtk_rcp: {
@@ -2845,6 +3104,7 @@ export let dtkTestRecord = {
     dtk_weight: "116.9",
   },
   1552262400000: {
+    synthetic: false,
     dtk_pc_fat: "44.8",
     dtk_pc_h2o: "40.2",
     dtk_rcp: {
@@ -2856,6 +3116,7 @@ export let dtkTestRecord = {
     dtk_weight: "116.3",
   },
   1552348800000: {
+    synthetic: false,
     dtk_pc_fat: "45.5",
     dtk_pc_h2o: "40.4",
     dtk_rcp: {
@@ -2867,6 +3128,7 @@ export let dtkTestRecord = {
     dtk_weight: "115.6",
   },
   1552435200000: {
+    synthetic: false,
     dtk_pc_fat: "44.7",
     dtk_pc_h2o: "40.3",
     dtk_rcp: {
@@ -2878,6 +3140,7 @@ export let dtkTestRecord = {
     dtk_weight: "115.7",
   },
   1552521600000: {
+    synthetic: false,
     dtk_pc_fat: "44.4",
     dtk_pc_h2o: "40.5",
     dtk_rcp: {
@@ -2889,6 +3152,7 @@ export let dtkTestRecord = {
     dtk_weight: "115.6",
   },
   1564704000000: {
+    synthetic: false,
     dtk_pc_fat: "37.8",
     dtk_pc_h2o: "45.2",
     dtk_rcp: {
@@ -2900,6 +3164,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.7",
   },
   1564790400000: {
+    synthetic: false,
     dtk_pc_fat: "37.2",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -2911,6 +3176,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.1",
   },
   1564876800000: {
+    synthetic: false,
     dtk_pc_fat: "37.3",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -2922,6 +3188,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.2",
   },
   1564963200000: {
+    synthetic: false,
     dtk_pc_fat: "37.3",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -2933,6 +3200,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.2",
   },
   1565049600000: {
+    synthetic: false,
     dtk_pc_fat: "37.3",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -2944,6 +3212,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.2",
   },
   1565136000000: {
+    synthetic: false,
     dtk_pc_fat: "37.3",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -2955,6 +3224,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.7",
   },
   1565222400000: {
+    synthetic: false,
     dtk_pc_fat: "37.3",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -2966,6 +3236,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.7",
   },
   1565308800000: {
+    synthetic: false,
     dtk_pc_fat: "37.7",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -2977,6 +3248,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.3",
   },
   1565395200000: {
+    synthetic: false,
     dtk_pc_fat: "37.3",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -2988,6 +3260,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.7",
   },
   1565481600000: {
+    synthetic: false,
     dtk_pc_fat: "37.2",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -2999,6 +3272,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.8",
   },
   1565568000000: {
+    synthetic: false,
     dtk_pc_fat: "36.6",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -3010,6 +3284,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.7",
   },
   1565654400000: {
+    synthetic: false,
     dtk_pc_fat: "36.9",
     dtk_pc_h2o: "45.9",
     dtk_rcp: {
@@ -3021,6 +3296,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.5",
   },
   1619222400000: {
+    synthetic: false,
     dtk_pc_fat: "39.9",
     dtk_pc_h2o: "44.7",
     dtk_rcp: {
@@ -3032,6 +3308,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.0",
   },
   1619395200000: {
+    synthetic: false,
     dtk_pc_fat: "39.6",
     dtk_pc_h2o: "44.9",
     dtk_rcp: {
@@ -3043,6 +3320,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1619481600000: {
+    synthetic: false,
     dtk_pc_fat: "39.6",
     dtk_pc_h2o: "44.9",
     dtk_rcp: {
@@ -3054,6 +3332,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1619654400000: {
+    synthetic: false,
     dtk_pc_fat: "39.6",
     dtk_pc_h2o: "44.9",
     dtk_rcp: {
@@ -3065,6 +3344,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.2",
   },
   1619740800000: {
+    synthetic: false,
     dtk_pc_fat: "39.4",
     dtk_pc_h2o: "45.0",
     dtk_rcp: {
@@ -3076,6 +3356,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.6",
   },
   1621814400000: {
+    synthetic: false,
     dtk_pc_fat: "39.9",
     dtk_pc_h2o: "44.7",
     dtk_rcp: {
@@ -3087,6 +3368,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.0",
   },
   1621900800000: {
+    synthetic: false,
     dtk_pc_fat: "40.0",
     dtk_pc_h2o: "44.6",
     dtk_rcp: {
@@ -3098,6 +3380,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.8",
   },
   1620172800000: {
+    synthetic: false,
     dtk_pc_fat: "40.0",
     dtk_pc_h2o: "44.6",
     dtk_rcp: {
@@ -3109,6 +3392,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.8",
   },
   1620259200000: {
+    synthetic: false,
     dtk_pc_fat: "39.4",
     dtk_pc_h2o: "45.0",
     dtk_rcp: {
@@ -3120,6 +3404,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.8",
   },
   1620345600000: {
+    synthetic: false,
     dtk_pc_fat: "38.8",
     dtk_pc_h2o: "45.5",
     dtk_rcp: {
@@ -3131,6 +3416,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.3",
   },
   1559952000000: {
+    synthetic: false,
     dtk_pc_fat: "39.0",
     dtk_pc_h2o: "44.3",
     dtk_rcp: {
@@ -3142,6 +3428,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.2",
   },
   1560297600000: {
+    synthetic: false,
     dtk_pc_fat: "38.7",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -3153,6 +3440,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.5",
   },
   1560384000000: {
+    synthetic: false,
     dtk_pc_fat: "39.2",
     dtk_pc_h2o: "44.2",
     dtk_rcp: {
@@ -3164,6 +3452,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.3",
   },
   1560470400000: {
+    synthetic: false,
     dtk_pc_fat: "39.5",
     dtk_pc_h2o: "44.0",
     dtk_rcp: {
@@ -3175,6 +3464,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.3",
   },
   1560556800000: {
+    synthetic: false,
     dtk_pc_fat: "39.3",
     dtk_pc_h2o: "44.1",
     dtk_rcp: {
@@ -3186,6 +3476,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.5",
   },
   1560902400000: {
+    synthetic: false,
     dtk_pc_fat: "39.0",
     dtk_pc_h2o: "44.3",
     dtk_rcp: {
@@ -3197,6 +3488,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.6",
   },
   1560988800000: {
+    synthetic: false,
     dtk_pc_fat: "38.6",
     dtk_pc_h2o: "44.6",
     dtk_rcp: {
@@ -3208,6 +3500,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.6",
   },
   1567123200000: {
+    synthetic: false,
     dtk_pc_fat: "37.5",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -3219,6 +3512,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.8",
   },
   1567209600000: {
+    synthetic: false,
     dtk_pc_fat: "37.0",
     dtk_pc_h2o: "45.8",
     dtk_rcp: {
@@ -3230,6 +3524,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.6",
   },
   1567296000000: {
+    synthetic: false,
     dtk_pc_fat: "36.9",
     dtk_pc_h2o: "45.9",
     dtk_rcp: {
@@ -3241,6 +3536,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.6",
   },
   1567382400000: {
+    synthetic: false,
     dtk_pc_fat: "36.7",
     dtk_pc_h2o: "46.0",
     dtk_rcp: {
@@ -3252,6 +3548,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.5",
   },
   1567468800000: {
+    synthetic: false,
     dtk_pc_fat: "36.8",
     dtk_pc_h2o: "45.9",
     dtk_rcp: {
@@ -3263,6 +3560,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.3",
   },
   1567555200000: {
+    synthetic: false,
     dtk_pc_fat: "36.9",
     dtk_pc_h2o: "45.9",
     dtk_rcp: {
@@ -3274,6 +3572,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.3",
   },
   1567641600000: {
+    synthetic: false,
     dtk_pc_fat: "36.4",
     dtk_pc_h2o: "46.2",
     dtk_rcp: {
@@ -3285,6 +3584,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.2",
   },
   1567728000000: {
+    synthetic: false,
     dtk_pc_fat: "36.2",
     dtk_pc_h2o: "46.4",
     dtk_rcp: {
@@ -3296,6 +3596,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.8",
   },
   1567814400000: {
+    synthetic: false,
     dtk_pc_fat: "36.9",
     dtk_pc_h2o: "45.9",
     dtk_rcp: {
@@ -3307,6 +3608,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.6",
   },
   1567900800000: {
+    synthetic: false,
     dtk_pc_fat: "36.8",
     dtk_pc_h2o: "45.9",
     dtk_rcp: {
@@ -3318,6 +3620,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.3",
   },
   1567987200000: {
+    synthetic: false,
     dtk_pc_fat: "36.6",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -3329,6 +3632,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.2",
   },
   1568073600000: {
+    synthetic: false,
     dtk_pc_fat: "37.0",
     dtk_pc_h2o: "45.8",
     dtk_rcp: {
@@ -3340,6 +3644,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.8",
   },
   1568160000000: {
+    synthetic: false,
     dtk_pc_fat: "36.8",
     dtk_pc_h2o: "45.9",
     dtk_rcp: {
@@ -3351,6 +3656,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.5",
   },
   1568851200000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -3362,6 +3668,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1597190400000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -3373,6 +3680,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.9",
   },
   1597276800000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -3384,6 +3692,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.7",
   },
   1597363200000: {
+    synthetic: false,
     dtk_pc_fat: "36.7",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -3395,6 +3704,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.9",
   },
   1597449600000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -3406,6 +3716,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.1",
   },
   1597795200000: {
+    synthetic: false,
     dtk_pc_fat: "37.1",
     dtk_pc_h2o: "45.7",
     dtk_rcp: {
@@ -3417,6 +3728,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.5",
   },
   1597881600000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -3428,6 +3740,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.9",
   },
   1597968000000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -3439,6 +3752,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.9",
   },
   1598054400000: {
+    synthetic: false,
     dtk_pc_fat: "37.0",
     dtk_pc_h2o: "45.8",
     dtk_rcp: {
@@ -3450,6 +3764,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.4",
   },
   1598140800000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -3461,6 +3776,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.9",
   },
   1598227200000: {
+    synthetic: false,
     dtk_pc_fat: "35.8",
     dtk_pc_h2o: "46.7",
     dtk_rcp: {
@@ -3472,6 +3788,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.3",
   },
   1598313600000: {
+    synthetic: false,
     dtk_pc_fat: "36.6",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -3483,6 +3800,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.0",
   },
   1598400000000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -3494,6 +3812,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.9",
   },
   1598486400000: {
+    synthetic: false,
     dtk_pc_fat: "35.9",
     dtk_pc_h2o: "46.6",
     dtk_rcp: {
@@ -3505,6 +3824,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.0",
   },
   1588118400000: {
+    synthetic: false,
     dtk_pc_fat: "37.7",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -3516,6 +3836,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.3",
   },
   1588204800000: {
+    synthetic: false,
     dtk_pc_fat: "38.8",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -3527,6 +3848,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.0",
   },
   1588291200000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -3538,6 +3860,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1588377600000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -3549,6 +3872,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1588464000000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -3560,6 +3884,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.6",
   },
   1588550400000: {
+    synthetic: false,
     dtk_pc_fat: "38.0",
     dtk_pc_h2o: "45.1",
     dtk_rcp: {
@@ -3571,6 +3896,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.1",
   },
   1588636800000: {
+    synthetic: false,
     dtk_pc_fat: "38.0",
     dtk_pc_h2o: "45.1",
     dtk_rcp: {
@@ -3582,6 +3908,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.1",
   },
   1588723200000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -3593,6 +3920,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1588809600000: {
+    synthetic: false,
     dtk_pc_fat: "38.7",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -3604,6 +3932,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1588896000000: {
+    synthetic: false,
     dtk_pc_fat: "38.6",
     dtk_pc_h2o: "44.6",
     dtk_rcp: {
@@ -3615,6 +3944,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.9",
   },
   1552608000000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -3626,6 +3956,7 @@ export let dtkTestRecord = {
     dtk_weight: "115.3",
   },
   1552694400000: {
+    synthetic: false,
     dtk_pc_fat: "44.3",
     dtk_pc_h2o: "40.6",
     dtk_rcp: {
@@ -3637,6 +3968,7 @@ export let dtkTestRecord = {
     dtk_weight: "115.2",
   },
   1552780800000: {
+    synthetic: false,
     dtk_pc_fat: "44.7",
     dtk_pc_h2o: "40.3",
     dtk_rcp: {
@@ -3648,6 +3980,7 @@ export let dtkTestRecord = {
     dtk_weight: "115.9",
   },
   1552867200000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -3659,6 +3992,7 @@ export let dtkTestRecord = {
     dtk_weight: "115.4",
   },
   1552953600000: {
+    synthetic: false,
     dtk_pc_fat: "44.2",
     dtk_pc_h2o: "40.6",
     dtk_rcp: {
@@ -3670,6 +4004,7 @@ export let dtkTestRecord = {
     dtk_weight: "114.8",
   },
   1553040000000: {
+    synthetic: false,
     dtk_pc_fat: "44.0",
     dtk_pc_h2o: "40.8",
     dtk_rcp: {
@@ -3681,6 +4016,7 @@ export let dtkTestRecord = {
     dtk_weight: "114.5",
   },
   1553126400000: {
+    synthetic: false,
     dtk_pc_fat: "44.8",
     dtk_pc_h2o: "40.2",
     dtk_rcp: {
@@ -3692,6 +4028,7 @@ export let dtkTestRecord = {
     dtk_weight: "115.8",
   },
   1553212800000: {
+    synthetic: false,
     dtk_pc_fat: "45.2",
     dtk_pc_h2o: "39.9",
     dtk_rcp: {
@@ -3703,6 +4040,7 @@ export let dtkTestRecord = {
     dtk_weight: "116.2",
   },
   1553299200000: {
+    synthetic: false,
     dtk_pc_fat: "45.3",
     dtk_pc_h2o: "39.8",
     dtk_rcp: {
@@ -3714,6 +4052,7 @@ export let dtkTestRecord = {
     dtk_weight: "116.7",
   },
   1553385600000: {
+    synthetic: false,
     dtk_pc_fat: "45.8",
     dtk_pc_h2o: "39.5",
     dtk_rcp: {
@@ -3725,6 +4064,7 @@ export let dtkTestRecord = {
     dtk_weight: "117.2",
   },
   1553472000000: {
+    synthetic: false,
     dtk_pc_fat: "44.5",
     dtk_pc_h2o: "40.4",
     dtk_rcp: {
@@ -3736,6 +4076,7 @@ export let dtkTestRecord = {
     dtk_weight: "115.1",
   },
   1553558400000: {
+    synthetic: false,
     dtk_pc_fat: "44.0",
     dtk_pc_h2o: "40.8",
     dtk_rcp: {
@@ -3747,6 +4088,7 @@ export let dtkTestRecord = {
     dtk_weight: "114.5",
   },
   1553644800000: {
+    synthetic: false,
     dtk_pc_fat: "43.8",
     dtk_pc_h2o: "40.8",
     dtk_rcp: {
@@ -3758,6 +4100,7 @@ export let dtkTestRecord = {
     dtk_weight: "114.3",
   },
   1553731200000: {
+    synthetic: false,
     dtk_pc_fat: null,
     dtk_pc_h2o: null,
     dtk_rcp: {
@@ -3769,6 +4112,7 @@ export let dtkTestRecord = {
     dtk_weight: "115.3",
   },
   1681862400000: {
+    synthetic: false,
     dtk_pc_fat: "34.6",
     dtk_pc_h2o: "49.6",
     dtk_rcp: {
@@ -3780,6 +4124,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.7",
   },
   1622851200000: {
+    synthetic: false,
     dtk_pc_fat: "39.7",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -3791,6 +4136,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.3",
   },
   1623196800000: {
+    synthetic: false,
     dtk_pc_fat: "39.7",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -3802,6 +4148,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.3",
   },
   1623283200000: {
+    synthetic: false,
     dtk_pc_fat: "39.7",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -3813,6 +4160,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.3",
   },
   1623369600000: {
+    synthetic: false,
     dtk_pc_fat: "39.4",
     dtk_pc_h2o: "45.0",
     dtk_rcp: {
@@ -3824,6 +4172,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.9",
   },
   1623456000000: {
+    synthetic: false,
     dtk_pc_fat: "39.1",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -3835,6 +4184,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.4",
   },
   1623542400000: {
+    synthetic: false,
     dtk_pc_fat: "38.9",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -3846,6 +4196,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.4",
   },
   1623628800000: {
+    synthetic: false,
     dtk_pc_fat: "39.6",
     dtk_pc_h2o: "44.9",
     dtk_rcp: {
@@ -3857,6 +4208,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.9",
   },
   1623715200000: {
+    synthetic: false,
     dtk_pc_fat: "38.8",
     dtk_pc_h2o: "45.5",
     dtk_rcp: {
@@ -3868,6 +4220,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.0",
   },
   1623801600000: {
+    synthetic: false,
     dtk_pc_fat: "38.4",
     dtk_pc_h2o: "45.8",
     dtk_rcp: {
@@ -3879,6 +4232,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.3",
   },
   1623888000000: {
+    synthetic: false,
     dtk_pc_fat: "39.7",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -3890,6 +4244,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.6",
   },
   1623974400000: {
+    synthetic: false,
     dtk_pc_fat: "38.6",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -3901,6 +4256,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.6",
   },
   1556236800000: {
+    synthetic: false,
     dtk_pc_fat: "42.9",
     dtk_pc_h2o: "41.6",
     dtk_rcp: {
@@ -3912,6 +4268,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.7",
   },
   1556323200000: {
+    synthetic: false,
     dtk_pc_fat: "42.5",
     dtk_pc_h2o: "41.9",
     dtk_rcp: {
@@ -3923,6 +4280,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.5",
   },
   1556409600000: {
+    synthetic: false,
     dtk_pc_fat: "42.8",
     dtk_pc_h2o: "41.7",
     dtk_rcp: {
@@ -3934,6 +4292,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.7",
   },
   1556496000000: {
+    synthetic: false,
     dtk_pc_fat: "42.4",
     dtk_pc_h2o: "42.0",
     dtk_rcp: {
@@ -3945,6 +4304,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.1",
   },
   1556582400000: {
+    synthetic: false,
     dtk_pc_fat: "42.6",
     dtk_pc_h2o: "41.8",
     dtk_rcp: {
@@ -3956,6 +4316,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.4",
   },
   1556668800000: {
+    synthetic: false,
     dtk_pc_fat: "42.1",
     dtk_pc_h2o: "42.2",
     dtk_rcp: {
@@ -3967,6 +4328,7 @@ export let dtkTestRecord = {
     dtk_weight: "112.0",
   },
   1556755200000: {
+    synthetic: false,
     dtk_pc_fat: "42.2",
     dtk_pc_h2o: "42.1",
     dtk_rcp: {
@@ -3978,6 +4340,7 @@ export let dtkTestRecord = {
     dtk_weight: "111.7",
   },
   1556841600000: {
+    synthetic: false,
     dtk_pc_fat: "42.1",
     dtk_pc_h2o: "42.2",
     dtk_rcp: {
@@ -3989,6 +4352,7 @@ export let dtkTestRecord = {
     dtk_weight: "111.8",
   },
   1556928000000: {
+    synthetic: false,
     dtk_pc_fat: "41.9",
     dtk_pc_h2o: "42.3",
     dtk_rcp: {
@@ -4000,6 +4364,7 @@ export let dtkTestRecord = {
     dtk_weight: "111.6",
   },
   1557014400000: {
+    synthetic: false,
     dtk_pc_fat: "41.9",
     dtk_pc_h2o: "42.3",
     dtk_rcp: {
@@ -4011,6 +4376,7 @@ export let dtkTestRecord = {
     dtk_weight: "111.5",
   },
   1557100800000: {
+    synthetic: false,
     dtk_pc_fat: "41.6",
     dtk_pc_h2o: "42.5",
     dtk_rcp: {
@@ -4022,6 +4388,7 @@ export let dtkTestRecord = {
     dtk_weight: "111.1",
   },
   1557187200000: {
+    synthetic: false,
     dtk_pc_fat: "41.4",
     dtk_pc_h2o: "42.7",
     dtk_rcp: {
@@ -4033,6 +4400,7 @@ export let dtkTestRecord = {
     dtk_weight: "110.8",
   },
   1557273600000: {
+    synthetic: false,
     dtk_pc_fat: "41.5",
     dtk_pc_h2o: "42.6",
     dtk_rcp: {
@@ -4044,6 +4412,7 @@ export let dtkTestRecord = {
     dtk_weight: "110.9",
   },
   1592611200000: {
+    synthetic: false,
     dtk_pc_fat: "37.0",
     dtk_pc_h2o: "45.8",
     dtk_rcp: {
@@ -4055,6 +4424,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.4",
   },
   1592697600000: {
+    synthetic: false,
     dtk_pc_fat: "36.0",
     dtk_pc_h2o: "46.5",
     dtk_rcp: {
@@ -4066,6 +4436,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.2",
   },
   1592784000000: {
+    synthetic: false,
     dtk_pc_fat: "36.6",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -4077,6 +4448,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.0",
   },
   1592870400000: {
+    synthetic: false,
     dtk_pc_fat: "36.6",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -4088,6 +4460,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.4",
   },
   1592956800000: {
+    synthetic: false,
     dtk_pc_fat: "37.0",
     dtk_pc_h2o: "45.8",
     dtk_rcp: {
@@ -4099,6 +4472,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.5",
   },
   1593043200000: {
+    synthetic: false,
     dtk_pc_fat: "37.0",
     dtk_pc_h2o: "45.8",
     dtk_rcp: {
@@ -4110,6 +4484,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.2",
   },
   1593129600000: {
+    synthetic: false,
     dtk_pc_fat: "36.8",
     dtk_pc_h2o: "45.9",
     dtk_rcp: {
@@ -4121,6 +4496,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.9",
   },
   1593216000000: {
+    synthetic: false,
     dtk_pc_fat: "37.9",
     dtk_pc_h2o: "45.1",
     dtk_rcp: {
@@ -4132,6 +4508,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.3",
   },
   1593302400000: {
+    synthetic: false,
     dtk_pc_fat: "37.7",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -4143,6 +4520,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.1",
   },
   1593388800000: {
+    synthetic: false,
     dtk_pc_fat: "37.1",
     dtk_pc_h2o: "45.7",
     dtk_rcp: {
@@ -4154,6 +4532,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.8",
   },
   1593475200000: {
+    synthetic: false,
     dtk_pc_fat: "37.0",
     dtk_pc_h2o: "45.8",
     dtk_rcp: {
@@ -4165,6 +4544,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.7",
   },
   1593561600000: {
+    synthetic: false,
     dtk_pc_fat: "36.6",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -4176,6 +4556,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.8",
   },
   1593648000000: {
+    synthetic: false,
     dtk_pc_fat: "37.0",
     dtk_pc_h2o: "45.8",
     dtk_rcp: {
@@ -4187,6 +4568,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.4",
   },
   1593734400000: {
+    synthetic: false,
     dtk_pc_fat: "37.0",
     dtk_pc_h2o: "45.8",
     dtk_rcp: {
@@ -4198,6 +4580,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.4",
   },
   1593820800000: {
+    synthetic: false,
     dtk_pc_fat: "35.8",
     dtk_pc_h2o: "46.7",
     dtk_rcp: {
@@ -4209,6 +4592,7 @@ export let dtkTestRecord = {
     dtk_weight: "101.8",
   },
   1568332800000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -4220,6 +4604,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.0",
   },
   1568419200000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4231,6 +4616,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1568505600000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4242,6 +4628,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1568592000000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4253,6 +4640,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1568678400000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4264,6 +4652,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1568764800000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4275,6 +4664,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1568937600000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4286,6 +4676,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1569024000000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4297,6 +4688,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1569110400000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4308,6 +4700,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1569196800000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4319,6 +4712,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1569283200000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4330,6 +4724,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1569369600000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4341,6 +4736,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1569456000000: {
+    synthetic: false,
     dtk_pc_fat: "38.3",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4352,6 +4748,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1557532800000: {
+    synthetic: false,
     dtk_pc_fat: "42.0",
     dtk_pc_h2o: "42.2",
     dtk_rcp: {
@@ -4363,6 +4760,7 @@ export let dtkTestRecord = {
     dtk_weight: "111.4",
   },
   1558569600000: {
+    synthetic: false,
     dtk_pc_fat: "40.6",
     dtk_pc_h2o: "43.3",
     dtk_rcp: {
@@ -4374,6 +4772,7 @@ export let dtkTestRecord = {
     dtk_weight: "109.4",
   },
   1595376000000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -4385,6 +4784,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.7",
   },
   1595462400000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -4396,6 +4796,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.7",
   },
   1595548800000: {
+    synthetic: false,
     dtk_pc_fat: "36.0",
     dtk_pc_h2o: "46.5",
     dtk_rcp: {
@@ -4407,6 +4808,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.1",
   },
   1595635200000: {
+    synthetic: false,
     dtk_pc_fat: "36.4",
     dtk_pc_h2o: "46.0",
     dtk_rcp: {
@@ -4418,6 +4820,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.4",
   },
   1595721600000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -4429,6 +4832,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.0",
   },
   1595808000000: {
+    synthetic: false,
     dtk_pc_fat: "36.2",
     dtk_pc_h2o: "46.4",
     dtk_rcp: {
@@ -4440,6 +4844,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.4",
   },
   1595894400000: {
+    synthetic: false,
     dtk_pc_fat: "36.3",
     dtk_pc_h2o: "46.3",
     dtk_rcp: {
@@ -4451,6 +4856,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.3",
   },
   1595980800000: {
+    synthetic: false,
     dtk_pc_fat: "36.4",
     dtk_pc_h2o: "46.2",
     dtk_rcp: {
@@ -4462,6 +4868,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.8",
   },
   1596067200000: {
+    synthetic: false,
     dtk_pc_fat: "36.4",
     dtk_pc_h2o: "46.2",
     dtk_rcp: {
@@ -4473,6 +4880,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.7",
   },
   1596153600000: {
+    synthetic: false,
     dtk_pc_fat: "35.9",
     dtk_pc_h2o: "46.5",
     dtk_rcp: {
@@ -4484,6 +4892,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.2",
   },
   1691712000000: {
+    synthetic: false,
     dtk_pc_fat: "49.6",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -4495,6 +4904,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.7",
   },
   1691798400000: {
+    synthetic: false,
     dtk_pc_fat: "49.6",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -4506,6 +4916,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.7",
   },
   1691884800000: {
+    synthetic: false,
     dtk_pc_fat: "49.6",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -4517,6 +4928,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1691971200000: {
+    synthetic: false,
     dtk_pc_fat: "49.9",
     dtk_pc_h2o: "34.3",
     dtk_rcp: {
@@ -4528,6 +4940,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.2",
   },
   1692057600000: {
+    synthetic: false,
     dtk_pc_fat: "49.6",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -4539,6 +4952,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.9",
   },
   1692144000000: {
+    synthetic: false,
     dtk_pc_fat: "49.1",
     dtk_pc_h2o: "34.9",
     dtk_rcp: {
@@ -4550,6 +4964,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.3",
   },
   1692230400000: {
+    synthetic: false,
     dtk_pc_fat: "49.0",
     dtk_pc_h2o: "35.0",
     dtk_rcp: {
@@ -4561,6 +4976,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.8",
   },
   1692316800000: {
+    synthetic: false,
     dtk_pc_fat: "48.5",
     dtk_pc_h2o: "35.4",
     dtk_rcp: {
@@ -4572,6 +4988,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.2",
   },
   1692403200000: {
+    synthetic: false,
     dtk_pc_fat: "47.9",
     dtk_pc_h2o: "35.8",
     dtk_rcp: {
@@ -4583,6 +5000,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.1",
   },
   1692489600000: {
+    synthetic: false,
     dtk_pc_fat: "48.6",
     dtk_pc_h2o: "35.3",
     dtk_rcp: {
@@ -4594,6 +5012,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.2",
   },
   1692576000000: {
+    synthetic: false,
     dtk_pc_fat: "49.1",
     dtk_pc_h2o: "34.9",
     dtk_rcp: {
@@ -4605,6 +5024,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.8",
   },
   1692662400000: {
+    synthetic: false,
     dtk_pc_fat: "49.7",
     dtk_pc_h2o: "34.5",
     dtk_rcp: {
@@ -4616,6 +5036,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1692748800000: {
+    synthetic: false,
     dtk_pc_fat: "49.2",
     dtk_pc_h2o: "34.9",
     dtk_rcp: {
@@ -4627,6 +5048,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1692835200000: {
+    synthetic: false,
     dtk_pc_fat: "50.0",
     dtk_pc_h2o: "34.3",
     dtk_rcp: {
@@ -4638,6 +5060,7 @@ export let dtkTestRecord = {
     dtk_weight: "107.2",
   },
   1692921600000: {
+    synthetic: false,
     dtk_pc_fat: "49.0",
     dtk_pc_h2o: "35.0",
     dtk_rcp: {
@@ -4649,6 +5072,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.6",
   },
   1693008000000: {
+    synthetic: false,
     dtk_pc_fat: "48.4",
     dtk_pc_h2o: "35.4",
     dtk_rcp: {
@@ -4660,6 +5084,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.0",
   },
   1693094400000: {
+    synthetic: false,
     dtk_pc_fat: "48.6",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -4671,6 +5096,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.1",
   },
   1693180800000: {
+    synthetic: false,
     dtk_pc_fat: "48.4",
     dtk_pc_h2o: "35.4",
     dtk_rcp: {
@@ -4682,6 +5108,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.9",
   },
   1693267200000: {
+    synthetic: false,
     dtk_pc_fat: "47.8",
     dtk_pc_h2o: "35.9",
     dtk_rcp: {
@@ -4693,6 +5120,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.8",
   },
   1693353600000: {
+    synthetic: false,
     dtk_pc_fat: "47.4",
     dtk_pc_h2o: "36.2",
     dtk_rcp: {
@@ -4704,6 +5132,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.6",
   },
   1693440000000: {
+    synthetic: false,
     dtk_pc_fat: "47.3",
     dtk_pc_h2o: "36.2",
     dtk_rcp: {
@@ -4714,7 +5143,80 @@ export let dtkTestRecord = {
     dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
     dtk_weight: "103.5",
   },
+  1693526400000: {
+    synthetic: false,
+    dtk_pc_fat: "47.3",
+    dtk_pc_h2o: "36.2",
+    dtk_rcp: {
+      dt_date: 1693526400000,
+      dt_date_readable: "2023 09 01",
+      dt_day: "fri",
+    },
+    dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    dtk_weight: "103.3",
+  },
+  1693612800000: {
+    synthetic: false,
+    dtk_pc_fat: "47.3",
+    dtk_pc_h2o: "36.3",
+    dtk_rcp: {
+      dt_date: 1693612800000,
+      dt_date_readable: "2023 09 02",
+      dt_day: "sat",
+    },
+    dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    dtk_weight: "103.4",
+  },
+  1693699200000: {
+    synthetic: false,
+    dtk_pc_fat: "47.6",
+    dtk_pc_h2o: "36.0",
+    dtk_rcp: {
+      dt_date: 1693699200000,
+      dt_date_readable: "2023 09 03",
+      dt_day: "sun",
+    },
+    dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    dtk_weight: "104.0",
+  },
+  1694390400000: {
+    synthetic: false,
+    dtk_pc_fat: "14.6",
+    dtk_pc_h2o: "55.3",
+    dtk_rcp: {
+      dt_date: 1694390400000,
+      dt_date_readable: "2023 09 11",
+      dt_day: "mon",
+    },
+    dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    dtk_weight: "105.8",
+  },
+  1694476800000: {
+    synthetic: false,
+    dtk_pc_fat: "14.5",
+    dtk_pc_h2o: "55.4",
+    dtk_rcp: {
+      dt_date: 1694476800000,
+      dt_date_readable: "2023 09 12",
+      dt_day: "tue",
+    },
+    dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    dtk_weight: "105.2",
+  },
+  1694563200000: {
+    synthetic: false,
+    dtk_pc_fat: "14.5",
+    dtk_pc_h2o: "55.4",
+    dtk_rcp: {
+      dt_date: 1694563200000,
+      dt_date_readable: "2023 09 13",
+      dt_day: "wed",
+    },
+    dtk_user_info: { UUID: "x-x-x-x-xxx", name: "AGCT" },
+    dtk_weight: "105.2",
+  },
   1564531200000: {
+    synthetic: false,
     dtk_pc_fat: "37.6",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -4726,6 +5228,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.6",
   },
   1564617600000: {
+    synthetic: false,
     dtk_pc_fat: "37.8",
     dtk_pc_h2o: "45.2",
     dtk_rcp: {
@@ -4737,6 +5240,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.4",
   },
   1593907200000: {
+    synthetic: false,
     dtk_pc_fat: "36.4",
     dtk_pc_h2o: "46.2",
     dtk_rcp: {
@@ -4748,6 +5252,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.7",
   },
   1593993600000: {
+    synthetic: false,
     dtk_pc_fat: "37.4",
     dtk_pc_h2o: "45.5",
     dtk_rcp: {
@@ -4759,6 +5264,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.0",
   },
   1594080000000: {
+    synthetic: false,
     dtk_pc_fat: "37.4",
     dtk_pc_h2o: "45.5",
     dtk_rcp: {
@@ -4770,6 +5276,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.1",
   },
   1594166400000: {
+    synthetic: false,
     dtk_pc_fat: "36.4",
     dtk_pc_h2o: "46.2",
     dtk_rcp: {
@@ -4781,6 +5288,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.7",
   },
   1594252800000: {
+    synthetic: false,
     dtk_pc_fat: "36.2",
     dtk_pc_h2o: "46.2",
     dtk_rcp: {
@@ -4792,6 +5300,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.3",
   },
   1594339200000: {
+    synthetic: false,
     dtk_pc_fat: "36.4",
     dtk_pc_h2o: "46.2",
     dtk_rcp: {
@@ -4803,6 +5312,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.7",
   },
   1594425600000: {
+    synthetic: false,
     dtk_pc_fat: "36.4",
     dtk_pc_h2o: "46.2",
     dtk_rcp: {
@@ -4814,6 +5324,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.7",
   },
   1594512000000: {
+    synthetic: false,
     dtk_pc_fat: "37.0",
     dtk_pc_h2o: "45.8",
     dtk_rcp: {
@@ -4825,6 +5336,7 @@ export let dtkTestRecord = {
     dtk_weight: "103.5",
   },
   1594598400000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -4836,6 +5348,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.7",
   },
   1594684800000: {
+    synthetic: false,
     dtk_pc_fat: "36.6",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
@@ -4847,6 +5360,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.6",
   },
   1594771200000: {
+    synthetic: false,
     dtk_pc_fat: "36.1",
     dtk_pc_h2o: "46.4",
     dtk_rcp: {
@@ -4858,6 +5372,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.3",
   },
   1594857600000: {
+    synthetic: false,
     dtk_pc_fat: "36.1",
     dtk_pc_h2o: "46.4",
     dtk_rcp: {
@@ -4869,6 +5384,7 @@ export let dtkTestRecord = {
     dtk_weight: "102.1",
   },
   1618012800000: {
+    synthetic: false,
     dtk_pc_fat: "38.7",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -4880,6 +5396,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1618099200000: {
+    synthetic: false,
     dtk_pc_fat: "38.4",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4891,6 +5408,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.8",
   },
   1618185600000: {
+    synthetic: false,
     dtk_pc_fat: "38.0",
     dtk_pc_h2o: "45.0",
     dtk_rcp: {
@@ -4902,6 +5420,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1618272000000: {
+    synthetic: false,
     dtk_pc_fat: "38.9",
     dtk_pc_h2o: "44.4",
     dtk_rcp: {
@@ -4913,6 +5432,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.9",
   },
   1618358400000: {
+    synthetic: false,
     dtk_pc_fat: "38.6",
     dtk_pc_h2o: "44.6",
     dtk_rcp: {
@@ -4924,6 +5444,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.5",
   },
   1618531200000: {
+    synthetic: false,
     dtk_pc_fat: "39.1",
     dtk_pc_h2o: "44.2",
     dtk_rcp: {
@@ -4935,6 +5456,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.9",
   },
   1618617600000: {
+    synthetic: false,
     dtk_pc_fat: "38.8",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -4946,6 +5468,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.9",
   },
   1618704000000: {
+    synthetic: false,
     dtk_pc_fat: "39.0",
     dtk_pc_h2o: "44.3",
     dtk_rcp: {
@@ -4957,6 +5480,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.6",
   },
   1618790400000: {
+    synthetic: false,
     dtk_pc_fat: "38.4",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -4968,6 +5492,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.9",
   },
   1618876800000: {
+    synthetic: false,
     dtk_pc_fat: "38.0",
     dtk_pc_h2o: "45.1",
     dtk_rcp: {
@@ -4979,6 +5504,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.4",
   },
   1618963200000: {
+    synthetic: false,
     dtk_pc_fat: "37.7",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -4990,6 +5516,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.7",
   },
   1619049600000: {
+    synthetic: false,
     dtk_pc_fat: "37.8",
     dtk_pc_h2o: "45.2",
     dtk_rcp: {
@@ -5001,6 +5528,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.2",
   },
   1619136000000: {
+    synthetic: false,
     dtk_pc_fat: "39.8",
     dtk_pc_h2o: "44.7",
     dtk_rcp: {
@@ -5012,6 +5540,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.4",
   },
   1665187200000: {
+    synthetic: false,
     dtk_pc_fat: "39.8",
     dtk_pc_h2o: "44.7",
     dtk_rcp: {
@@ -5023,6 +5552,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.9",
   },
   1666656000000: {
+    synthetic: false,
     dtk_pc_fat: "39.8",
     dtk_pc_h2o: "44.7",
     dtk_rcp: {
@@ -5034,6 +5564,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.6",
   },
   1689120000000: {
+    synthetic: false,
     dtk_pc_fat: "48.3",
     dtk_pc_h2o: "35.5",
     dtk_rcp: {
@@ -5045,6 +5576,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.1",
   },
   1689206400000: {
+    synthetic: false,
     dtk_pc_fat: "48.8",
     dtk_pc_h2o: "35.1",
     dtk_rcp: {
@@ -5056,6 +5588,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1689292800000: {
+    synthetic: false,
     dtk_pc_fat: "48.7",
     dtk_pc_h2o: "35.2",
     dtk_rcp: {
@@ -5067,6 +5600,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1689379200000: {
+    synthetic: false,
     dtk_pc_fat: "48.3",
     dtk_pc_h2o: "35.5",
     dtk_rcp: {
@@ -5078,6 +5612,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.8",
   },
   1689465600000: {
+    synthetic: false,
     dtk_pc_fat: "48.3",
     dtk_pc_h2o: "35.5",
     dtk_rcp: {
@@ -5089,6 +5624,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.9",
   },
   1689552000000: {
+    synthetic: false,
     dtk_pc_fat: "48.1",
     dtk_pc_h2o: "35.7",
     dtk_rcp: {
@@ -5100,6 +5636,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.5",
   },
   1689638400000: {
+    synthetic: false,
     dtk_pc_fat: "48.1",
     dtk_pc_h2o: "35.7",
     dtk_rcp: {
@@ -5111,6 +5648,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.7",
   },
   1689724800000: {
+    synthetic: false,
     dtk_pc_fat: "34.6",
     dtk_pc_h2o: "49.6",
     dtk_rcp: {
@@ -5122,6 +5660,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.7",
   },
   1689811200000: {
+    synthetic: false,
     dtk_pc_fat: "47.6",
     dtk_pc_h2o: "36.0",
     dtk_rcp: {
@@ -5133,6 +5672,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.1",
   },
   1689897600000: {
+    synthetic: false,
     dtk_pc_fat: "48.1",
     dtk_pc_h2o: "35.7",
     dtk_rcp: {
@@ -5144,6 +5684,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.5",
   },
   1689984000000: {
+    synthetic: false,
     dtk_pc_fat: "48.3",
     dtk_pc_h2o: "35.5",
     dtk_rcp: {
@@ -5155,6 +5696,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.9",
   },
   1690070400000: {
+    synthetic: false,
     dtk_pc_fat: "49.0",
     dtk_pc_h2o: "35.0",
     dtk_rcp: {
@@ -5166,6 +5708,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.0",
   },
   1690156800000: {
+    synthetic: false,
     dtk_pc_fat: "48.7",
     dtk_pc_h2o: "35.2",
     dtk_rcp: {
@@ -5177,6 +5720,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.4",
   },
   1690243200000: {
+    synthetic: false,
     dtk_pc_fat: "35.0",
     dtk_pc_h2o: "49.0",
     dtk_rcp: {
@@ -5188,6 +5732,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.0",
   },
   1690329600000: {
+    synthetic: false,
     dtk_pc_fat: "48.7",
     dtk_pc_h2o: "35.2",
     dtk_rcp: {
@@ -5199,6 +5744,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1690416000000: {
+    synthetic: false,
     dtk_pc_fat: "48.7",
     dtk_pc_h2o: "35.2",
     dtk_rcp: {
@@ -5210,6 +5756,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.1",
   },
   1690502400000: {
+    synthetic: false,
     dtk_pc_fat: "48.7",
     dtk_pc_h2o: "35.2",
     dtk_rcp: {
@@ -5221,6 +5768,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1690588800000: {
+    synthetic: false,
     dtk_pc_fat: "48.4",
     dtk_pc_h2o: "35.4",
     dtk_rcp: {
@@ -5232,6 +5780,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.9",
   },
   1690675200000: {
+    synthetic: false,
     dtk_pc_fat: "48.6",
     dtk_pc_h2o: "35.3",
     dtk_rcp: {
@@ -5243,6 +5792,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1690761600000: {
+    synthetic: false,
     dtk_pc_fat: "48.5",
     dtk_pc_h2o: "35.4",
     dtk_rcp: {
@@ -5254,6 +5804,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.4",
   },
   1690848000000: {
+    synthetic: false,
     dtk_pc_fat: "49.2",
     dtk_pc_h2o: "34.9",
     dtk_rcp: {
@@ -5265,6 +5816,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.3",
   },
   1690934400000: {
+    synthetic: false,
     dtk_pc_fat: "49.6",
     dtk_pc_h2o: "34.6",
     dtk_rcp: {
@@ -5276,6 +5828,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.5",
   },
   1691020800000: {
+    synthetic: false,
     dtk_pc_fat: "49.2",
     dtk_pc_h2o: "34.9",
     dtk_rcp: {
@@ -5287,6 +5840,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.3",
   },
   1691107200000: {
+    synthetic: false,
     dtk_pc_fat: "48.8",
     dtk_pc_h2o: "35.1",
     dtk_rcp: {
@@ -5298,6 +5852,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.6",
   },
   1691193600000: {
+    synthetic: false,
     dtk_pc_fat: "44.8",
     dtk_pc_h2o: "39.7",
     dtk_rcp: {
@@ -5309,6 +5864,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.3",
   },
   1691280000000: {
+    synthetic: false,
     dtk_pc_fat: "44.8",
     dtk_pc_h2o: "39.7",
     dtk_rcp: {
@@ -5320,6 +5876,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.3",
   },
   1603843200000: {
+    synthetic: false,
     dtk_pc_fat: "38.4",
     dtk_pc_h2o: "44.8",
     dtk_rcp: {
@@ -5331,6 +5888,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.7",
   },
   1603929600000: {
+    synthetic: false,
     dtk_pc_fat: "37.8",
     dtk_pc_h2o: "44.2",
     dtk_rcp: {
@@ -5342,6 +5900,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.2",
   },
   1604016000000: {
+    synthetic: false,
     dtk_pc_fat: "37.9",
     dtk_pc_h2o: "45.1",
     dtk_rcp: {
@@ -5353,6 +5912,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.2",
   },
   1604102400000: {
+    synthetic: false,
     dtk_pc_fat: "37.2",
     dtk_pc_h2o: "45.6",
     dtk_rcp: {
@@ -5364,6 +5924,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.2",
   },
   1604275200000: {
+    synthetic: false,
     dtk_pc_fat: "37.1",
     dtk_pc_h2o: "45.7",
     dtk_rcp: {
@@ -5375,6 +5936,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.0",
   },
   1604361600000: {
+    synthetic: false,
     dtk_pc_fat: "37.1",
     dtk_pc_h2o: "45.7",
     dtk_rcp: {
@@ -5386,6 +5948,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.0",
   },
   1590192000000: {
+    synthetic: false,
     dtk_pc_fat: "38.8",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -5397,6 +5960,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.1",
   },
   1590278400000: {
+    synthetic: false,
     dtk_pc_fat: "38.9",
     dtk_pc_h2o: "44.4",
     dtk_rcp: {
@@ -5408,6 +5972,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.3",
   },
   1590364800000: {
+    synthetic: false,
     dtk_pc_fat: "37.9",
     dtk_pc_h2o: "45.1",
     dtk_rcp: {
@@ -5419,6 +5984,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.3",
   },
   1590451200000: {
+    synthetic: false,
     dtk_pc_fat: "37.6",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -5430,6 +5996,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.6",
   },
   1590537600000: {
+    synthetic: false,
     dtk_pc_fat: "37.7",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -5441,6 +6008,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.7",
   },
   1590624000000: {
+    synthetic: false,
     dtk_pc_fat: "37.6",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -5452,6 +6020,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.5",
   },
   1590710400000: {
+    synthetic: false,
     dtk_pc_fat: "38.2",
     dtk_pc_h2o: "44.9",
     dtk_rcp: {
@@ -5463,6 +6032,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1590796800000: {
+    synthetic: false,
     dtk_pc_fat: "37.8",
     dtk_pc_h2o: "45.2",
     dtk_rcp: {
@@ -5474,6 +6044,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.8",
   },
   1590883200000: {
+    synthetic: false,
     dtk_pc_fat: "37.7",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -5485,6 +6056,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.8",
   },
   1590969600000: {
+    synthetic: false,
     dtk_pc_fat: "38.1",
     dtk_pc_h2o: "45.0",
     dtk_rcp: {
@@ -5496,6 +6068,7 @@ export let dtkTestRecord = {
     dtk_weight: "105.5",
   },
   1591056000000: {
+    synthetic: false,
     dtk_pc_fat: "38.8",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -5507,6 +6080,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.1",
   },
   1591142400000: {
+    synthetic: false,
     dtk_pc_fat: "37.4",
     dtk_pc_h2o: "45.4",
     dtk_rcp: {
@@ -5518,6 +6092,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.6",
   },
   1591228800000: {
+    synthetic: false,
     dtk_pc_fat: "37.6",
     dtk_pc_h2o: "45.3",
     dtk_rcp: {
@@ -5529,6 +6104,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.4",
   },
   1591315200000: {
+    synthetic: false,
     dtk_pc_fat: "37.9",
     dtk_pc_h2o: "44.1",
     dtk_rcp: {
@@ -5540,6 +6116,7 @@ export let dtkTestRecord = {
     dtk_weight: "104.7",
   },
   1613606400000: {
+    synthetic: false,
     dtk_pc_fat: "38.8",
     dtk_pc_h2o: "44.5",
     dtk_rcp: {
@@ -5551,6 +6128,7 @@ export let dtkTestRecord = {
     dtk_weight: "106.4",
   },
   1613692800000: {
+    synthetic: false,
     dtk_pc_fat: "36.5",
     dtk_pc_h2o: "46.1",
     dtk_rcp: {
