@@ -3,40 +3,6 @@ import { dtkChartData } from './dtk_data_process.js';
 const CHART_WIDTH_DAYS_DEFAULT = 7;
 const INDEX_END_DEFAULT = parseInt(dtkChartData.length);
 const INDEX_START_DEFAULT = parseInt(INDEX_END_DEFAULT - CHART_WIDTH_DAYS_DEFAULT);
-export var chartSettings = {
-  cnv_width: 400,
-  cnv_height: 400,
-  startIndex: INDEX_START_DEFAULT,
-  endIndex:   INDEX_END_DEFAULT,
-  chartWidthDays: CHART_WIDTH_DAYS_DEFAULT,
-  fontSize: 10,
-  availableDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
-  //selectedDataSources:  ['dtk_pc_h2o'],
-  //selectedDataSources:  ['dtk_pc_fat'], 
-  //selectedDataSources:  ['dtk_weight'], 
-  selectedDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
-  //selectedDataSources: ['dtk_pc_fat', 'dtk_pc_h2o'],
-  col_ink: {dtk_weight: 'rgb(255, 132, 0)', 
-            dtk_pc_fat: 'rgb(219, 0, 0)',
-            dtk_pc_h2o: 'rgb(0, 132, 233)', 
-            dtk_frame:  'rgb(107, 214, 0)'},
-  band_ink:{dtk_weight: { top: 'rgb(200, 140, 85)', 
-                          bot: 'rgb(250, 190, 125)' }, 
-            dtk_pc_fat: { top: 'rgb(160, 55, 55)',
-                          bot: 'rgb(210, 105, 105)' },
-            dtk_pc_h2o: { top: 'rgb(65, 130, 180)', 
-                          bot: 'rgb(115, 180, 230)' }, 
-            dtk_frame:  { top:  'rgb(100, 160, 60)',
-                          bot:  'rgb(160, 210, 110)'}},
-  target_band:{ dtk_weight: { top: 95.0,  // kg
-                              bot: 88.0 }, 
-                dtk_pc_fat: { top: 34.0,   // %
-                              bot: 6.0  },
-                dtk_pc_h2o: { top: 55.0, 
-                              bot: 45.0 }, 
-                dtk_frame:  { top: 18.0,
-                              bot: 22.0 } }
-}
 
 var progressChart;
 
@@ -255,18 +221,20 @@ class VertLabelBar extends DisplayObject {
 
 class VertLabelBars extends DisplayObject {
   // display rolling average for period length
-  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {} )
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
+                dtkChart )
   {
     super({ display:display, doName:doName, 
       x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, arc_rad:arc_rad, 
       col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
       this.fontSize = fontSize;
+      this.dtkChart = dtkChart;
   }
 
   draw(){
     super.draw();
-    let periodWindow  = chartSettings.chartWidthDays;
-    let endIndex      = chartSettings.endIndex;
+    let periodWindow  = this.dtkChart.chartSettings.chartWidthDays;
+    let endIndex      = this.dtkChart.chartSettings.endIndex;
     let startIndex    = endIndex - periodWindow;
 
     for (let pwPos = 0; pwPos < periodWindow; pwPos++){
@@ -509,7 +477,7 @@ class DataPlot extends DisplayObject {
       let dsObjConfig = { display:this.display, doName:`${y_pc}`, 
           x_pc:prevX_pc,  y_pc:prevY_pc,
           x1_pc:x_pc,     y1_pc:y_pc,          
-          col_ink:chartSettings.col_ink[this.dataSourceKey], col_bk:'white', alpha:1, fontSize:this.fontSize,
+          col_ink:this.dtkChart.chartSettings.col_ink[this.dataSourceKey], col_bk:'white', alpha:1, fontSize:this.fontSize,
           col_bbox:'cyan', dbgOn:true};
 
       // let point = new DataPoint(dsObjConfig, yVal, this.pointType);
@@ -649,22 +617,43 @@ class SummaryBar extends DisplayObject {
 
 class DtkChart extends DisplayObject { // hold curent state
   constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
-                settings )
+                settings = {} )
   {         
     super({ display:display, doName:doName, 
             x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, arc_rad:arc_rad, 
             col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn})
 
-    // this.periodWindow   = null;   // no of days in the display chart
-    // this.endIndex       = null;
-    // this.startIndex     = null;
-    // this.xIncrement_pc  = null;
-    
-    // this.dataMin        = null;
-    // this.dataMax        = null;
-    // this.yAxisMinVal    = null;    
-    // this.yAxisMaxVal    = null;
-    // this.yAxisRange     = null;
+    this.chartSettings = {
+              cnv_width: 400,       // set below TODO REMOVE on REFACTOR
+              cnv_height: 400,
+              startIndex: INDEX_START_DEFAULT,
+              endIndex:   INDEX_END_DEFAULT,
+              chartWidthDays: CHART_WIDTH_DAYS_DEFAULT,
+              selectedDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
+              fontSize: fontSize,
+              availableDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
+              col_ink: {dtk_weight: 'rgb(255, 132, 0)', 
+                        dtk_pc_fat: 'rgb(219, 0, 0)',
+                        dtk_pc_h2o: 'rgb(0, 132, 233)', 
+                        dtk_frame:  'rgb(107, 214, 0)'},
+              band_ink:{dtk_weight: { top: 'rgb(200, 140, 85)', 
+                                      bot: 'rgb(250, 190, 125)' }, 
+                        dtk_pc_fat: { top: 'rgb(160, 55, 55)',
+                                      bot: 'rgb(210, 105, 105)' },
+                        dtk_pc_h2o: { top: 'rgb(65, 130, 180)', 
+                                      bot: 'rgb(115, 180, 230)' }, 
+                        dtk_frame:  { top:  'rgb(100, 160, 60)',
+                                      bot:  'rgb(160, 210, 110)'}},
+              target_band:{ dtk_weight: { top: 95.0,  // kg
+                                          bot: 88.0 }, 
+                            dtk_pc_fat: { top: 34.0,   // %
+                                          bot: 6.0  },
+                            dtk_pc_h2o: { top: 55.0, 
+                                          bot: 45.0 }, 
+                            dtk_frame:  { top: 18.0,
+                                          bot: 22.0 } }
+    };
+    Object.assign(this.chartSettings, settings);
 
     // get ylimits of each data source so composite plots match yAxisNumbering
     this.calculateBoundaries(); // calculates above values
@@ -712,39 +701,39 @@ class DtkChart extends DisplayObject { // hold curent state
 
     dsObjConfig = { display:display, doName:'vBarS', 
                     x_pc:0, y_pc:0, w_pc:100, h_pc:100, arc_rad:0, 
-                    col_ink:'orangeRed', col_bk:col_bk, alpha:alpha, fontSize:chartSettings.fontSize, col_bbox:'purple', dbgOn:true}
-    let verticalLabelBars = new VertLabelBars(dsObjConfig);
+                    col_ink:'orangeRed', col_bk:col_bk, alpha:alpha, fontSize:this.chartSettings.fontSize, col_bbox:'purple', dbgOn:true}
+    let verticalLabelBars = new VertLabelBars(dsObjConfig, this);
     this.zList.push(verticalLabelBars);
 
 
-    for (let dsIdx = 0; dsIdx < chartSettings.selectedDataSources.length; dsIdx++) {
-      let dataSourceKey = chartSettings.selectedDataSources[dsIdx];
+    for (let dsIdx = 0; dsIdx < this.chartSettings.selectedDataSources.length; dsIdx++) {
+      let dataSourceKey = this.chartSettings.selectedDataSources[dsIdx];
 
-      let dataSourceInk = chartSettings.col_ink[dataSourceKey];
+      let dataSourceInk = this.chartSettings.col_ink[dataSourceKey];
 
       dsObjConfig = { display:display, doName:'pData', 
                       x_pc:0, y_pc:0, w_pc:100, h_pc:100, arc_rad:0, 
-                      col_ink:dataSourceInk, col_bk:col_bk, alpha:alpha, fontSize:chartSettings.fontSize,
+                      col_ink:dataSourceInk, col_bk:col_bk, alpha:alpha, fontSize:this.chartSettings.fontSize,
                       col_bbox:'purple', dbgOn:false}
 
       let singlePlot = new DataPlot(dsObjConfig, this, dataSourceKey, 'test label');
       this.zList.push(singlePlot);
 
       dsObjConfig = { display:display, doName:'tBand', 
-                      col_ink:dataSourceInk, col_bk:col_bk, alpha:1, fontSize:chartSettings.fontSize,
+                      col_ink:dataSourceInk, col_bk:col_bk, alpha:1, fontSize:this.chartSettings.fontSize,
                       col_bbox:'purple', dbgOn:false}
 
       let targetBand = new TargetBand(dsObjConfig, this, `tBand:${dataSourceKey}`,
-      chartSettings.target_band[dataSourceKey].top, chartSettings.target_band[dataSourceKey].bot,
-      chartSettings.band_ink[dataSourceKey].top, chartSettings.band_ink[dataSourceKey].bot,
-      chartSettings.band_ink[dataSourceKey].bot);
+      this.chartSettings.target_band[dataSourceKey].top, this.chartSettings.target_band[dataSourceKey].bot,
+      this.chartSettings.band_ink[dataSourceKey].top, this.chartSettings.band_ink[dataSourceKey].bot,
+      this.chartSettings.band_ink[dataSourceKey].bot);
 
       this.zList.push(targetBand);      
     }
     
     dsObjConfig = { display:display, doName:'yAxNum', 
                     x_pc:0, y_pc:0, w_pc:15, h_pc:100, arc_rad:0, 
-                    col_ink:'black', col_bk:col_bk, alpha:0.5, fontSize:chartSettings.fontSize, col_bbox:'orange', dbgOn:true}
+                    col_ink:'black', col_bk:col_bk, alpha:0.5, fontSize:this.chartSettings.fontSize, col_bbox:'orange', dbgOn:true}
     let yAxisNumbering = new YAxisNumbering(dsObjConfig, this);
     this.zList.push(yAxisNumbering);    
 
@@ -752,21 +741,21 @@ class DtkChart extends DisplayObject { // hold curent state
 
   calculateBoundaries() {
     // scan data for min & max to scale data
-    this.periodWindow   = chartSettings.chartWidthDays;    
-    this.endIndex       = chartSettings.endIndex;
+    this.periodWindow   = this.chartSettings.chartWidthDays;    
+    this.endIndex       = this.chartSettings.endIndex;
     this.startIndex     = this.endIndex - this.periodWindow;
     this.xIncrement_pc  = (100 / this.periodWindow);
 
 
-    this.dataMax      = parseFloat(dtkChartData[this.startIndex][chartSettings.selectedDataSources[0]]);
-    this.dataMin      = parseFloat(dtkChartData[this.startIndex][chartSettings.selectedDataSources[0]]);
+    this.dataMax      = parseFloat(dtkChartData[this.startIndex][this.chartSettings.selectedDataSources[0]]);
+    this.dataMin      = parseFloat(dtkChartData[this.startIndex][this.chartSettings.selectedDataSources[0]]);
     this.yAxisMaxVal  = null;
     this.yAxisMinVal  = null;
     this.yAxisRange   = null;
 
     // iterate through datasources to calculate composite limits/boundaries
-    for (let dsIdx = 0; dsIdx < chartSettings.selectedDataSources.length; dsIdx++) {
-      let dataSourceKey = chartSettings.selectedDataSources[dsIdx];
+    for (let dsIdx = 0; dsIdx < this.chartSettings.selectedDataSources.length; dsIdx++) {
+      let dataSourceKey = this.chartSettings.selectedDataSources[dsIdx];
       
       let min = parseFloat(dtkChartData[this.startIndex][dataSourceKey]);
       let max = parseFloat(dtkChartData[this.startIndex][dataSourceKey]);
@@ -841,7 +830,7 @@ class Canvas {
     this.canvas = document.createElement('canvas');
     this.canvas.width = width;
     this.canvas.height = height;
-    this.canvas.style.position = 'absolute';
+    //this.canvas.style.position = 'absolute';
     //this.canvas.style.top = "100px";
     this.canvas.style.left = "0px";    
     parent.appendChild(this.canvas);
@@ -904,25 +893,22 @@ window.addEventListener('resize', () => {
 });
 
 
-export function updateChart({cnv_width = 400, cnv_height = 400, parent = document.body, chartWidthDays = 7} = {}){
-  progressChart.update();
-}
-
-
-export function createDtkChart({cnv_width = 400, cnv_height = 400, parent = document.body, chartWidthDays = 7} = {}){
+export function createDtkChart({cnv_width = 400, cnv_height = 400, parent = document.body, chartWidthDays = 7} = {}, settings){
   const display = new Canvas(parent, cnv_width, cnv_height);
 
   display.canvas.width = window.innerWidth;
-  display.canvas.height = window.innerHeight / 2;
-  display.canvas.style.position = 'absolute';
-  display.canvas.style.left = "0px"; 
+  //display.canvas.height = window.innerHeight / 1.2;
+  //display.canvas.height = window.innerHeight / 1.2;
+  display.canvas.height = cnv_height;
+  //display.canvas.style.position = 'absolute';
+  //display.canvas.style.left = "0px"; 
 
   progressChart = new DtkChart(  
     { display: display,
       doName:'dtkProgress',
       x:0, y:0, w:cnv_width, h:cnv_height,
       col_ink:'black', col_bk:'white', alpha:'100', fontSize:10, col_bbox:'olive', dbgOn:true },
-    chartSettings ) ;
+      settings ) ;
 
   progressChart.update(); // pass in state: 7day, 14d, 21d, 1m, 3m, 6m, 1y, 2y, plus new dimensions
 

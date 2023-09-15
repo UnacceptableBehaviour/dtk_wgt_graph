@@ -1,5 +1,4 @@
-//import { collidingBalls } from './collision_canvas.js';
-import { createDtkChart, updateChart, chartSettings } from './dtk_chart.js';
+import { createDtkChart } from './dtk_chart.js';
 import { dtkChartData } from './dtk_data_process.js';
 
 // note on using import - module syntax
@@ -8,14 +7,23 @@ import { dtkChartData } from './dtk_data_process.js';
 // use .mjs in node?
 // https://exerror.com/uncaught-syntaxerror-cannot-use-import-statement-outside-a-module-when-importing-ecmascript-6/
 
-var dtkChart;
+var dtkChart1;
+var dtkChart2;
 
-console.log('createDtkChart(); - - - S');
+
 document.addEventListener('DOMContentLoaded', (e) => {
-    const divCanv = document.getElementById('weigh-in-chart-canv');
-    dtkChart = createDtkChart({width: 400, height: 400, parent: divCanv});
+    const divCanv1 = document.getElementById('weigh-in-chart-canv-1');
+    //{selectedDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o']}
+    dtkChart1 = createDtkChart({width: 400, height: 400, parent: divCanv1}, {selectedDataSources: ['dtk_pc_fat', 'dtk_pc_h2o']});
 });
-console.log('createDtkChart(); - - - E');
+
+
+document.addEventListener('DOMContentLoaded', (e) => {
+    const divCanv2 = document.getElementById('weigh-in-chart-canv-2');
+    dtkChart2 = createDtkChart({cnv_width: 300, cnv_height: 300, parent: divCanv2},{selectedDataSources: ['dtk_weight']});
+});
+
+
 
 var periodWindowButtons = document.getElementById('btn-period-window');
 periodWindowButtons.addEventListener('click', (e) => {
@@ -25,35 +33,38 @@ periodWindowButtons.addEventListener('click', (e) => {
     if (e.target.id.includes('but-win-set')){
         if (chartSettings.chartWidthDays != e.target.value){ // no repaint unless needed
             chartSettings.chartWidthDays = e.target.value;        
-            console.log(`chartSettings.chartWidthDays: ${chartSettings.chartWidthDays}`);
-            dtkChart.update(); 
+            console.log(`chSetgs.chartWidthDays: ${chartSettings.chartWidthDays}`);
+            dtkChart1.update(); 
+            dtkChart2.update(); 
         }
     }
     if (e.target.id === 'but-win-mov-fwd'){
-        console.log(`chartSettings.endIndex: ${chartSettings.endIndex} + chartSettings.chartWidthDays:${chartSettings.chartWidthDays}`);
+        console.log(`chSetgs.endIndex: ${chartSettings.endIndex} + chartSettings.chartWidthDays:${chartSettings.chartWidthDays}`);
         chartSettings.endIndex = parseInt(chartSettings.endIndex) + parseInt(chartSettings.chartWidthDays);
-        console.log(`chartSettings.endIndex AFTER ADD: ${chartSettings.endIndex}`);
+        console.log(`chSetgs.endIndex AFTER ADD: ${chartSettings.endIndex}`);
         
         if (chartSettings.endIndex > dtkChartData.length){
             chartSettings.endIndex = dtkChartData.length;
             chartSettings.startIndex = chartSettings.endIndex - chartSettings.chartWidthDays;
         }            
         
-        console.log(`chartSettings.endIndex: ${chartSettings.endIndex}`);
-        dtkChart.update();
+        console.log(`chSetgs.endIndex: ${chartSettings.endIndex}`);
+        dtkChart1.update();
+        dtkChart2.update(); 
     }
     if (e.target.id === 'but-win-mov-bak'){        
-        console.log(`chartSettings.endIndex: ${chartSettings.endIndex} + chartSettings.chartWidthDays:${chartSettings.chartWidthDays}`);
+        console.log(`chSetgs.endIndex: ${chartSettings.endIndex} + chartSettings.chartWidthDays:${chartSettings.chartWidthDays}`);
         chartSettings.endIndex = parseInt(chartSettings.endIndex) - parseInt(chartSettings.chartWidthDays);
-        console.log(`chartSettings.endIndex AFTER SUB: ${chartSettings.endIndex}`);
+        console.log(`chSetgs.endIndex AFTER SUB: ${chartSettings.endIndex}`);
 
         if (parseInt(chartSettings.startIndex) < 0 ){
             chartSettings.startIndex = 0;
             chartSettings.endIndex = chartSettings.chartWidthDays;
         }
 
-        console.log(`chartSettings.endIndex: ${chartSettings.endIndex}`);
-        dtkChart.update();
+        console.log(`chSetgs.endIndex: ${chartSettings.endIndex}`);
+        dtkChart1.update();
+        dtkChart2.update(); 
     }
 
 });
