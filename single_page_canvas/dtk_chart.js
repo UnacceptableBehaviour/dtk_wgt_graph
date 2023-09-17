@@ -893,33 +893,9 @@ window.addEventListener('resize', () => {
 });
 
 
-export function createDtkChart({cnv_width = 400, cnv_height = 400, parent = document.body, chartWidthDays = 7} = {}, settings){
-  const display = new Canvas(parent, cnv_width, cnv_height);
-
-  display.canvas.width = window.innerWidth;
-  display.canvas.height = cnv_height;
-
-  progressChart = new DtkChart(  
-    { display: display,
-      doName:'dtkProgress',
-      x:0, y:0, w:cnv_width, h:cnv_height,
-      col_ink:'black', col_bk:'white', alpha:'100', fontSize:10, col_bbox:'olive', dbgOn:true },
-      settings ) ;
-
-  progressChart.update(); // pass in state: 7day, 14d, 21d, 1m, 3m, 6m, 1y, 2y, plus new dimensions
-
-  // runAnimation(time => {
-  //   // pass in state: 7day, 14d, 21d, 1m, 3m, 6m, 1y, 2y
-  //   progressChart.update();
-  //   display.sync();  
-  // });
-  return progressChart;
-};
 
 
-
-
-class DtkChartWithControls { 
+export class DtkChartWithControls { 
   constructor( chartName, parentDivId, settings = {} )
   {
     // TODO get settings
@@ -1046,14 +1022,5 @@ class DtkChartWithControls {
       }
   };
 }
-
-export function createDtkChartWithControls(chartName, parentDivId, settings = {}){
-
-  const chartWithControls = new DtkChartWithControls( chartName, parentDivId, settings );
-  
-
-  return chartWithControls;
-};
-
 
 

@@ -1,4 +1,4 @@
-import { createDtkChart, createDtkChartWithControls } from './dtk_chart.js';
+import { DtkChartWithControls } from './dtk_chart.js';
 import { dtkChartData } from './dtk_data_process.js';
 
 // note on using import - module syntax
@@ -7,76 +7,24 @@ import { dtkChartData } from './dtk_data_process.js';
 // use .mjs in node?
 // https://exerror.com/uncaught-syntaxerror-cannot-use-import-statement-outside-a-module-when-importing-ecmascript-6/
 
-var dtkChart1;
-var dtkClip;
-var dtkCh20;
-var dtkCwgt;
-
-
-document.addEventListener('DOMContentLoaded', (e) => {
-    const divCanv1 = document.getElementById('chartname-dtk-chart-canv');
-    // {selectedDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o']}
-    dtkChart1 = createDtkChart({width: 400, height: 400, parent: divCanv1}, {selectedDataSources: ['dtk_pc_fat', 'dtk_pc_h2o']});
-});
-
 
 document.addEventListener('DOMContentLoaded', (e) => {    
-    dtkClip = createDtkChartWithControls("wic-lip", "weigh-in-chart", {selectedDataSources: ['dtk_pc_fat']});
+    //new DtkChartWithControls( chartName, parentDivId, settings );
+    const dtkClip = new DtkChartWithControls( "wic-lip", "weigh-in-chart", {selectedDataSources: ['dtk_pc_fat']} );
 });
 
 document.addEventListener('DOMContentLoaded', (e) => {    
-    dtkCh20 = createDtkChartWithControls("wic-h2o", "weigh-in-chart", {selectedDataSources: ['dtk_pc_h2o']});
+    const dtkCh20 = new DtkChartWithControls( "wic-h2o", "weigh-in-chart", {selectedDataSources: ['dtk_pc_h2o']} );
 });
 
 document.addEventListener('DOMContentLoaded', (e) => {    
-    dtkCwgt = createDtkChartWithControls("wic-wgt", "weigh-in-chart", {selectedDataSources: ['dtk_weight']});
+    const dtkCwgt = new DtkChartWithControls( "wic-wgt", "weigh-in-chart", {selectedDataSources: ['dtk_weight']} );
 });
 
 document.addEventListener('DOMContentLoaded', (e) => {    
-    const dtkCw = createDtkChartWithControls("wic-tur", "weigh-in-chart", {selectedDataSources: ['dtk_weight','dtk_pc_h2o']});
+    const dtkCw = new DtkChartWithControls( "wic-tur", "weigh-in-chart", {selectedDataSources: ['dtk_weight','dtk_pc_h2o']} );
 });
 
-
-var periodWindowButtons = document.getElementById('chartname-btn-period-window');
-periodWindowButtons.addEventListener('click', (e) => {
-    console.log(`periodWindowButtons: ${e.target.id}`);
-    console.log(e.target.value);
-    console.log(e);
-    if (e.target.id.includes('but-win-set')){
-        if (dtkChart1.chartSettings.chartWidthDays != e.target.value){ // no repaint unless needed
-            dtkChart1.chartSettings.chartWidthDays = e.target.value;        
-            console.log(`chSetgs.chartWidthDays: ${dtkChart1.chartSettings.chartWidthDays}`);
-            dtkChart1.update(); 
-        }
-    }
-    if (e.target.id === 'chartname-but-win-mov-fwd'){
-        console.log(`chSetgs.endIndex: ${dtkChart1.chartSettings.endIndex} + dtkChart1.chartSettings.chartWidthDays:${dtkChart1.chartSettings.chartWidthDays}`);
-        dtkChart1.chartSettings.endIndex = parseInt(dtkChart1.chartSettings.endIndex) + parseInt(dtkChart1.chartSettings.chartWidthDays);
-        console.log(`chSetgs.endIndex AFTER ADD: ${dtkChart1.chartSettings.endIndex}`);
-        
-        if (dtkChart1.chartSettings.endIndex > dtkChartData.length){
-            dtkChart1.chartSettings.endIndex = dtkChartData.length;
-            dtkChart1.chartSettings.startIndex = dtkChart1.chartSettings.endIndex - dtkChart1.chartSettings.chartWidthDays;
-        }            
-        
-        console.log(`chSetgs.endIndex: ${dtkChart1.chartSettings.endIndex}`);
-        dtkChart1.update(); 
-    }
-    if (e.target.id === 'chartname-but-win-mov-bak'){        
-        console.log(`chSetgs.endIndex: ${dtkChart1.chartSettings.endIndex} + dtkChart1.chartSettings.chartWidthDays:${dtkChart1.chartSettings.chartWidthDays}`);
-        dtkChart1.chartSettings.endIndex = parseInt(dtkChart1.chartSettings.endIndex) - parseInt(dtkChart1.chartSettings.chartWidthDays);
-        console.log(`chSetgs.endIndex AFTER SUB: ${dtkChart1.chartSettings.endIndex}`);
-
-        if (parseInt(dtkChart1.chartSettings.startIndex) < 0 ){
-            dtkChart1.chartSettings.startIndex = 0;
-            dtkChart1.chartSettings.endIndex = dtkChart1.chartSettings.chartWidthDays;
-        }
-
-        console.log(`chSetgs.endIndex: ${dtkChart1.chartSettings.endIndex}`);
-        dtkChart1.update();
-    }
-
-});
 
 
 // So FOUR ways to schedule work:
