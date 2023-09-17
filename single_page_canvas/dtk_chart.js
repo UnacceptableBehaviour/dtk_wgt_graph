@@ -810,7 +810,7 @@ class DtkChart extends DisplayObject { // hold curent state
     // Resize the canvas to the new dimensions
     this.display.canvas.width = winInnerWidth;
     this.display.canvas.height = winInnerHeight / 2;
-    this.display.canvas.style.position = 'absolute';
+    //this.display.canvas.style.position = 'absolute';
     this.display.canvas.style.left = "0px";        
     this.update();
   }
@@ -915,5 +915,145 @@ export function createDtkChart({cnv_width = 400, cnv_height = 400, parent = docu
   // });
   return progressChart;
 };
+
+
+
+
+class DtkChartWithControls { 
+  constructor( chartName, parentDivId, settings = {} )
+  {
+    // TODO get settings
+    settings.cnv_width = 400;
+    settings.cnv_height = 400;
+    
+    // create html - controls
+    this.canvasDivId = `${chartName}-dtk-chart-canv`;
+    this.createChartHtml(chartName, parentDivId);
+
+    // add chart
+    this.parentDivId = parentDivId;     
+    console.log(`DtkChartWithControls: N:${this.chartName} C:${this.canvasDivId} P:${this.parentDivId}`)
+
+    const canvasParent = document.getElementById(this.canvasDivId);
+    this.display = new Canvas(canvasParent, settings.cnv_width, settings.cnv_height);
+    this.display.canvas.width = window.innerWidth;
+    this.display.canvas.height = settings.cnv_height;
+
+    this.dtkChart = new DtkChart(  
+      { display: this.display,
+        doName:'dtkProgress',
+        x:0, y:0, w:settings.cnv_width, h:settings.cnv_height,
+        col_ink:'black', col_bk:'white', alpha:'100', fontSize:10, col_bbox:'olive', dbgOn:true },
+        settings ) ;
+
+    this.dtkChart.update(); // pass in state: 7day, 14d, 21d, 1m, 3m, 6m, 1y, 2y, plus new dimensions
+
+    var periodWindowButtons = document.getElementById(`${chartName}-btn-period-window`);
+    periodWindowButtons.addEventListener('click', (e) => this.processUIEvents(e));
+
+    window.addEventListener('resize', () => {
+      // TODO use flag to RAF() scheduling
+      this.dtkChart.resizeCanvas()
+      // if (rafScheduled == false) {
+      //   rafScheduled = true;
+      //   requestAnimationFrame(progressChart.resizeCanvas);
+      // }
+    });
+  
+    // runAnimation(time => {
+    //   // pass in state: 7day, 14d, 21d, 1m, 3m, 6m, 1y, 2y
+    //   this.dtkChart.update();
+    //   display.sync();  
+    // });
+
+  }
+
+  createChartHtml(chartName, parent) {
+    this.chartName = chartName.toLowerCase();
+    var html = `
+    <div id="${this.chartName}-btn-period-window" class="d-inline-flex w-100">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary period-window">
+                <input type="radio" name="options" value="7" id="${this.chartName}-but-win-set-7d" autocomplete="off">7D
+            </label>
+            <label class="btn btn-secondary period-window">
+                <input type="radio" name="options" value="14" id="${this.chartName}-but-win-set-14d" autocomplete="off">14D
+            </label>
+            <label class="btn btn-secondary period-window">
+                <input type="radio" name="options" value="28" id="${this.chartName}-but-win-set-28d" autocomplete="off">1M
+            </label>
+            <label class="btn btn-secondary period-window">
+                <input type="radio" name="options" value="88" id="${this.chartName}-but-win-set-3m" autocomplete="off">3M
+            </label>
+            <label class="btn btn-secondary period-window">
+                <input type="radio" name="options" value="176" id="${this.chartName}-but-win-set-6m" autocomplete="off">6M
+            </label>
+            <label class="btn btn-secondary period-window">
+                <input type="radio" name="options" value="0" id="${this.chartName}-but-win-set-0" autocomplete="off">All
+            </label>
+        </div>
+        <inline class="bt-nav-space"></inline>
+        <div class="btn-group ml-3">
+            <button id="${this.chartName}-but-win-mov-bak" type="button" class="btn btn-outline-secondary"><</button>
+            <button id="${this.chartName}-but-win-mov-fwd" type="button" class="btn btn-outline-secondary">></button>
+        </div>
+    </div>
+    <div id="${this.canvasDivId}"></div>`;
+
+    var div = document.createElement('div');
+    div.id = `${this.chartName}-chrt-cont`;
+    div.innerHTML = html;
+    //document.getElementById(parent).appendChild(div.firstChild);
+    document.getElementById(parent).appendChild(div);
+  }
+
+  processUIEvents(e) {
+      console.log(`periodWindowButtons: ${e.target.id}`);
+      console.log(e.target.value);
+      console.log(e);
+      if (e.target.id.includes('but-win-set')){
+          if (this.dtkChart.chartSettings.chartWidthDays != e.target.value){ // no repaint unless needed
+              this.dtkChart.chartSettings.chartWidthDays = e.target.value;        
+              console.log(`chSetgs.chartWidthDays: ${this.dtkChart.chartSettings.chartWidthDays}`);
+              this.dtkChart.update(); 
+          }
+      }
+      if (e.target.id === `${this.chartName}-but-win-mov-fwd`){
+          console.log(`chSetgs.endIndex: ${this.dtkChart.chartSettings.endIndex} + this.dtkChart.chartSettings.chartWidthDays:${this.dtkChart.chartSettings.chartWidthDays}`);
+          this.dtkChart.chartSettings.endIndex = parseInt(this.dtkChart.chartSettings.endIndex) + parseInt(this.dtkChart.chartSettings.chartWidthDays);
+          console.log(`chSetgs.endIndex AFTER ADD: ${this.dtkChart.chartSettings.endIndex}`);
+          
+          if (this.dtkChart.chartSettings.endIndex > dtkChartData.length){
+              this.dtkChart.chartSettings.endIndex = dtkChartData.length;
+              this.dtkChart.chartSettings.startIndex = this.dtkChart.chartSettings.endIndex - this.dtkChart.chartSettings.chartWidthDays;
+          }            
+          
+          console.log(`chSetgs.endIndex: ${this.dtkChart.chartSettings.endIndex}`);
+          this.dtkChart.update(); 
+      }
+      if (e.target.id === `${this.chartName}-but-win-mov-bak`){        
+          console.log(`chSetgs.endIndex: ${this.dtkChart.chartSettings.endIndex} + this.dtkChart.chartSettings.chartWidthDays:${this.dtkChart.chartSettings.chartWidthDays}`);
+          this.dtkChart.chartSettings.endIndex = parseInt(this.dtkChart.chartSettings.endIndex) - parseInt(this.dtkChart.chartSettings.chartWidthDays);
+          console.log(`chSetgs.endIndex AFTER SUB: ${this.dtkChart.chartSettings.endIndex}`);
+  
+          if (parseInt(this.dtkChart.chartSettings.startIndex) < 0 ){
+              this.dtkChart.chartSettings.startIndex = 0;
+              this.dtkChart.chartSettings.endIndex = this.dtkChart.chartSettings.chartWidthDays;
+          }
+  
+          console.log(`chSetgs.endIndex: ${this.dtkChart.chartSettings.endIndex}`);
+          this.dtkChart.update();
+      }
+  };
+}
+
+export function createDtkChartWithControls(chartName, parentDivId, settings = {}){
+
+  const chartWithControls = new DtkChartWithControls( chartName, parentDivId, settings );
+  
+
+  return chartWithControls;
+};
+
 
 

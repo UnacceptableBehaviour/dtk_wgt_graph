@@ -1,4 +1,4 @@
-import { createDtkChart } from './dtk_chart.js';
+import { createDtkChart, createDtkChartWithControls } from './dtk_chart.js';
 import { dtkChartData } from './dtk_data_process.js';
 
 // note on using import - module syntax
@@ -8,24 +8,36 @@ import { dtkChartData } from './dtk_data_process.js';
 // https://exerror.com/uncaught-syntaxerror-cannot-use-import-statement-outside-a-module-when-importing-ecmascript-6/
 
 var dtkChart1;
-var dtkChart2;
+var dtkClip;
+var dtkCh20;
+var dtkCwgt;
 
 
 document.addEventListener('DOMContentLoaded', (e) => {
-    const divCanv1 = document.getElementById('weigh-in-chart-canv-1');
-    //{selectedDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o']}
+    const divCanv1 = document.getElementById('chartname-dtk-chart-canv');
+    // {selectedDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o']}
     dtkChart1 = createDtkChart({width: 400, height: 400, parent: divCanv1}, {selectedDataSources: ['dtk_pc_fat', 'dtk_pc_h2o']});
 });
 
 
-document.addEventListener('DOMContentLoaded', (e) => {
-    const divCanv2 = document.getElementById('weigh-in-chart-canv-2');
-    dtkChart2 = createDtkChart({cnv_width: 300, cnv_height: 300, parent: divCanv2},{selectedDataSources: ['dtk_weight']});
+document.addEventListener('DOMContentLoaded', (e) => {    
+    dtkClip = createDtkChartWithControls("wic-lip", "weigh-in-chart", {selectedDataSources: ['dtk_pc_fat']});
+});
+
+document.addEventListener('DOMContentLoaded', (e) => {    
+    dtkCh20 = createDtkChartWithControls("wic-h2o", "weigh-in-chart", {selectedDataSources: ['dtk_pc_h2o']});
+});
+
+document.addEventListener('DOMContentLoaded', (e) => {    
+    dtkCwgt = createDtkChartWithControls("wic-wgt", "weigh-in-chart", {selectedDataSources: ['dtk_weight']});
+});
+
+document.addEventListener('DOMContentLoaded', (e) => {    
+    const dtkCw = createDtkChartWithControls("wic-tur", "weigh-in-chart", {selectedDataSources: ['dtk_weight','dtk_pc_h2o']});
 });
 
 
-
-var periodWindowButtons = document.getElementById('btn-period-window');
+var periodWindowButtons = document.getElementById('chartname-btn-period-window');
 periodWindowButtons.addEventListener('click', (e) => {
     console.log(`periodWindowButtons: ${e.target.id}`);
     console.log(e.target.value);
@@ -35,10 +47,9 @@ periodWindowButtons.addEventListener('click', (e) => {
             dtkChart1.chartSettings.chartWidthDays = e.target.value;        
             console.log(`chSetgs.chartWidthDays: ${dtkChart1.chartSettings.chartWidthDays}`);
             dtkChart1.update(); 
-            dtkChart2.update(); 
         }
     }
-    if (e.target.id === 'but-win-mov-fwd'){
+    if (e.target.id === 'chartname-but-win-mov-fwd'){
         console.log(`chSetgs.endIndex: ${dtkChart1.chartSettings.endIndex} + dtkChart1.chartSettings.chartWidthDays:${dtkChart1.chartSettings.chartWidthDays}`);
         dtkChart1.chartSettings.endIndex = parseInt(dtkChart1.chartSettings.endIndex) + parseInt(dtkChart1.chartSettings.chartWidthDays);
         console.log(`chSetgs.endIndex AFTER ADD: ${dtkChart1.chartSettings.endIndex}`);
@@ -49,10 +60,9 @@ periodWindowButtons.addEventListener('click', (e) => {
         }            
         
         console.log(`chSetgs.endIndex: ${dtkChart1.chartSettings.endIndex}`);
-        dtkChart1.update();
-        dtkChart2.update(); 
+        dtkChart1.update(); 
     }
-    if (e.target.id === 'but-win-mov-bak'){        
+    if (e.target.id === 'chartname-but-win-mov-bak'){        
         console.log(`chSetgs.endIndex: ${dtkChart1.chartSettings.endIndex} + dtkChart1.chartSettings.chartWidthDays:${dtkChart1.chartSettings.chartWidthDays}`);
         dtkChart1.chartSettings.endIndex = parseInt(dtkChart1.chartSettings.endIndex) - parseInt(dtkChart1.chartSettings.chartWidthDays);
         console.log(`chSetgs.endIndex AFTER SUB: ${dtkChart1.chartSettings.endIndex}`);
@@ -64,7 +74,6 @@ periodWindowButtons.addEventListener('click', (e) => {
 
         console.log(`chSetgs.endIndex: ${dtkChart1.chartSettings.endIndex}`);
         dtkChart1.update();
-        dtkChart2.update(); 
     }
 
 });
