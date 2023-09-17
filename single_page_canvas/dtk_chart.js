@@ -897,11 +897,7 @@ export function createDtkChart({cnv_width = 400, cnv_height = 400, parent = docu
   const display = new Canvas(parent, cnv_width, cnv_height);
 
   display.canvas.width = window.innerWidth;
-  //display.canvas.height = window.innerHeight / 1.2;
-  //display.canvas.height = window.innerHeight / 1.2;
   display.canvas.height = cnv_height;
-  //display.canvas.style.position = 'absolute';
-  //display.canvas.style.left = "0px"; 
 
   progressChart = new DtkChart(  
     { display: display,

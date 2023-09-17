@@ -31,38 +31,38 @@ periodWindowButtons.addEventListener('click', (e) => {
     console.log(e.target.value);
     console.log(e);
     if (e.target.id.includes('but-win-set')){
-        if (chartSettings.chartWidthDays != e.target.value){ // no repaint unless needed
-            chartSettings.chartWidthDays = e.target.value;        
-            console.log(`chSetgs.chartWidthDays: ${chartSettings.chartWidthDays}`);
+        if (dtkChart1.chartSettings.chartWidthDays != e.target.value){ // no repaint unless needed
+            dtkChart1.chartSettings.chartWidthDays = e.target.value;        
+            console.log(`chSetgs.chartWidthDays: ${dtkChart1.chartSettings.chartWidthDays}`);
             dtkChart1.update(); 
             dtkChart2.update(); 
         }
     }
     if (e.target.id === 'but-win-mov-fwd'){
-        console.log(`chSetgs.endIndex: ${chartSettings.endIndex} + chartSettings.chartWidthDays:${chartSettings.chartWidthDays}`);
-        chartSettings.endIndex = parseInt(chartSettings.endIndex) + parseInt(chartSettings.chartWidthDays);
-        console.log(`chSetgs.endIndex AFTER ADD: ${chartSettings.endIndex}`);
+        console.log(`chSetgs.endIndex: ${dtkChart1.chartSettings.endIndex} + dtkChart1.chartSettings.chartWidthDays:${dtkChart1.chartSettings.chartWidthDays}`);
+        dtkChart1.chartSettings.endIndex = parseInt(dtkChart1.chartSettings.endIndex) + parseInt(dtkChart1.chartSettings.chartWidthDays);
+        console.log(`chSetgs.endIndex AFTER ADD: ${dtkChart1.chartSettings.endIndex}`);
         
-        if (chartSettings.endIndex > dtkChartData.length){
-            chartSettings.endIndex = dtkChartData.length;
-            chartSettings.startIndex = chartSettings.endIndex - chartSettings.chartWidthDays;
+        if (dtkChart1.chartSettings.endIndex > dtkChartData.length){
+            dtkChart1.chartSettings.endIndex = dtkChartData.length;
+            dtkChart1.chartSettings.startIndex = dtkChart1.chartSettings.endIndex - dtkChart1.chartSettings.chartWidthDays;
         }            
         
-        console.log(`chSetgs.endIndex: ${chartSettings.endIndex}`);
+        console.log(`chSetgs.endIndex: ${dtkChart1.chartSettings.endIndex}`);
         dtkChart1.update();
         dtkChart2.update(); 
     }
     if (e.target.id === 'but-win-mov-bak'){        
-        console.log(`chSetgs.endIndex: ${chartSettings.endIndex} + chartSettings.chartWidthDays:${chartSettings.chartWidthDays}`);
-        chartSettings.endIndex = parseInt(chartSettings.endIndex) - parseInt(chartSettings.chartWidthDays);
-        console.log(`chSetgs.endIndex AFTER SUB: ${chartSettings.endIndex}`);
+        console.log(`chSetgs.endIndex: ${dtkChart1.chartSettings.endIndex} + dtkChart1.chartSettings.chartWidthDays:${dtkChart1.chartSettings.chartWidthDays}`);
+        dtkChart1.chartSettings.endIndex = parseInt(dtkChart1.chartSettings.endIndex) - parseInt(dtkChart1.chartSettings.chartWidthDays);
+        console.log(`chSetgs.endIndex AFTER SUB: ${dtkChart1.chartSettings.endIndex}`);
 
-        if (parseInt(chartSettings.startIndex) < 0 ){
-            chartSettings.startIndex = 0;
-            chartSettings.endIndex = chartSettings.chartWidthDays;
+        if (parseInt(dtkChart1.chartSettings.startIndex) < 0 ){
+            dtkChart1.chartSettings.startIndex = 0;
+            dtkChart1.chartSettings.endIndex = dtkChart1.chartSettings.chartWidthDays;
         }
 
-        console.log(`chSetgs.endIndex: ${chartSettings.endIndex}`);
+        console.log(`chSetgs.endIndex: ${dtkChart1.chartSettings.endIndex}`);
         dtkChart1.update();
         dtkChart2.update(); 
     }
