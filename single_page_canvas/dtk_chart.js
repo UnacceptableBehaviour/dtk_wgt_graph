@@ -4,8 +4,6 @@ const CHART_WIDTH_DAYS_DEFAULT = 7;
 const INDEX_END_DEFAULT = parseInt(dtkChartData.length);
 const INDEX_START_DEFAULT = parseInt(INDEX_END_DEFAULT - CHART_WIDTH_DAYS_DEFAULT);
 
-var progressChart;
-
 class DisplayObject {
   constructor({display, doName, x_pc, y_pc, w_pc, h_pc, x1_pc, y1_pc, radius_pc, arc_rad, col_ink, col_bk, alpha, fontSize=10, col_bbox='magenta', dbgOn=true} = {}){
 		this.display = display;
@@ -622,7 +620,8 @@ class DtkChart extends DisplayObject { // hold curent state
     super({ display:display, doName:doName, 
             x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, arc_rad:arc_rad, 
             col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn})
-
+    
+    this.rafScheduled = false;
     this.chartSettings = {
               cnv_width: 400,       // set below TODO REMOVE on REFACTOR
               cnv_height: 400,
@@ -828,6 +827,7 @@ class DtkChart extends DisplayObject { // hold curent state
     //this.display.canvas.style.position = 'absolute';
     this.display.canvas.style.left = "0px";        
     this.update();
+    this.rafScheduled = false;
   }
 
   addDisplayObject(dspObj){
@@ -896,20 +896,6 @@ const runAnimation = animation => {
 };
 
 
-var rafScheduled = false;
-window.addEventListener('resize', () => {
-  // Perform actions in response to window resize
-  //console.log('Window was resized');
-  progressChart.resizeCanvas()
-  // if (rafScheduled == false) {
-  //   rafScheduled = true;
-  //   requestAnimationFrame(progressChart.resizeCanvas);
-  // }
-});
-
-
-
-
 export class DtkChartWithControls { 
   constructor( chartName, parentDivId, settings = {} )
   {
@@ -942,20 +928,16 @@ export class DtkChartWithControls {
     var periodWindowButtons = document.getElementById(`${chartName}-btn-period-window`);
     periodWindowButtons.addEventListener('click', (e) => this.processUIEvents(e));
 
+    // When you pass rafResizeCanvas to requestAnimationFrame, it’s being called without the context of 
+    // DtkChartWithControls instance, so this inside resizeCanvas doesn’t refer to the DtkChart - bind(the object!)
+    const rafResizeCanvas = this.dtkChart.resizeCanvas.bind(this.dtkChart);
+
     window.addEventListener('resize', () => {
-      // TODO use flag to RAF() scheduling
-      this.dtkChart.resizeCanvas()
-      // if (rafScheduled == false) {
-      //   rafScheduled = true;
-      //   requestAnimationFrame(progressChart.resizeCanvas);
-      // }
+      if (this.dtkChart.rafScheduled === false) {
+        this.dtkChart.rafScheduled = true;
+        requestAnimationFrame(rafResizeCanvas);
+      }
     });
-  
-    // runAnimation(time => {
-    //   // pass in state: 7day, 14d, 21d, 1m, 3m, 6m, 1y, 2y
-    //   this.dtkChart.update();
-    //   display.sync();  
-    // });
 
   }
 
