@@ -933,6 +933,8 @@ export class DtkChartWithControls {
     const rafResizeCanvas = this.dtkChart.resizeCanvas.bind(this.dtkChart);
 
     window.addEventListener('resize', () => {
+      //rafResizeCanvas();              // work is bind is used above
+      //this.dtkChart.resizeCanvas();   // works because arrow function uses this from external context - 'lexically bound'
       if (this.dtkChart.rafScheduled === false) {
         this.dtkChart.rafScheduled = true;
         requestAnimationFrame(rafResizeCanvas);
