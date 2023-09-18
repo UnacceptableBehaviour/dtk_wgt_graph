@@ -629,26 +629,39 @@ class DtkChart extends DisplayObject { // hold curent state
               startIndex: INDEX_START_DEFAULT,
               endIndex:   INDEX_END_DEFAULT,
               chartWidthDays: CHART_WIDTH_DAYS_DEFAULT,
-              selectedDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
+              selectedDataSources: ['dtk_weight', 'dtk_kg_fat', 'dtk_kg_h2o'],
               fontSize: fontSize,
-              availableDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o'],
-              col_ink: {dtk_weight: 'rgb(255, 132, 0)', 
-                        dtk_pc_fat: 'rgb(219, 0, 0)',
-                        dtk_pc_h2o: 'rgb(0, 132, 233)', 
-                        dtk_frame:  'rgb(107, 214, 0)'},
+              availableDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o', 'dtk_kg_fat', 'dtk_kg_h2o'],
+              col_ink: {dtk_weight:     'rgb(255, 132, 0)', 
+                        dtk_weight_av7: 'rgba(255, 221, 0, 0.749)', 
+                        dtk_pc_fat:     'rgb(219, 0, 84)',                        
+                        dtk_kg_fat:     'rgb(219, 0, 0)',
+                        dtk_kg_fat_av7: 'rgb(219, 0, 84)',                        
+                        dtk_pc_h2o:     'rgb(0, 214, 233)', 
+                        dtk_kg_h2o:     'rgb(0, 132, 233)', 
+                        dtk_kg_h2o_av7: 'rgb(0, 214, 233)',                         
+                        dtk_frame:      'rgb(107, 214, 0)'},
               band_ink:{dtk_weight: { top: 'rgb(200, 140, 85)', 
                                       bot: 'rgb(250, 190, 125)' }, 
-                        dtk_pc_fat: { top: 'rgb(160, 55, 55)',
+                        // dtk_pc_fat: { top: 'rgb(160, 55, 55)',
+                        //               bot: 'rgb(210, 105, 105)' },
+                        dtk_kg_fat: { top: 'rgb(160, 55, 55)',
                                       bot: 'rgb(210, 105, 105)' },
-                        dtk_pc_h2o: { top: 'rgb(65, 130, 180)', 
+                        // dtk_pc_h2o: { top: 'rgb(65, 130, 180)', 
+                        //               bot: 'rgb(115, 180, 230)' },                         
+                        dtk_kg_h2o: { top: 'rgb(65, 130, 180)', 
                                       bot: 'rgb(115, 180, 230)' }, 
                         dtk_frame:  { top:  'rgb(100, 160, 60)',
                                       bot:  'rgb(160, 210, 110)'}},
               target_band:{ dtk_weight: { top: 95.0,  // kg
                                           bot: 88.0 }, 
-                            dtk_pc_fat: { top: 34.0,   // %
-                                          bot: 6.0  },
-                            dtk_pc_h2o: { top: 55.0, 
+                            // dtk_pc_fat: { top: 16.0,   // %
+                            //               bot: 10.0  },
+                            dtk_kg_fat: { top: 15.2,   // kg
+                                          bot: 8.8  },
+                            // dtk_pc_h2o: { top: 55.0, 
+                            //               bot: 45.0 }, 
+                            dtk_kg_h2o: { top: 55.0, 
                                           bot: 45.0 }, 
                             dtk_frame:  { top: 18.0,
                                           bot: 22.0 } }
@@ -719,16 +732,18 @@ class DtkChart extends DisplayObject { // hold curent state
       let singlePlot = new DataPlot(dsObjConfig, this, dataSourceKey, 'test label');
       this.zList.push(singlePlot);
 
-      dsObjConfig = { display:display, doName:'tBand', 
-                      col_ink:dataSourceInk, col_bk:col_bk, alpha:1, fontSize:this.chartSettings.fontSize,
-                      col_bbox:'purple', dbgOn:false}
+      if (dataSourceKey in this.chartSettings.target_band) { // add the target band
+        dsObjConfig = { display:display, doName:'tBand', 
+                        col_ink:dataSourceInk, col_bk:col_bk, alpha:1, fontSize:this.chartSettings.fontSize,
+                        col_bbox:'purple', dbgOn:false}
 
-      let targetBand = new TargetBand(dsObjConfig, this, `tBand:${dataSourceKey}`,
-      this.chartSettings.target_band[dataSourceKey].top, this.chartSettings.target_band[dataSourceKey].bot,
-      this.chartSettings.band_ink[dataSourceKey].top, this.chartSettings.band_ink[dataSourceKey].bot,
-      this.chartSettings.band_ink[dataSourceKey].bot);
+        let targetBand = new TargetBand(dsObjConfig, this, `tBand:${dataSourceKey}`,
+        this.chartSettings.target_band[dataSourceKey].top, this.chartSettings.target_band[dataSourceKey].bot,
+        this.chartSettings.band_ink[dataSourceKey].top, this.chartSettings.band_ink[dataSourceKey].bot,
+        this.chartSettings.band_ink[dataSourceKey].bot);
 
-      this.zList.push(targetBand);      
+        this.zList.push(targetBand);
+      }
     }
     
     dsObjConfig = { display:display, doName:'yAxNum', 
@@ -761,8 +776,8 @@ class DtkChart extends DisplayObject { // hold curent state
       let max = parseFloat(dtkChartData[this.startIndex][dataSourceKey]);
       
       for (let i = this.startIndex; i < this.endIndex; i++){
-        console.log(`[i]: [${i}] <`);
-        console.log(dtkChartData[i]);
+        // console.log(`[i]: [${i}] <`);
+        // console.log(dtkChartData[i]);
         let dataPoint = parseFloat(dtkChartData[i][dataSourceKey]);
         if (min > dataPoint) min = dataPoint;
         if (max < dataPoint) max = dataPoint;

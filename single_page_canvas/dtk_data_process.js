@@ -60,7 +60,7 @@ function gapsFilledWithSyntheticBlank(data){
 }
 
 // interpolate data from start/end points of gap
-function addRollingAverageData(){
+function addInterpolatedDataToGaps(){
     console.log(`adding rolling average data - BEFORE: [${Object.keys(dtkTestRecord).length}]`);
     const data = gapsFilledWithSyntheticBlank(dtkTestRecord); // 
     console.log(data);
@@ -121,9 +121,77 @@ function addRollingAverageData(){
     return result;
 }
 
+function addH2OFatInKGtoDataPointsARRAY() {
+    let data = addInterpolatedDataToGaps();
+
+    return data.map(item => {
+        let weight = parseFloat(item.dtk_weight);
+        let pc_fat = parseFloat(item.dtk_pc_fat);
+        let pc_h2o = parseFloat(item.dtk_pc_h2o);
+        
+        item.dtk_kg_fat = (pc_fat / 100 * weight).toFixed(1);
+        item.dtk_kg_h2o = (pc_h2o / 100 * weight).toFixed(1);
+        
+        return item;
+    });
+}
+
+function addH2OFatInKGtoDataPointsOBJECT() {
+    let data = addInterpolatedDataToGaps();
+
+    for (let key in data) {
+        let item = data[key];
+        let weight = parseFloat(item.dtk_weight);
+        let pc_fat = parseFloat(item.dtk_pc_fat);
+        let pc_h2o = parseFloat(item.dtk_pc_h2o);
+        
+        item.dtk_kg_fat = (pc_fat / 100 * weight).toFixed(1);
+        item.dtk_kg_h2o = (pc_h2o / 100 * weight).toFixed(1);
+    }
+    return data;
+}
+
+
+// TODO create some test data for this - ESP: start of / end of set
+function add7DayRollingAverages() {
+    let data = addH2OFatInKGtoDataPointsOBJECT();
+
+    let keysToAverage = ["dtk_pc_fat", "dtk_pc_h2o", "dtk_weight", "dtk_kg_fat", "dtk_kg_h2o"];
+    let sortedKeys = Object.keys(data).sort();
+    
+    for (let i = 0; i < sortedKeys.length; i++) {
+        let item = data[sortedKeys[i]];
+        
+        for (let key of keysToAverage) {
+            let sum = 0;
+            let count = 0;
+            
+            for (let j = i - 1; j >= 0 && j >= i - 7; j--) {
+                let prevItem = data[sortedKeys[j]];
+                
+                if (prevItem[key]) {
+                    sum += parseFloat(prevItem[key]);
+                    count++;
+                }
+            }
+            
+            if (count > 0) {
+                item[key + "_av7"] = (sum / count).toFixed(1);
+            }
+        }
+    }
+    
+    return data;
+}
+
+
+
+
+
 function processDataSet(){
     console.log(`processDataSet - [${Object.keys(dtkTestRecord).length}]`);
-    let data = addRollingAverageData();
+    //let data = addH2OFatInKGtoDataPointsOBJECT();
+    let data = add7DayRollingAverages();
 
     const sortedArray = Object.keys(data)
     .sort((a, b) => a - b)
