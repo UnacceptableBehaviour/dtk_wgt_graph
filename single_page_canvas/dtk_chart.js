@@ -5,7 +5,7 @@ const INDEX_END_DEFAULT = parseInt(dtkChartData.length);
 const INDEX_START_DEFAULT = parseInt(INDEX_END_DEFAULT - CHART_WIDTH_DAYS_DEFAULT);
 
 class DisplayObject {
-  constructor({display, doName, x_pc, y_pc, w_pc, h_pc, x1_pc, y1_pc, radius_pc, arc_rad, col_ink, col_bk, alpha, fontSize=10, col_bbox='magenta', dbgOn=true} = {}){
+  constructor({display, doName, x_pc, y_pc, w_pc, h_pc, x1_pc, y1_pc, radius_pc, arc_rad, col_ink, col_bk, alpha, fontSize=10, col_bbox='magenta', dbgOn=false} = {}){
 		this.display = display;
     this.ctx = this.display.canvas.getContext("2d");
     this.doName = doName;
@@ -340,6 +340,7 @@ class YAxisNumbering extends DisplayObject {
 
 
 class DataPoint extends DisplayObject {
+  static NONE     = 0;
   static CIRCLE   = 1;
   static SQUARE   = 2;
   static DIAMOND  = 3;
@@ -364,8 +365,9 @@ class DataPoint extends DisplayObject {
     super.draw(); // scale x_pc,y_pc
     let ctx = this.display.canvas.getContext("2d");
 
-    if (this.pointType == DataPoint.CIRCLE) {
-      this.drawCircle(this.x,this.y,this.w/2,this.col_ink);
+    if (this.pointType == DataPoint.NONE) {      
+    } else if (this.pointType == DataPoint.CIRCLE) {      
+      this.drawCircle(this.x,this.y,this.radius_pc/2,this.col_ink);
     } else if (this.pointType == DataPoint.SQUARE) {
       this.drawCircle(this.x,this.y,this.w/2,this.col_ink);
     } else if (this.pointType == DataPoint.DIAMOND) {
@@ -376,10 +378,20 @@ class DataPoint extends DisplayObject {
       this.drawCircle(this.x,this.y,this.w/2,this.col_ink);
     }
 
-    let xl = this.x + this.radius_pc*4;
     let pointLabelText = `${this.yVal.toFixed(1)}`;
-    let xr = xl + ctx.measureText(pointLabelText).width;
-    this.placeCentreTextNoMk(ctx, pointLabelText, xl, xr, this.y - this.fontSize, this.col_ink, this.fontSize, 'center', 'middle');
+
+    let leftOfDataPoint = true;
+    if (leftOfDataPoint) {
+      let xr = this.x - this.radius_pc*4;  
+      let xl = xr - ctx.measureText(pointLabelText).width;            
+      this.placeCentreTextNoMk(ctx, pointLabelText, xl, xr, this.y - this.fontSize, this.col_ink, this.fontSize, 'center', 'middle');
+    } else {
+      let xl = this.x + this.radius_pc*4;
+      let xr = xl + ctx.measureText(pointLabelText).width;  
+      this.placeCentreTextNoMk(ctx, pointLabelText, xl, xr, this.y - this.fontSize, this.col_ink, this.fontSize, 'center', 'middle');
+    }
+
+    
     
   }
 }
@@ -476,7 +488,7 @@ class DataPlot extends DisplayObject {
           x_pc:prevX_pc,  y_pc:prevY_pc,
           x1_pc:x_pc,     y1_pc:y_pc,          
           col_ink:this.dtkChart.chartSettings.col_ink[this.dataSourceKey], col_bk:'white', alpha:1, fontSize:this.fontSize,
-          col_bbox:'cyan', dbgOn:true};
+          col_bbox:'cyan', dbgOn:false };
 
       // let point = new DataPoint(dsObjConfig, yVal, this.pointType);
       // point.draw();
@@ -604,13 +616,111 @@ class TargetBand extends DisplayObject {
 class SummaryBar extends DisplayObject {
   // display rolling average for period length
   constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
-                nix_time_day, ave_for_period, ave_last_period, min, max, pos_LR='right' )
+                dtkChart, dataSourceKey )
   {
     super({ display:display, doName:doName, 
             x_pc:x_pc, y_pc:y_pc, w_pc:w_pc, h_pc:h_pc, arc_rad:arc_rad, 
             col_ink:col_ink, col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:col_bbox, dbgOn:dbgOn});
+    
+    this.dtkChart       = dtkChart;
+    this.dataSourceKey  = dataSourceKey;
+    
+    // max,min & ave for THIS week w/ deltas of max,min & ave for LAST week
+    this.getBoundaryValues(); 
+    this.calculateBands();
+
+    console.log(`\n> - - SummaryBar:${this.dataSourceKey} <`);
+    console.log(`S:${this.startIndex}, pWin:${this.periodWindow}, E:${this.endIndex}`);
+    console.log(`MIN:${this.dataSourceMin}, AVE:${dtkChartData[this.endIndex]}, MAX:${this.dataSourceMax}`);
+    console.log(`dataSources: ${this.dtkChart.chartSettings.selectedDataSources}`);
+  }
+
+  getBoundaryValues() {  // potentialy MANY datasources - TODO move to display object??
+    if (this.dtkChart){
+      const {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange} = this.dtkChart;
+      Object.assign(this, {periodWindow, endIndex, startIndex, xIncrement_pc, dataMin, dataMax, yAxisMinVal, yAxisMaxVal, yAxisRange});
+    }
+  }
+
+  minMaxAveFroPeriod(startIndex, endIndex){
+    let min = parseFloat(dtkChartData[startIndex][this.dataSourceKey]);
+    let max = parseFloat(dtkChartData[startIndex][this.dataSourceKey]);
+    
+    let total = 0;
+    let steps = endIndex - startIndex;    
+    for (let i = startIndex; i < endIndex; i++){
+      // console.log(`[i]: [${i}] <`);
+      // console.log(dtkChartData[i]);
+      let dataPoint = parseFloat(dtkChartData[i][this.dataSourceKey]);
+      total += dataPoint;
+      if (min > dataPoint) min = dataPoint;
+      if (max < dataPoint) max = dataPoint;
+    }
+    let ave = total / steps;
+    
+    return [min, ave, max];
+  }
+
+  calculateBands(){
+    [this.dataSourceMin,this.dataSourceAve,this.dataSourceMax] = this.minMaxAveFroPeriod(this.startIndex, this.endIndex);
+    let startIndexLP  = this.startIndex - this.periodWindow;
+    let endIndexLP    = this.endIndex - this.periodWindow;
+    [this.dataSourceMinLP,this.dataSourceAveLP,this.dataSourceMaxLP] = this.minMaxAveFroPeriod(startIndexLP, endIndexLP);
+
+    this.dataSourceMinDelta = this.dataSourceMin - this.dataSourceMinLP;
+    this.dataSourceAveDelta = this.dataSourceAve - this.dataSourceAveLP;
+    this.dataSourceMaxDelta = this.dataSourceMax - this.dataSourceMaxLP;
+  }
+
+  // max, ave, min line
+  drawSummaryDataLine(yVal, colInk='magenta', pattern=[], lineWidth=2){
+    let y_pc = this.dtkChart.yPcFromyVal(parseFloat(yVal));
+
+    let dsObjConfig = { display:this.display, doName:`${yVal}`, 
+        x_pc:this.x_pc,               y_pc:y_pc,
+        x1_pc:this.x_pc+this.w_pc,    y1_pc:y_pc,          
+        col_ink:colInk, col_bk:'white', alpha:1, fontSize:this.fontSize,
+        col_bbox:'cyan', dbgOn:false};
+                                // linePattern, lineWidth
+    let tl = new ScaledLine(dsObjConfig, pattern, lineWidth);
+    tl.draw();
+  }
+
+  // vertical line w/ text next to it placed xPos_pc % across the width of the SummaryBar
+  drawSummaryDataLineJoin(yValLast, yValThis, xPos_pc, colInk='magenta', pattern=[], lineWidth=2){
+    let yL_pc     = this.dtkChart.yPcFromyVal(parseFloat(yValLast));    
+    let yT_pc     = this.dtkChart.yPcFromyVal(parseFloat(yValThis));
+    let delta     = yValLast - yValThis;
+    let yText_pc  = this.dtkChart.yPcFromyVal(parseFloat(yValLast + delta/2));
         
+    let dsObjConfig = { display:this.display, doName:`delta`, 
+        x_pc:this.x_pc+(this.w_pc* xPos_pc/100),  y_pc:yL_pc,
+        x1_pc:this.x_pc+(this.w_pc* xPos_pc/100), y1_pc:yT_pc,          
+        col_ink:colInk, col_bk:'white', alpha:1, fontSize:this.fontSize,
+        col_bbox:'cyan', dbgOn:false};
+                                // linePattern, lineWidth
+    let tl = new ScaledLine(dsObjConfig, pattern, lineWidth);
+    tl.draw();
+    // draw text
+
   }  
+
+  draw(){
+    this.getBoundaryValues(); 
+    this.calculateBands();
+    super.draw()
+    this.drawSummaryDataLine(this.dataSourceMax, 'red',[],4);
+    this.drawSummaryDataLineJoin(this.dataSourceMaxLP, this.dataSourceMax, 30,'rgb(244, 61, 128)',[5,5], 2);
+    this.drawSummaryDataLine(this.dataSourceMaxLP, 'rgb(244, 61, 128)',[5,5],2);
+
+    this.drawSummaryDataLine(this.dataSourceAve, 'blue',[],4);
+    this.drawSummaryDataLineJoin(this.dataSourceAveLP, this.dataSourceAve, 50,'rgb(6, 136, 212)',[5,5], 2);
+    this.drawSummaryDataLine(this.dataSourceAveLP, 'pastel blue',[5,5],2);
+
+    this.drawSummaryDataLine(this.dataSourceMin, 'green',[],4);
+    this.drawSummaryDataLineJoin(this.dataSourceMinLP, this.dataSourceMin, 70,'yellowgreen',[5,5], 2);
+    this.drawSummaryDataLine(this.dataSourceMinLP, 'yellowgreen',[5,5],2);
+  }
 }
 
 class DtkChart extends DisplayObject { // hold curent state
@@ -706,10 +816,10 @@ class DtkChart extends DisplayObject { // hold curent state
 
     dsObjConfig = { display:display, doName:'sBar', 
                     //x_pc:80, y_pc:0, w_pc:20, h_pc:100, arc_rad:0, 
-                    x_pc:80, y_pc:0, w_pc:20, h_pc:80, arc_rad:0, 
-                    col_ink:'maroon', col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:'magenta', dbgOn:true}
-    let sBar = new SummaryBar(dsObjConfig);
-    //this.zList.push(sBar);
+                    x_pc:94, y_pc:0, w_pc:6, h_pc:100, arc_rad:0, 
+                    col_ink:'maroon', col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:'rgb(0, 40, 119)', dbgOn:true}
+    let sBar = new SummaryBar(dsObjConfig, this, this.chartSettings.selectedDataSources[0]);
+    this.zList.push(sBar);
 
     dsObjConfig = { display:display, doName:'vBarS', 
                     x_pc:0, y_pc:0, w_pc:100, h_pc:100, arc_rad:0, 
@@ -747,7 +857,7 @@ class DtkChart extends DisplayObject { // hold curent state
     
     dsObjConfig = { display:display, doName:'yAxNum', 
                     x_pc:0, y_pc:0, w_pc:15, h_pc:100, arc_rad:0, 
-                    col_ink:'black', col_bk:col_bk, alpha:0.5, fontSize:this.chartSettings.fontSize, col_bbox:'orange', dbgOn:true}
+                    col_ink:'black', col_bk:col_bk, alpha:0.5, fontSize:this.chartSettings.fontSize, col_bbox:'orange'}
     let yAxisNumbering = new YAxisNumbering(dsObjConfig, this);
     this.zList.push(yAxisNumbering);    
 
@@ -873,27 +983,6 @@ class Canvas {
   }
 
 }
-
-
-
-
-
-const runAnimation = animation => {
-  let lastTime = null;
-  const frame = time => {
-    if (lastTime !== null) {
-      const timeStep = Math.min(100, time - lastTime) / 1000;
-
-      // return false from animation to stop
-      if (animation(timeStep) === false) {
-        return;
-      }
-    }
-    lastTime = time;
-    requestAnimationFrame(frame);     // re-insert frame callback in animation Q
-  };
-  requestAnimationFrame(frame);       // start animation
-};
 
 
 export class DtkChartWithControls { 
