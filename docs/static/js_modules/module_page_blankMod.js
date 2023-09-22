@@ -8,32 +8,32 @@
 import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTMLPageContainer} from './navbarMod.js';
 
 // specifics to page
-import * as tileModCanvas from './content/mathTilesCanvas.js';       // relative to this file
-var jsSource = 'static/js_modules/content/mathTilesCanvas.js';  // switch (to canvas once working
-var jsContainerId = 'maths_paint_canvas';
+import * as blankMod from './content/blankCanvas.js';       // relative to this file
+var jsSource = 'static/js_modules/content/blankCanvas.js';
+var jsContainerId = 'blankMod_js';
 
 var pageTarget;
-var pageId = 'mathPaintCanvas_page';
-//var htmlSource = 'static/html/mathPaintCanvas.html';
-var buttonId = 'b_nav_math_tile_canvas';
+var pageId = 'blankMod_page';
+//var htmlSource = 'static/html/blankMod.html';
+var buttonId = 'b_nav_blankMod';
 
 // tidy up when another button is pressed
 // maybe just hide page
 function unload_page(idOfPressedButton) {
   // are we on the same page if so do nothing!
   if (getCurrentPage() === idOfPressedButton) {
-    console.log('unload_math_tiles: SAME PAGE - DO NOTHING');
+    console.log(`unload_${pageId}: SAME PAGE - DO NOTHING`);
     return;
   }
   
-  console.log(`module_page_mathPaint.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);    
-  console.log('run mathTile.js resetRAFcallback: - S');
+  console.log(`module_page_blankMod.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);      
+  console.log('run blankCanvas.js resetRAFcallback: - S');
   
-  if (typeof(tileModCanvas.startPageAnimation) === 'function') {
-    tileModCanvas.stopAnim();
-    console.log(`run mathTile.js resetRAFcallback: ${typeof(tileModCanvas.startPageAnimation)} - E`);
+  if (typeof(blankMod.startPageAnimation) === 'function') {
+    blankMod.stopAnim();
+    console.log(`run blankCanvas.js resetRAFcallback: ${typeof(blankMod.startPageAnimation)} - E`);
   } else {
-    console.log('run mathTile.js NOT LOADED! - E');
+    console.log('run blankCanvas.js NOT LOADED! - E');
   }
   // delete page
   document.getElementById(pageTarget).replaceChildren();
@@ -50,7 +50,7 @@ function load_page() {
   
   setUnloadCurrentPageCallback(unload_page);
   
-  //console.log(`module_page_mathPaint.js: ${buttonId} - loading: ${htmlSource}`);
+  //console.log(`module_page_blankMod.js: ${buttonId} - loading: ${htmlSource}`);
   //fetch(htmlSource)
   //.then(function(response) {
   //  return response.text();
@@ -60,7 +60,7 @@ function load_page() {
   //});
   
   // construct page from JS land - very simple container
-  console.log(`module_page_mathPaint.js: ${pageId} - constructing html`);
+  console.log(`module_page_blankMod.js: ${pageId} - constructing html`);
   createHTMLPageContainer(pageTarget, pageId, jsContainerId, 'mathTiles');
   
   // fix margin
@@ -68,14 +68,14 @@ function load_page() {
   document.getElementById(jsContainerId).style.padding = "0px";
   document.getElementById(pageTarget).style.padding = "0px";
   
-  console.log(`module_page_mathPaint.js: ${pageId} - loading JS: ${jsSource}`);
+  console.log(`module_page_blankMod.js: ${pageId} - loading JS: ${jsSource}`);
 
 
-  if (typeof(tileModCanvas.startPageAnimation) === 'function') {
+  if (typeof(blankMod.startPageAnimation) === 'function') {
 
-    console.log('mathTile.js ALREADY LOADED! restart animation');
-    tileModCanvas.setKeepAnimRuning();     // must do before starting anim
-    tileModCanvas.startPageAnimation(document.getElementById(jsContainerId));
+    console.log('blankCanvas.js ALREADY LOADED! restart animation');
+    blankMod.setKeepAnimRuning();     // must do before starting anim
+    blankMod.startPageAnimation(document.getElementById(jsContainerId));
 
   } else {
 
@@ -88,14 +88,14 @@ function load_page() {
       script.innerHTML = text;
       script.setAttribute("type", "module");
       document.getElementById(jsContainerId).appendChild(script);
-      tileModCanvas.startPageAnimation(document.getElementById(jsContainerId));
+      blankMod.startPageAnimation(document.getElementById(jsContainerId));
     });
     
   }   
 }
 
 export function getButtonInfo(containers){
-  console.log(`module_page_mathPaintCanvas.js: registering ${pageId} - to ${containers.main}`);
+  console.log(`module_page_blankMod.js: registering ${pageId} - to ${containers.main}`);
   
   pageTarget = containers.main;
   
@@ -103,8 +103,8 @@ export function getButtonInfo(containers){
 
   buttonInfo.callback = load_page;
   buttonInfo.image    = ''; //'static/images/svg/blank.svg'; // or '' < will use text if no image
-  buttonInfo.alt      = 'mathPaintCanvas';
-  buttonInfo.text     = 'MPC';
+  buttonInfo.alt      = 'blankMod';
+  buttonInfo.text     = 'BM';
   buttonInfo.id       =  buttonId;
   
   return buttonInfo;

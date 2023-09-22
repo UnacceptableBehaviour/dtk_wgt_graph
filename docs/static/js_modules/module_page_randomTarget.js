@@ -18,18 +18,18 @@ var buttonId = 'b_nav_random_target';
 function unload_page(idOfPressedButton) {
   // are we on the same page if so do nothing!
   if (getCurrentPage() === idOfPressedButton) {
-    console.log('unload_math_tiles: SAME PAGE - DO NOTHING');
+    console.log(`unload_${pageId}: SAME PAGE - DO NOTHING`);
     return;
   }
   
   console.log(`module_page_randomTarget.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);    
-  console.log('run mathTile.js resetRAFcallback: - S');
+  console.log('run u9_fp_random_target_port.js resetRAFcallback: - S');
   
   if (typeof(pageModule.startPageAnimation) === 'function') {
     pageModule.stopAnim();
-    console.log(`run mathTile.js resetRAFcallback: ${typeof(pageModule.startPageAnimation)} - E`);
+    console.log(`run u9_fp_random_target_port.js resetRAFcallback: ${typeof(pageModule.startPageAnimation)} - E`);
   } else {
-    console.log('run mathTile.js NOT LOADED! - E');
+    console.log('run u9_fp_random_target_port.js NOT LOADED! - E');
   }
   // delete page
   document.getElementById(pageTarget).replaceChildren();
@@ -69,7 +69,7 @@ function load_page() {
 
   if (typeof(pageModule.startPageAnimation) === 'function') {
 
-    console.log('mathTile.js ALREADY LOADED! restart animation');
+    console.log('u9_fp_random_target_port.js ALREADY LOADED! restart animation');
     pageModule.setKeepAnimRuning();     // must do before starting anim
     pageModule.startPageAnimation(document.getElementById(jsContainerId));
 

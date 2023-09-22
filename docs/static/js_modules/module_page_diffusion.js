@@ -8,10 +8,8 @@
 import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTMLPageContainer} from './navbarMod.js';
 
 // specifics to page
-//import * as diffusionModule from './content/u7_fp_diffusion.js';       // relative to this file
-//var jsSource = 'static/js_modules/content/u7_fp_diffusion.js';  // switch (to canvas once working
 import * as diffusionModule from './content/u7_fp_diffusion_port.js';       // relative to this file
-var jsSource = 'static/js_modules/content/u7_fp_diffusion_port.js';  // switch (to canvas once working
+var jsSource = 'static/js_modules/content/u7_fp_diffusion_port.js';
 var jsContainerId = 'diffusion_id';
 
 var pageTarget;
@@ -24,18 +22,18 @@ var buttonId = 'b_nav_diffusion';
 function unload_page(idOfPressedButton) {
   // are we on the same page if so do nothing!
   if (getCurrentPage() === idOfPressedButton) {
-    console.log('unload_math_tiles: SAME PAGE - DO NOTHING');
+    console.log(`unload_${pageId}: SAME PAGE - DO NOTHING`);
     return;
   }
   
   console.log(`module_page_mathPaint.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);    
-  console.log('run mathTile.js resetRAFcallback: - S');
+  console.log('run u7_fp_diffusion_port.js resetRAFcallback: - S');
   
   if (typeof(diffusionModule.startPageAnimation) === 'function') {
     diffusionModule.stopAnim();
-    console.log(`run mathTile.js resetRAFcallback: ${typeof(diffusionModule.startPageAnimation)} - E`);
+    console.log(`run u7_fp_diffusion_port.js resetRAFcallback: ${typeof(diffusionModule.startPageAnimation)} - E`);
   } else {
-    console.log('run mathTile.js NOT LOADED! - E');
+    console.log('run u7_fp_diffusion_port.js NOT LOADED! - E');
   }
   // delete page
   document.getElementById(pageTarget).replaceChildren();
@@ -75,7 +73,7 @@ function load_page() {
 
   if (typeof(diffusionModule.startPageAnimation) === 'function') {
 
-    console.log('mathTile.js ALREADY LOADED! restart animation');
+    console.log('u7_fp_diffusion_port.js ALREADY LOADED! restart animation');
     diffusionModule.setKeepAnimRuning();     // must do before starting anim
     diffusionModule.startPageAnimation(document.getElementById(jsContainerId));
 

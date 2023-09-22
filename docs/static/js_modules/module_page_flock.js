@@ -22,18 +22,18 @@ var buttonId = 'b_nav_flock';
 function unload_page(idOfPressedButton) {
   // are we on the same page if so do nothing!
   if (getCurrentPage() === idOfPressedButton) {
-    console.log('unload_math_tiles: SAME PAGE - DO NOTHING');
+    console.log(`unload_${pageId}: SAME PAGE - DO NOTHING`);
     return;
   }
   
   console.log(`module_page_mathPaint.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);    
-  console.log('run mathTile.js resetRAFcallback: - S');
+  console.log('run u8_fp_flock_port.js resetRAFcallback: - S');
   
   if (typeof(flockMod.startPageAnimation) === 'function') {
     flockMod.stopAnim();
-    console.log(`run mathTile.js resetRAFcallback: ${typeof(flockMod.startPageAnimation)} - E`);
+    console.log(`run u8_fp_flock_port.js resetRAFcallback: ${typeof(flockMod.startPageAnimation)} - E`);
   } else {
-    console.log('run mathTile.js NOT LOADED! - E');
+    console.log('run u8_fp_flock_port.js NOT LOADED! - E');
   }
   // delete page
   document.getElementById(pageTarget).replaceChildren();
@@ -73,7 +73,7 @@ function load_page() {
 
   if (typeof(flockMod.startPageAnimation) === 'function') {
 
-    console.log('mathTile.js ALREADY LOADED! restart animation');
+    console.log('u8_fp_flock_port.js ALREADY LOADED! restart animation');
     flockMod.setKeepAnimRuning();     // must do before starting anim
     flockMod.startPageAnimation(document.getElementById(jsContainerId));
 

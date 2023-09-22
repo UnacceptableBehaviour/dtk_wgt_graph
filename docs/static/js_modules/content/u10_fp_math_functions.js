@@ -1,17 +1,9 @@
-//const canvasSketch = require('canvas-sketch');
-//const random = require('canvas-sketch-util/random');
-//const math = require('canvas-sketch-util/math');
-//const Tweakpane = require('tweakpane');
-
 // helpers
 const cl = (str) => {
   console.log(str);
 };
 
-cl('u10_fp_math_functions.js: LOADING - - - S');
-
 // paint metrics
-var paintMetricsEnabled = false;
 var rafCount = 0;
 var rafStartTime = 0;
 var rafFinishTime = 0;
@@ -42,11 +34,8 @@ function resetMetrics() {
   rafLowWatermark = 10000;
   rafAveFrameTime = 0;
   rafBuckets = [];
-  rafEvents = 0;
 }
 
-// TODO - equations loop at #12 tan(x) is a repeat of #0
-// MAKE ALL UNIQUE
 const EQU_COLOR = 0;
 const EQU_TITLE = 1;
 const EQU_EQUATION = 2;
@@ -64,43 +53,48 @@ var equA = [
             [ '#F4C300', 'sec(x)',                        (rad) => { return (1 / Math.cos(rad)) /20; } ],
             [ '#93832F', 'cos(sin(x)^4)',                 (rad) => { return Math.cos(Math.pow(4, Math.sin(rad))); } ],
             [ '#3D2409', 'f(x)',                          (rad) => { return (Math.sqrt(rad)/rad + Math.sqrt(rad)/2) /3 + (Math.sin(rad*10)/4); }  ],
-            [ '#F4EC00', 'tan(x)',                        (rad) => { return Math.tan(rad); } ],
-            [ '#99650D', 'sin(x)',                        (rad) => { return Math.sin(rad); } ],
-            [ '#E89E00', 'cos(x)',                        (rad) => { return Math.cos(rad); } ],            
-            [ '#5E2100', 'sin(sin(x)^8)',                 (rad) => { return Math.sin(Math.pow(8, Math.sin(rad))); } ],
-            [ '#600000', '(sqrt(x)/x + sqrt(x)/2) / 5',   (rad) => { return (Math.sqrt(rad)/rad + Math.sqrt(rad)/2) /5; } ],
-            [ '#630E32', 'floor((sin(rad) * 5) +1) / 5))',(rad) => { return (Math.floor((Math.sin(rad) * 5) +1) /5); } ],
-            [ '#840919', 'sin(rad) + cos(rad)/4',         (rad) => { return Math.sin(rad) + Math.cos(rad*4)/4; } ],
-            [ '#AA842A', 'sin(x*10)',                     (rad) => { return Math.sin(rad*10); } ],
-            [ '#C17700', 'sin(x)+cos(rad*10)/4',          (rad) => { return Math.sin(rad)+Math.cos(rad*10)/4; } ],
-            [ '#F4C300', 'sec(x)',                        (rad) => { return (1 / Math.cos(rad)) /20; } ],
-            [ '#93832F', 'cos(sin(x)^4)',                 (rad) => { return Math.cos(Math.pow(4, Math.sin(rad))); } ],
-            [ '#3D2409', 'f(x)',                          (rad) => { return (Math.sqrt(rad)/rad + Math.sqrt(rad)/2) /3 + (Math.sin(rad*10)/4); }  ],
-            [ '#F4EC00', 'tan(x)',                        (rad) => { return Math.tan(rad); } ],
-            [ '#99650D', 'sin(x)',                        (rad) => { return Math.sin(rad); } ],
-            [ '#E89E00', 'cos(x)',                        (rad) => { return Math.cos(rad); } ],            
-            [ '#5E2100', 'sin(sin(x)^8)',                 (rad) => { return Math.sin(Math.pow(8, Math.sin(rad))); } ],
-            [ '#600000', '(sqrt(x)/x + sqrt(x)/2) / 5',   (rad) => { return (Math.sqrt(rad)/rad + Math.sqrt(rad)/2) /5; } ],
-            [ '#630E32', 'floor((sin(rad) * 5) +1) / 5))',(rad) => { return (Math.floor((Math.sin(rad) * 5) +1) /5); } ],
-            [ '#840919', 'sin(rad) + cos(rad)/4',         (rad) => { return Math.sin(rad) + Math.cos(rad*4)/4; } ],
-            [ '#AA842A', 'sin(x*10)',                     (rad) => { return Math.sin(rad*10); } ],
-            [ '#C17700', 'sin(x)+cos(rad*10)/4',          (rad) => { return Math.sin(rad)+Math.cos(rad*10)/4; } ],
-            [ '#F4C300', 'sec(x)',                        (rad) => { return (1 / Math.cos(rad)) /20; } ],
-            [ '#93832F', 'cos(sin(x)^4)',                 (rad) => { return Math.cos(Math.pow(4, Math.sin(rad))); } ],
-            [ '#3D2409', 'f(x)',                          (rad) => { return (Math.sqrt(rad)/rad + Math.sqrt(rad)/2) /3 + (Math.sin(rad*10)/4); }  ],
-            [ '#F4EC00', 'tan(x)',                        (rad) => { return Math.tan(rad); } ],
-            [ '#99650D', 'sin(x)',                        (rad) => { return Math.sin(rad); } ],
-            [ '#E89E00', 'cos(x)',                        (rad) => { return Math.cos(rad); } ],            
-            [ '#5E2100', 'sin(sin(x)^8)',                 (rad) => { return Math.sin(Math.pow(8, Math.sin(rad))); } ],
-            [ '#600000', '(sqrt(x)/x + sqrt(x)/2) / 5',   (rad) => { return (Math.sqrt(rad)/rad + Math.sqrt(rad)/2) /5; } ],
-            [ '#630E32', 'floor((sin(rad) * 5) +1) / 5))',(rad) => { return (Math.floor((Math.sin(rad) * 5) +1) /5); } ],
-            [ '#840919', 'sin(rad) + cos(rad)/4',         (rad) => { return Math.sin(rad) + Math.cos(rad*4)/4; } ],
-            [ '#AA842A', 'sin(x*10)',                     (rad) => { return Math.sin(rad*10); } ],
-            [ '#C17700', 'sin(x)+cos(rad*10)/4',          (rad) => { return Math.sin(rad)+Math.cos(rad*10)/4; } ],
-            [ '#F4C300', 'sec(x)',                        (rad) => { return (1 / Math.cos(rad)) /20; } ],
-            [ '#93832F', 'cos(sin(x)^4)',                 (rad) => { return Math.cos(Math.pow(4, Math.sin(rad))); } ],
-            [ '#3D2409', 'f(x)',                          (rad) => { return (Math.sqrt(rad)/rad + Math.sqrt(rad)/2) /3 + (Math.sin(rad*10)/4); }  ],
-            ];
+            
+            [ '#BC4254', 'tan(x*2)',                        (rad) => { return Math.tan(rad*2); } ],
+            [ '#9BBA7C', 'sin(x*2)',                        (rad) => { return Math.sin(rad*2); } ],
+            [ '#A2DD00', 'cos(x*2)',                        (rad) => { return Math.cos(rad*2); } ],            
+            [ '#005B27', 'sin(sin(x)^8)',                 (rad) => { return Math.sin(Math.pow(8, Math.sin(rad*2))); } ],
+            [ '#005E49', '(sqrt(x)/x + sqrt(x)/2) / 10',   (rad) => { return (Math.sqrt(rad)/rad + Math.sqrt(rad)/2) /5; } ],
+            [ '#0E4A60', 'floor((sin(rad) * 5) +1) / 5))',(rad) => { return (Math.floor((Math.sin(rad*2) * 5) +1) /5); } ],
+            [ '#094582', 'sin(rad) + cos(rad)/4',         (rad) => { return Math.sin(rad) + Math.cos(rad*8)/4; } ],
+            [ '#223389', 'sin(x*10)',                     (rad) => { return Math.sin(rad*5); } ],
+            [ '#4C0093', 'sin(x)+cos(rad*10)/4',          (rad) => { return Math.sin(rad)+Math.cos(rad*5)/4; } ],
+            [ '#D385C7', 'sec(x)',                        (rad) => { return (1 / Math.cos(rad*2)) /20; } ],
+            [ '#93832F', 'cos(sin(x)^4)',                 (rad) => { return Math.cos(Math.pow(2, Math.sin(rad*2))); } ],
+            [ '#D60052', 'f(x)',                          (rad) => { return (Math.floor((Math.sin(rad*2) * 5) +1) /5) + (Math.sin(rad*10)/4); }  ],
+            ];            
+
+const randomizeTiles = (tileArray) => {
+  let randomizedTileArray = Array();
+  let noElements = tileArray.length;
+  
+  //for (let i=0; i<noElements; i++) {
+  //  cl(`randomizeTiles: ${i} - ${tileArray[i][0]}`);
+  //}
+
+  for (let i=0; i<noElements; i++) {
+    let removeIdx = Math.floor(Math.random() * tileArray.length);
+    let element = tileArray.splice(removeIdx,1);
+    randomizedTileArray.push(element[0]);
+    cl(`rT: ${removeIdx} - ${tileArray.length} - ${element[0]}`);
+  }
+
+  //for (let i=0; i<noElements; i++) {
+  //  cl(`randomizeTiles: ${i} - ${randomizedTileArray[i]}`);
+  //}
+
+  return randomizedTileArray;
+}
+//cl('- - - - - - - - - - - - - - - - - - - - - - - - - - - - S');
+var equR = randomizeTiles(equA);
+//cl('- - - - - - - - - - - - - - - - - - - - - - - - - - - - M');
+//cl(equR);
+//cl('- - - - - - - - - - - - - - - - - - - - - - - - - - - - E');
+
 
 function getOptTileLayoutInfo(canvWidth, canvHeight, noOfXTiles, noOfYTiles, minSpace, fontSize=20) {
   // tiles should have a space between them and
@@ -122,98 +116,30 @@ const settings = {
   //dimensions: [ 2000, 1224 ],
   animate: true
 };
-//const xTiles = 8;
-//const yTiles = 6;
-const xTiles = 4;
-const yTiles = 3;
-//const xTiles = 3;
-//const yTiles = 2;
-
+const xTiles = 4;     
+const yTiles = 6;
 const minSpacerSize = 10;
 
-const sketch = ({ context, width, height }) => {  
-  
-  const mathTiles = [];  
-  const [size, spaceX, spaceY] = getOptTileLayoutInfo(width, height, xTiles, yTiles, minSpacerSize);
 
-  let cnt = 0;
-  for (let rectX = 0; rectX < xTiles; rectX++) {
-    for (let rectY = 0; rectY < yTiles; rectY++) {
-      if ((paintMetricsEnabled) && ((rectX === xTiles -1) && (rectY === yTiles -1))) { // put histo in last square
-        mathTiles.push( new RafHistogram(rectX * (size + spaceX) + (spaceX/2),   // centre w/ + (spaceX/2) offset
-                                      rectY * (size + spaceY),
-                                      size,
-                                      equA[cnt][EQU_EQUATION],
-                                      equA[cnt][EQU_TITLE],
-                                      equA[cnt][EQU_COLOR])
-                       );
-      } else {
-        mathTiles.push( new MathsTile(rectX * (size + spaceX) + (spaceX/2),   // centre w/ + (spaceX/2) offset
-                                      rectY * (size + spaceY),
-                                      size,
-                                      equA[cnt][EQU_EQUATION],
-                                      equA[cnt][EQU_TITLE],
-                                      equA[cnt][EQU_COLOR])
-                       );
-        
-      }
-      cnt++;        
-      cl(`pX:${rectX * (size + spaceX)}, pY:${rectY * (size + spaceY)}, size:${size}, spcX-Y:${spaceX}-${spaceY}`);
-    }
+class Canvas {
+  constructor(parent = document.body, width = settings.dimensions[0], height = settings.dimensions[1]) {
+    console.log(`Canvas:\nparent: ${parent} - document.body:${document.body}`);
+    this.canvas = document.createElement('canvas');
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+    parent.appendChild(this.canvas);
+    this.context = this.canvas.getContext('2d');
+  }
+
+  getContext(){
+    return this.context;
   }
   
-  if (paintMetricsEnabled) {
-    cl('setTimeout(resetWatermarks)');
-    setTimeout(resetMetrics, 5000);
-  } else {
-    cl('* * * paintMetrics DISABLED * * *');
+  getCanvasWH(){
+    return [this.canvas.width, this.canvas.height];
   }
-  
-  return ({ context, width, height }) => {
-    if (paintMetricsEnabled) rafStartTime = performance.now();                  //
-    // metrics - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
-    
-    context.fillStyle = 'beige';
-    context.fillRect(0, 0, width, height);
-    
-    for (let t = 0; t < mathTiles.length; t++) {
-    //for (let t = 0; t < 6; t++) {
-      mathTiles[t].draw(context);
-      mathTiles[t].update();
-    }
-  
-    // metrics - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
-    if (paintMetricsEnabled) {                                                  //
-      rafFinishTime = performance.now();                                        //
-      rafCount++;                                                               //
-      rafFrameTime = rafFinishTime - rafStartTime;                              //
-      rafTotalTime += rafFrameTime;                                             //
-      rafAveFrameTime = rafTotalTime / rafCount;                                //
-      if (rafFrameTime < rafLowWatermark) rafLowWatermark = rafFrameTime;       //
-      if (rafFrameTime > rafHighWatermark) rafHighWatermark = rafFrameTime;     //
-      let idx = Math.floor(rafFrameTime);                                       //
-      if (rafBuckets[idx] === undefined)                                        //
-        rafBuckets[idx] = 1;                                                    //
-      else{                                                                     //
-        rafBuckets[idx]++;                                                      //
-      }                                                                         //
-      if (rafCount % 60 === 0) {                                                //
-        cl(performance.now());                                                  //
-        cl(`This frame:    ${rafFrameTime}`);                                   //
-        cl(`Average frame: ${rafAveFrameTime}`);                                //
-        cl(`Low tide:      ${rafLowWatermark}`);                                //
-        cl(`High tide:     ${rafHighWatermark}`);                               //
-        cl(`rafCount:      ${rafCount}`);                                       //
-        cl(`totalTime:     ${performance.now() - rafTotalTimeStart}`);          //
-        cl('rafBuckets');                                                       //
-        cl(rafBuckets);                                                         //
-      }      
-    }
-  };
-};
+}
 
-// TODO - break MathTile into Tile and MathsTile extends Tile
-// RafHistogram extends Tile - remove equation refs
 class MathsTile {
   constructor(x, y, size, equationCallback, title, color ){
     this.x = x;
@@ -256,7 +182,8 @@ class MathsTile {
     
     //context.translate(this.x, this.y);  
     context.lineWidth = 2;    
-    
+
+    // M1
     let clipRegion = new Path2D();
     clipRegion.rect(this.x,this.y, this.w,this.h); // x,y,w,h
     context.clip(clipRegion,"nonzero");
@@ -288,7 +215,7 @@ class MathsTile {
       if (nextPoint >= this.w) nextPoint = 0;
     }
     context.restore();  // clear clipping region
-    
+
     context.save();
     if (this.border) {
       // border - guideline for now
@@ -383,82 +310,104 @@ class MathsTile {
   }  
 }
 
-// TODO - break MathTile into Tile and MathsTile extends Tile
-// RafHistogram extends Tile - remove equation refs
-class RafHistogram extends MathsTile{
-  constructor(x, y, size, equationCallback, title, color ){
-    super(x, y, size, equationCallback, title, color);
-  }
-  
-  draw(context){
-      context.beginPath();
-      context.rect(this.x,this.y, this.w,this.h);
-      context.strokeStyle = 'black';
-      context.lineWidth = 2;
-      context.stroke();
-      context.strokeStyle = 'CornflowerBlue';
-      
-      let barW = this.w/rafBuckets.length;
-      //let max = Math.max(...rafBuckets) ?? 1;   // return NaN if any element is not a number IE undefined!
-      
-      // we know the shape of this data - the peak is early in the array and happens once! < INCORRECT
-      //let max = Math.max(rafBuckets.filter(element => typeof element === 'number'));
-      let max = 1;
-      let maxAt = 1;
-      for (let i=0; i<rafBuckets.length; i++) {
-        if (max < rafBuckets[i]) { max = rafBuckets[i]; maxAt = i; }
-      }      
-      
-      let unitH = this.h / max;
-      context.fillStyle = 'CornflowerBlue';
-      
-      for (let col = 0; col < rafBuckets.length; col++) {
-        let val = rafBuckets[col] ?? 0;
-        //cl(`x:${this.x + col*barW} - y:${this.y + this.h - val*unitH} w:${barW} h:${val*unitH}`);
-        //cl(`t.y:${this.y} t.h:${this.h} val:${val} max:${max} uH: ${unitH} h:${val*unitH}`);
-        context.fillRect(this.x + col*barW, this.y + this.h - val*unitH, barW, val*unitH);
+const runAnimation = animation => {
+  let lastTime = null;
+  const frame = time => {
+    if (lastTime !== null) {
+      const timeStep = Math.min(100, time - lastTime) / 1000;
+
+      // return false from animation to stop
+      if (animation(timeStep) === false) {
+        return;
       }
-      
-      this.placeChartText(context, 'green');
+    }
+    lastTime = time;
+    requestAnimationFrame(frame);     // re-insert frame callback in animation Q
+  };
+  requestAnimationFrame(frame);       // start animation
+};
+
+const random = (max = 9, min = 0) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+
+var mathTilesKeepRunningAnimation = true;
+
+export const setKeepAnimRuning = () => {
+  mathTilesKeepRunningAnimation = true;
+};
+export const stopAnim = () => {
+  mathTilesKeepRunningAnimation = false;
+};
+
+
+//const mathTiles = ({ width = 400, height = 400, parent = document.body, count = 50 } = {}) => {
+export const startMathTiles = (targetContainer) => {
+  const display = new Canvas(targetContainer);
+  const [width, height] = display.getCanvasWH();  
+  const mathTiles = [];  
+  const [size, spaceX, spaceY] = getOptTileLayoutInfo(width, height, xTiles, yTiles, minSpacerSize);
+
+  let cnt = 0;
+  for (let rectX = 0; rectX < xTiles; rectX++) {
+    for (let rectY = 0; rectY < yTiles; rectY++) {
+      mathTiles.push( new MathsTile(rectX * (size + spaceX) + (spaceX/2),   // centre w/ + (spaceX/2) offset
+                                    rectY * (size + spaceY),
+                                    size,
+                                    equR[cnt][EQU_EQUATION],
+                                    equR[cnt][EQU_TITLE],
+                                    equR[cnt][EQU_COLOR])
+                     );
+      cnt++;
+      cl(`pX:${rectX * (size + spaceX)}, pY:${rectY * (size + spaceY)}, size:${size}, spcX-Y:${spaceX}-${spaceY}`);
+    }
   }
   
-  placeChartText(context, color) {    
-    // place text left justified right half
-    context.save();
-    let text = [  'raf paint / ms ',
-                  ' ',
-                  `H: ${rafHighWatermark.toFixed(2)} `,
-                  //' ',
-                  `Av: ${rafAveFrameTime.toFixed(2)} `,
-                  //' ',
-                  `L: ${rafLowWatermark.toFixed(2)} `,
-                ];
-
-    let rows = text.length;
-    let fontSize = Math.floor(this.h / (rows * 2));
-    let padding = fontSize / 4;
-    let rowHeight = fontSize + padding;
-    let textStart = Math.floor(this.x + (this.w / 2));    
-    let rowZero = Math.floor(this.y + ((this.h - (rowHeight * rows)) / 2));
-    let maxWidth = this.w / 2;
-                
-    // font def
-    context.font = `${fontSize}px Arial`;
-    context.textBaseline = 'middle'; // hanging
-    context.textAlign = 'left';
-            
-    // place text between if it fits below if not
-    context.fillStyle = color;
-    for (let r=0; r<rows; r++) {
-      context.fillText(text[r], textStart, rowZero + rowHeight * r, maxWidth);
-    }
-    context.restore();
-
-  } 
+  cl('setTimeout(resetWatermarks)')
+  setTimeout(resetMetrics, 5000);  
   
-}
+  runAnimation(time => {
+    rafStartTime = performance.now();                                           //
+    // metrics - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
+    
+    let context = display.getContext();
+    context.fillStyle = 'beige';
+    context.fillRect(0, 0, width, height);    
+    for (let t = 0; t < mathTiles.length; t++) {
+    //for (let t = 0; t < 4; t++) {
+      mathTiles[t].draw(context);
+      mathTiles[t].update();
+    }
+    
+    // metrics - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
+    rafFinishTime = performance.now();                                          //
+    rafCount++;                                                                 //
+    rafFrameTime = rafFinishTime - rafStartTime;                                //
+    rafTotalTime += rafFrameTime;                                               //
+    rafAveFrameTime = rafTotalTime / rafCount;                                  //
+    if (rafFrameTime < rafLowWatermark) rafLowWatermark = rafFrameTime;         //
+    if (rafFrameTime > rafHighWatermark) rafHighWatermark = rafFrameTime;       //
+    let idx = Math.floor(rafFrameTime);                                         //
+    if (rafBuckets[idx] === undefined)                                          //
+      rafBuckets[idx] = 1;                                                      //
+    else{                                                                       //
+      rafBuckets[idx]++;                                                        //
+    }                                                                           //
+    if (rafCount % 60 === 0) {                                                  //
+      cl(performance.now());                                                    //
+      cl(`This frame:    ${rafFrameTime}`);                                     //
+      cl(`Average frame: ${rafAveFrameTime}`);                                  //
+      cl(`Low tide:      ${rafLowWatermark}`);                                  //
+      cl(`High tide:     ${rafHighWatermark}`);                                 //
+      cl(`rafCount:      ${rafCount}`);                                         //
+      cl(`totalTime:     ${performance.now() - rafTotalTimeStart}`);            //
+      cl('rafBuckets');                                                         //
+      cl(rafBuckets);                                                           //
+    }
+    
+    return mathTilesKeepRunningAnimation;
+  });
+};
 
-//createpane();    
-canvasSketch(sketch, settings);
-
-cl('u10_fp_math_functions.js: LOADING - - - E');
+//startMathTiles(document.getElementById('maths_paint_canvas'));

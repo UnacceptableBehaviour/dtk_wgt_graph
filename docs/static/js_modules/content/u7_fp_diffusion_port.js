@@ -1,5 +1,3 @@
-// use in conjunction with module_page_blank.js 
-// helpers
 const cl = (str) => {
   console.log(str);
 };

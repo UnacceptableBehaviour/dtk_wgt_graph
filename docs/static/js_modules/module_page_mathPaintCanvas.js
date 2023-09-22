@@ -4,8 +4,8 @@
 import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTMLPageContainer} from './navbarMod.js';
 
 // specifics to page
-import * as tileModCanvas from './content/mathTilesCanvas.js';       // relative to this file
-var jsSource = 'static/js_modules/content/mathTilesCanvas.js';  // switch (to canvas once working
+import * as tileModCanvas from './content/u10_fp_math_functions.js';       // relative to this file
+var jsSource = 'static/js_modules/content/u10_fp_math_functions.js';  // switch (to canvas once working
 var jsContainerId = 'maths_paint_canvas';
 
 var pageTarget;
@@ -18,18 +18,18 @@ var buttonId = 'b_nav_math_tile_canvas';
 function unload_page(idOfPressedButton) {
   // are we on the same page if so do nothing!
   if (getCurrentPage() === idOfPressedButton) {
-    console.log('unload_math_tiles: SAME PAGE - DO NOTHING');
+    console.log(`unload_${pageId}: SAME PAGE - DO NOTHING`);
     return;
   }
   
   console.log(`module_page_mathPaint.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);    
-  console.log('run mathTile.js resetRAFcallback: - S');
+  console.log('run u10_fp_math_functions.js resetRAFcallback: - S');
   
   if (typeof(tileModCanvas.startMathTiles) === 'function') {
     tileModCanvas.stopAnim();
-    console.log(`run mathTile.js resetRAFcallback: ${typeof(tileModCanvas.startMathTiles)} - E`);
+    console.log(`run u10_fp_math_functions.js resetRAFcallback: ${typeof(tileModCanvas.startMathTiles)} - E`);
   } else {
-    console.log('run mathTile.js NOT LOADED! - E');
+    console.log('run u10_fp_math_functions.js NOT LOADED! - E');
   }
   // delete page
   document.getElementById(pageTarget).replaceChildren();
@@ -69,7 +69,7 @@ function load_page() {
 
   if (typeof(tileModCanvas.startMathTiles) === 'function') {
 
-    console.log('mathTile.js ALREADY LOADED! restart animation');
+    console.log('u10_fp_math_functions.js ALREADY LOADED! restart animation');
     tileModCanvas.setKeepAnimRuning();     // must do before starting anim
     tileModCanvas.startMathTiles(document.getElementById(jsContainerId));
 
