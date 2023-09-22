@@ -4,8 +4,9 @@ from pprint import pprint
 
 # source = ''       # when using root - check
 source = 'docs'     # when using /docs as source - removes docs from the path
-repo_name = 'js_canvas_IO_docs'
-project_root = Path('/Users/simon/a_syllabus/repos_cm/js_canvas_IO_docs/docs/static')
+repo_name = 'dtk_wgt_graph'
+project_root = Path('/Users/simon/a_syllabus/lang/html_css_js/dtk_wgt_graph/docs/static')
+                     
 
 # const FILES_TO_CACHE = [
 #   '/static/offline.html',
@@ -25,15 +26,6 @@ def get_list_of_potential_files_to_cache(search_path, cache_root):
         if 'node_modules' in path or 'scratch' in path or p.is_dir() or '.DS_Store' in path: continue
         comps = str(p).split(dir_before_root)
         cache_targets = Path(comps.pop())
-        #non of comented work - w
-        # root_cache = Path('js_canvas_IO_docs').joinpath(comps.pop() )
-        #root_cache = PurePath('/',repo_name).joinpath(comps.pop())
-        #root_cache = Path('/').joinpath(comps.pop(), 'js_canvas_IO_docs', 'twat' )
-        #root_cache = Path('/').joinpath('js_canvas_IO_docs', comps.pop() )
-        #root_cache = Path('/').joinpath('js_canvas_IO_docs', str(comps.pop()) )
-        # root_cache = Path('js_canvas_IO_docs').joinpath(str(comps.pop()) )
-        # print(f"  '{root_cache}',")
-        #print(f"ct:{cache_targets}<")
         print(f"  '/{repo_name}{cache_targets}',")
        
         
