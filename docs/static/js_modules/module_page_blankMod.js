@@ -8,8 +8,8 @@
 import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTMLPageContainer} from './navbarMod.js';
 
 // specifics to page
-import * as blankMod from './content/blankCanvas.js';       // relative to this file
-var jsSource = 'static/js_modules/content/blankCanvas.js';
+import * as blankMod from './content/blankMod.js';       // relative to this file
+var jsSource = 'static/js_modules/content/blankMod.js';
 var jsContainerId = 'blankMod_js';
 
 var pageTarget;
@@ -27,13 +27,13 @@ function unload_page(idOfPressedButton) {
   }
   
   console.log(`module_page_blankMod.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);      
-  console.log('run blankCanvas.js resetRAFcallback: - S');
+  console.log('run blankMod.js resetRAFcallback: - S');
   
   if (typeof(blankMod.startPageAnimation) === 'function') {
     blankMod.stopAnim();
-    console.log(`run blankCanvas.js resetRAFcallback: ${typeof(blankMod.startPageAnimation)} - E`);
+    console.log(`run blankMod.js resetRAFcallback: ${typeof(blankMod.startPageAnimation)} - E`);
   } else {
-    console.log('run blankCanvas.js NOT LOADED! - E');
+    console.log('run blankMod.js NOT LOADED! - E');
   }
   // delete page
   document.getElementById(pageTarget).replaceChildren();
@@ -73,7 +73,7 @@ function load_page() {
 
   if (typeof(blankMod.startPageAnimation) === 'function') {
 
-    console.log('blankCanvas.js ALREADY LOADED! restart animation');
+    console.log('blankMod.js ALREADY LOADED! restart animation');
     blankMod.setKeepAnimRuning();     // must do before starting anim
     blankMod.startPageAnimation(document.getElementById(jsContainerId));
 
