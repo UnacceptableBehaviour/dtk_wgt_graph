@@ -8,6 +8,7 @@
 var pageTarget;
 var pageId = 'weigh_in_page_parent';
 var htmlSource = 'static/html/weigh_in.html';
+var jsSourceFileName = '';
 var jsSource = '';//'static/js_modules/content/mathTiles.js';
 var jsContainerId = 'weigh_in_page';
 var buttonId = 'b_nav_weigh_in';
@@ -23,7 +24,7 @@ function unload_page(idOfPressedButton) {
     return;
   } 
 
-  console.log(`module_page_weigh_in.js: ${buttonId} - UNLOADING`);    
+  console.log(`butId: ${buttonId} - UNLOADING`);    
   // delete page
   document.getElementById(pageTarget).replaceChildren();
 }
@@ -36,7 +37,7 @@ function load_page() {
     setCurrentPage(buttonId);
   }  
 
-  console.log(`module_page_weigh_in.js: ${pageId} - loading: ${htmlSource}`);
+  console.log(`pageId: ${pageId} - loading: ${htmlSource}`);
   
   setUnloadCurrentPageCallback(unload_page);  
   
@@ -55,7 +56,7 @@ function load_page() {
 }
 
 export function getButtonInfo(containers){
-  console.log(`module_page_weigh_in.js: registering ${pageId} - to ${containers.main}`);
+  console.log(`registering ${pageId} - to ${containers.main}`);
   
   pageTarget = containers.main;
   

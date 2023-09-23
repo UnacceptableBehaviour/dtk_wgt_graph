@@ -8,6 +8,7 @@
 var pageTarget;
 var pageId = 'snap_page_parent';
 var htmlSource = 'static/html/snap.html';
+var jsSourceFileName = '';
 var jsSource = '';//'static/js_modules/content/mathTiles.js';
 var jsContainerId = 'snap_page';
 var buttonId = 'b_nav_snap';
@@ -23,7 +24,7 @@ function unload_page(idOfPressedButton) {
     return;
   } 
   
-  console.log(`module_page_snap.js: ${pageId} - UNLOADING`);    
+  console.log(`pageId: ${pageId} - UNLOADING`);    
   // delete page
   document.getElementById(pageTarget).replaceChildren();
 }
@@ -37,7 +38,7 @@ function load_page() {
     setCurrentPage(buttonId);
   }
   
-  console.log(`module_page_snap.js: ${pageId} - loading: ${htmlSource}`);
+  console.log(`pageId: ${pageId} - loading: ${htmlSource}`);
 
   setUnloadCurrentPageCallback(unload_page);
   
@@ -55,7 +56,7 @@ function load_page() {
 }
 
 export function getButtonInfo(containers){
-  console.log(`module_page_snap.js: registering ${pageId} - to ${containers.main}`);
+  console.log(`registering ${pageId} - to ${containers.main}`);
   
   pageTarget = containers.main;
   

@@ -5,7 +5,8 @@ import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTML
 
 // specifics to page
 import * as pageModule from './content/recipe_dtk_multi.js';
-var jsSource = 'static/js_modules/content/recipe_dtk_multi.js';
+var jsSourceFileName = 'recipe_dtk_multi.js';
+var jsSource = `static/js_modules/content/${jsSourceFileName}.js`;
 var jsContainerId = 'tracker_page';
 
 var pageTarget;
@@ -23,7 +24,7 @@ function unload_page(idOfPressedButton) {
     return;
   } 
   
-  console.log(`module_page_tracker.js: ${pageId} - UNLOADING`);    
+  console.log(`pageId: ${pageId} - UNLOADING`);    
   // delete page
   document.getElementById(pageTarget).replaceChildren();
 }
@@ -73,7 +74,7 @@ function load_page() {
 }
 
 export function getButtonInfo(containers){
-  console.log(`module_page_tracker.js: registering ${pageId} - to ${containers.main}`);
+  console.log(`registering ${pageId} - to ${containers.main}`);
   
   pageTarget = containers.main;
   

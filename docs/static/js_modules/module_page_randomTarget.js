@@ -5,7 +5,8 @@ import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTML
 
 // specifics to page
 import * as pageModule from './content/u9_fp_random_target_port.js';       // relative to this file
-var jsSource = 'static/js_modules/content/u9_fp_random_target_port.js';  // switch (to canvas once working
+var jsSourceFileName = '';//'u9_fp_random_target_port.js';
+var jsSource = `static/js_modules/content/${jsSourceFileName}`;  // switch (to canvas once working
 var jsContainerId = 'random_target';
 
 var pageTarget;
@@ -22,14 +23,14 @@ function unload_page(idOfPressedButton) {
     return;
   }
   
-  console.log(`module_page_randomTarget.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);    
-  console.log('run u9_fp_random_target_port.js resetRAFcallback: - S');
+  console.log(`butId: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);    
+  console.log(`run ${jsSourceFileName} resetRAFcallback: - S`);
   
   if (typeof(pageModule.startPageAnimation) === 'function') {
     pageModule.stopAnim();
-    console.log(`run u9_fp_random_target_port.js resetRAFcallback: ${typeof(pageModule.startPageAnimation)} - E`);
+    console.log(`run ${jsSourceFileName} resetRAFcallback: ${typeof(pageModule.startPageAnimation)} - E`);
   } else {
-    console.log('run u9_fp_random_target_port.js NOT LOADED! - E');
+    console.log(`run ${jsSourceFileName} NOT LOADED! - E`);
   }
   // delete page
   document.getElementById(pageTarget).replaceChildren();
@@ -46,7 +47,7 @@ function load_page() {
   
   setUnloadCurrentPageCallback(unload_page);
   
-  //console.log(`module_page_randomTarget.js: ${buttonId} - loading: ${htmlSource}`);
+  //console.log(`butId: ${buttonId} - loading: ${htmlSource}`);
   //fetch(htmlSource)
   //.then(function(response) {
   //  return response.text();
@@ -56,7 +57,7 @@ function load_page() {
   //});
   
   // construct page from JS land - very simple container
-  console.log(`module_page_randomTarget.js: ${pageId} - constructing html`);
+  console.log(`pageId: ${pageId} - constructing html`);
   createHTMLPageContainer(pageTarget, pageId, jsContainerId, 'randomTarget');
   
   // fix margin
@@ -64,12 +65,12 @@ function load_page() {
   document.getElementById(jsContainerId).style.padding = "0px";
   document.getElementById(pageTarget).style.padding = "0px";
   
-  console.log(`module_page_randomTarget.js: ${pageId} - loading JS: ${jsSource}`);
+  console.log(`pageId: ${pageId} - loading JS: ${jsSource}`);
 
 
   if (typeof(pageModule.startPageAnimation) === 'function') {
 
-    console.log('u9_fp_random_target_port.js ALREADY LOADED! restart animation');
+    console.log(`${jsSourceFileName} ALREADY LOADED! restart animation`);
     pageModule.setKeepAnimRuning();     // must do before starting anim
     pageModule.startPageAnimation(document.getElementById(jsContainerId));
 
@@ -92,7 +93,7 @@ function load_page() {
 }
 
 export function getButtonInfo(containers){
-  console.log(`module_page_randomTarget.js: registering ${pageId} - to ${containers.main}`);
+  console.log(`registering ${pageId} - to ${containers.main}`);
   
   pageTarget = containers.main;
   

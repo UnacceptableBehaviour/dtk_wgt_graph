@@ -8,6 +8,7 @@
 var pageTarget;
 var pageId = 'home_page_parent';
 var htmlSource = 'static/html/cert.html';
+var jsSourceFileName = '';
 var jsSource = '';//'static/js_modules/content/mathTiles.js';
 var jsContainerId = 'home_page';
 var buttonId = 'b_nav_home';
@@ -18,13 +19,13 @@ import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTML
 // maybe just hide page
 function unload_page(idOfPressedButton) {
   // are we on the same page if so do nothing!
-  console.log(`module_page_home.js: ${buttonId} - ${getCurrentPage()} - ${idOfPressedButton}`); 
+  console.log(`butId: ${buttonId} - ${getCurrentPage()} - ${idOfPressedButton}`); 
   if (getCurrentPage() === idOfPressedButton) {
     console.log('unload_home: SAME PAGE - DO NOTHING');
     return;
   }
 
-  console.log(`module_page_home.js: ${pageId} - UNLOADING`);    
+  console.log(`pageId: ${pageId} - UNLOADING`);    
   // delete page
   document.getElementById(pageTarget).replaceChildren();
 }
@@ -38,7 +39,7 @@ function load_page() {
     setCurrentPage(buttonId);
   }
   
-  console.log(`module_page_home.js: ${pageId} - loading: ${htmlSource}`);
+  console.log(`pageId: ${pageId} - loading: ${htmlSource}`);
   
   setUnloadCurrentPageCallback(unload_page);
   
@@ -56,7 +57,7 @@ function load_page() {
 }
 
 export function getButtonInfo(containers){
-  console.log(`module_page_home.js: registering ${pageId} - to ${containers.main}`);
+  console.log(`registering ${pageId} - to ${containers.main}`);
   
   pageTarget = containers.main;
   

@@ -1,15 +1,13 @@
 // Ex create a module that implements a page behavior by clicking a button in the navbar
 
-// **
-// Compare to ** module_page_mathPaint.js ** to see changes required for a new module
-// **
 
 // navbar generic
 import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTMLPageContainer} from './navbarMod.js';
 
 // specifics to page
 import * as blankMod from './content/blankMod.js';       // relative to this file
-var jsSource = 'static/js_modules/content/blankMod.js';
+var jsSourceFileName = 'blankMod.js';// - - /            // console.log support
+var jsSource = `static/js_modules/content/${jsSourceFileName}`;
 var jsContainerId = 'blankMod_js';
 
 var pageTarget;
@@ -26,14 +24,14 @@ function unload_page(idOfPressedButton) {
     return;
   }
   
-  console.log(`module_page_blankMod.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);      
-  console.log('run blankMod.js resetRAFcallback: - S');
+  console.log(`butId: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);      
+  console.log(`run ${jsSourceFileName} resetRAFcallback: - S`);
   
   if (typeof(blankMod.startPageAnimation) === 'function') {
     blankMod.stopAnim();
-    console.log(`run blankMod.js resetRAFcallback: ${typeof(blankMod.startPageAnimation)} - E`);
+    console.log(`run ${jsSourceFileName} resetRAFcallback: ${typeof(blankMod.startPageAnimation)} - E`);
   } else {
-    console.log('run blankMod.js NOT LOADED! - E');
+    console.log(`run ${jsSourceFileName} NOT LOADED! - E`);
   }
   // delete page
   document.getElementById(pageTarget).replaceChildren();
@@ -50,7 +48,7 @@ function load_page() {
   
   setUnloadCurrentPageCallback(unload_page);
   
-  //console.log(`module_page_blankMod.js: ${buttonId} - loading: ${htmlSource}`);
+  //console.log(`butId: ${buttonId} - loading: ${htmlSource}`);
   //fetch(htmlSource)
   //.then(function(response) {
   //  return response.text();
@@ -60,20 +58,20 @@ function load_page() {
   //});
   
   // construct page from JS land - very simple container
-  console.log(`module_page_blankMod.js: ${pageId} - constructing html`);
-  createHTMLPageContainer(pageTarget, pageId, jsContainerId, 'mathTiles');
+  console.log(`pageId: ${pageId} - constructing html`);
+  createHTMLPageContainer(pageTarget, pageId, jsContainerId, 'blankMod');
   
   // fix margin
   document.getElementById(pageId).style.padding = "0px";
   document.getElementById(jsContainerId).style.padding = "0px";
   document.getElementById(pageTarget).style.padding = "0px";
   
-  console.log(`module_page_blankMod.js: ${pageId} - loading JS: ${jsSource}`);
+  console.log(`pageId: ${pageId} - loading JS: ${jsSource}`);
 
 
   if (typeof(blankMod.startPageAnimation) === 'function') {
 
-    console.log('blankMod.js ALREADY LOADED! restart animation');
+    console.log(`${jsSourceFileName} ALREADY LOADED! restart animation`);
     blankMod.setKeepAnimRuning();     // must do before starting anim
     blankMod.startPageAnimation(document.getElementById(jsContainerId));
 
@@ -95,7 +93,7 @@ function load_page() {
 }
 
 export function getButtonInfo(containers){
-  console.log(`module_page_blankMod.js: registering ${pageId} - to ${containers.main}`);
+  console.log(`registering ${pageId} - to ${containers.main}`);
   
   pageTarget = containers.main;
   
