@@ -1,9 +1,5 @@
 // Ex create a module that implements a page behavior by clicking a button in the navbar
 
-// **
-// Compare to ** module_page_mathPaint.js ** to see changes required for a new module
-// **
-
 // navbar generic
 import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTMLPageContainer} from './navbarMod.js';
 
@@ -26,7 +22,7 @@ function unload_page(idOfPressedButton) {
     return;
   }
   
-  console.log(`module_page_mathPaint.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);    
+  console.log(`module_page_flock.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);    
   console.log('run u8_fp_flock_port.js resetRAFcallback: - S');
   
   if (typeof(flockMod.startPageAnimation) === 'function') {
@@ -50,7 +46,7 @@ function load_page() {
   
   setUnloadCurrentPageCallback(unload_page);
   
-  //console.log(`module_page_mathPaint.js: ${buttonId} - loading: ${htmlSource}`);
+  //console.log(`module_page_flock.js: ${buttonId} - loading: ${htmlSource}`);
   //fetch(htmlSource)
   //.then(function(response) {
   //  return response.text();
@@ -60,7 +56,7 @@ function load_page() {
   //});
   
   // construct page from JS land - very simple container
-  console.log(`module_page_mathPaint.js: ${pageId} - constructing html`);
+  console.log(`module_page_flock.js: ${pageId} - constructing html`);
   createHTMLPageContainer(pageTarget, pageId, jsContainerId, 'mathTiles');
   
   // fix margin
@@ -68,7 +64,7 @@ function load_page() {
   document.getElementById(jsContainerId).style.padding = "0px";
   document.getElementById(pageTarget).style.padding = "0px";
   
-  console.log(`module_page_mathPaint.js: ${pageId} - loading JS: ${jsSource}`);
+  console.log(`module_page_flock.js: ${pageId} - loading JS: ${jsSource}`);
 
 
   if (typeof(flockMod.startPageAnimation) === 'function') {

@@ -22,7 +22,7 @@ function unload_page(idOfPressedButton) {
     return;
   }
   
-  console.log(`module_page_mathPaint.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);    
+  console.log(`module_page_mathPaintCanvas.js: ${buttonId} - unloading: stop RAF calls JS: ${jsSource}`);    
   console.log('run u10_fp_math_functions.js resetRAFcallback: - S');
   
   if (typeof(tileModCanvas.startPageAnimation) === 'function') {
@@ -46,7 +46,7 @@ function load_page() {
   
   setUnloadCurrentPageCallback(unload_page);
   
-  //console.log(`module_page_mathPaint.js: ${buttonId} - loading: ${htmlSource}`);
+  //console.log(`module_page_mathPaintCanvas.js: ${buttonId} - loading: ${htmlSource}`);
   //fetch(htmlSource)
   //.then(function(response) {
   //  return response.text();
@@ -56,7 +56,7 @@ function load_page() {
   //});
   
   // construct page from JS land - very simple container
-  console.log(`module_page_mathPaint.js: ${pageId} - constructing html`);
+  console.log(`module_page_mathPaintCanvas.js: ${pageId} - constructing html`);
   createHTMLPageContainer(pageTarget, pageId, jsContainerId, 'mathTiles');
   
   // fix margin
@@ -64,7 +64,7 @@ function load_page() {
   document.getElementById(jsContainerId).style.padding = "0px";
   document.getElementById(pageTarget).style.padding = "0px";
   
-  console.log(`module_page_mathPaint.js: ${pageId} - loading JS: ${jsSource}`);
+  console.log(`module_page_mathPaintCanvas.js: ${pageId} - loading JS: ${jsSource}`);
 
 
   if (typeof(tileModCanvas.startPageAnimation) === 'function') {
