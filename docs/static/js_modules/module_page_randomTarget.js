@@ -5,7 +5,7 @@ import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTML
 
 // specifics to page
 import * as pageModule from './content/u9_fp_random_target_port.js';       // relative to this file
-var jsSourceFileName = '';//'u9_fp_random_target_port.js';
+var jsSourceFileName = 'u9_fp_random_target_port.js';
 var jsSource = `static/js_modules/content/${jsSourceFileName}`;  // switch (to canvas once working
 var jsContainerId = 'random_target';
 

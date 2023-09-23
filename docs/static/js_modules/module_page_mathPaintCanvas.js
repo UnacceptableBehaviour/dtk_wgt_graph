@@ -5,7 +5,7 @@ import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTML
 
 // specifics to page
 import * as tileModCanvas from './content/u10_fp_math_functions.js';       // relative to this file
-var jsSourceFileName = '';// 'u10_fp_math_functions.js';
+var jsSourceFileName = 'u10_fp_math_functions.js';
 var jsSource = `static/js_modules/content/${jsSourceFileName}`;  // switch (to canvas once working
 var jsContainerId = 'maths_paint_canvas';
 

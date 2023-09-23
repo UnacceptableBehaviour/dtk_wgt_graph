@@ -6,6 +6,8 @@ import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTML
 
 // specifics to page
 import * as blankMod from './content/blankMod.js';       // relative to this file
+
+// TODO - remove jsSourceFileName - used for loading JS [not needed because of import] & console outs
 var jsSourceFileName = 'blankMod.js';// - - /            // console.log support
 var jsSource = `static/js_modules/content/${jsSourceFileName}`;
 var jsContainerId = 'blankMod_js';

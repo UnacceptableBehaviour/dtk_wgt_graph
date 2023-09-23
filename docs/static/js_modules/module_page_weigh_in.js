@@ -9,7 +9,7 @@ var pageTarget;
 var pageId = 'weigh_in_page_parent';
 var htmlSource = 'static/html/weigh_in.html';
 var jsSourceFileName = '';
-var jsSource = '';//'static/js_modules/content/mathTiles.js';
+var jsSource = '';//'static/js_modules/content/weigh_in.js';
 var jsContainerId = 'weigh_in_page';
 var buttonId = 'b_nav_weigh_in';
 

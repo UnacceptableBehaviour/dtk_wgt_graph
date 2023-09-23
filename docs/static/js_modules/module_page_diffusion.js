@@ -5,7 +5,7 @@ import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTML
 
 // specifics to page
 import * as diffusionModule from './content/u7_fp_diffusion_port.js';       // relative to this file
-var jsSourceFileName = '';// 'u7_fp_diffusion_port.js';// - - - /                // console.log support - REMOVE
+var jsSourceFileName = 'u7_fp_diffusion_port.js';// - - - /                // console.log support - REMOVE
 var jsSource = `static/js_modules/content/${jsSourceFileName}`;
 var jsContainerId = 'diffusion_id';
 

@@ -5,7 +5,7 @@ import {getCurrentPage, setCurrentPage, setUnloadCurrentPageCallback, createHTML
 
 // specifics to page
 import * as flockMod from './content/u8_fp_flock_port.js';       // relative to this file
-var jsSourceFileName = '';// 'u8_fp_flock_port.js';
+var jsSourceFileName = 'u8_fp_flock_port.js';
 var jsSource = `static/js_modules/content/${jsSourceFileName}`;  // switch (to canvas once working
 var jsContainerId = 'flock_js_container';
 
