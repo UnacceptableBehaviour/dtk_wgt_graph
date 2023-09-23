@@ -3,6 +3,7 @@
 import * as navBarMod from './navbarMod.js';
 //import * as pageHome from './module_page_home.js';
 //import * as pageTracker from './module_page_tracker.js';
+import * as pageRecipe from './module_page_recipe.js';
 //import * as pageSnap from './module_page_snap.js';
 import * as pageWeighIn from './module_page_weigh_in.js';
 import * as pageMathPaintCanvas from './module_page_mathPaintCanvas.js';
@@ -24,6 +25,7 @@ var containers = navBarMod.getContainers();
 //navBarMod.addNavbutton(pageTracker.getButtonInfo(containers));
 //navBarMod.addNavbutton(pageSnap.getButtonInfo(containers));
 navBarMod.addNavbutton(pageWeighIn.getButtonInfo(containers));
+navBarMod.addNavbutton(pageRecipe.getButtonInfo(containers));
 navBarMod.addNavbutton(pageMathPaintCanvas.getButtonInfo(containers));
 navBarMod.addNavbutton(pageRandomTarget.getButtonInfo(containers));
 navBarMod.addNavbutton(pageDiffusion.getButtonInfo(containers));
