@@ -343,7 +343,7 @@ export const stopAnim = () => {
 
 
 //const mathTiles = ({ width = 400, height = 400, parent = document.body, count = 50 } = {}) => {
-export const startMathTiles = (targetContainer) => {
+export const startPageAnimation = (targetContainer) => {
   const display = new Canvas(targetContainer);
   const [width, height] = display.getCanvasWH();  
   const mathTiles = [];  
@@ -410,4 +410,4 @@ export const startMathTiles = (targetContainer) => {
   });
 };
 
-//startMathTiles(document.getElementById('maths_paint_canvas'));
+//startPageAnimation(document.getElementById('maths_paint_canvas'));
