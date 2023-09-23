@@ -16,7 +16,7 @@ console.log('service_worker.js LOADING');
 
 let verion_numner_passed_in = '00.01';
 
-const CACHE_NAME = `dtk-gitio-cache_${verion_numner_passed_in}`;  // TODO add version number for ServWrkr updates
+const CACHE_NAME = `dtk-gitio-cache_${verion_numner_passed_in}`;  // Version number for ServWrkr updates
 
 // run
 // build_cache_file_list.py from /dtk_wgt_graph/docs
@@ -65,6 +65,7 @@ const FILES_TO_CACHE = [
   '/dtk_wgt_graph/static/html/tracker.html',
   '/dtk_wgt_graph/static/html/snap.html',
   '/dtk_wgt_graph/static/html/mathPaint.html',
+  '/dtk_wgt_graph/static/js_modules/module_page_dtk_chart.js',
   '/dtk_wgt_graph/static/js_modules/module_page_snap.js',
   '/dtk_wgt_graph/static/js_modules/module_page_blankMod.js',
   '/dtk_wgt_graph/static/js_modules/module_page_diffusion.js',
@@ -79,11 +80,12 @@ const FILES_TO_CACHE = [
   '/dtk_wgt_graph/static/js_modules/module_page_recipe.js',
   '/dtk_wgt_graph/static/js_modules/module_page_randomTarget.js',
   '/dtk_wgt_graph/static/js_modules/app.js',
-  '/dtk_wgt_graph/static/js_modules/module_page_weigh_in.js',
   '/dtk_wgt_graph/static/js_modules/content/recipe_dtk_multi.js',
   '/dtk_wgt_graph/static/js_modules/content/dtk_data.js',
   '/dtk_wgt_graph/static/js_modules/content/require_random.js',
+  '/dtk_wgt_graph/static/js_modules/content/dtk_chart.js',
   '/dtk_wgt_graph/static/js_modules/content/u10_fp_math_functions.js',
+  '/dtk_wgt_graph/static/js_modules/content/dtk_data_process.js',
   '/dtk_wgt_graph/static/js_modules/content/u7_fp_diffusion_port.js',
   '/dtk_wgt_graph/static/js_modules/content/u8_fp_flock_port.js',
   '/dtk_wgt_graph/static/js_modules/content/blankMod.js',
@@ -92,6 +94,7 @@ const FILES_TO_CACHE = [
   '/dtk_wgt_graph/static/js_modules/content/lib/algos_sftest/index.js',
   '/dtk_wgt_graph/static/js_modules/content/lib/algos_sftest/package.json',
   '/dtk_wgt_graph/static/data/dtk_data.json',
+  '/dtk_wgt_graph/static/data/dtk_data.js',
 ];
 
 
