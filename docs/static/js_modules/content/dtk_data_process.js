@@ -1,5 +1,9 @@
-//import { dtkTestRecord } from './dtk_data_bk.js';   // all data
-import { dtkTestRecord } from '/static/data/dtk_data.js';      // 2 weeks
+//import { dtkTestRecord } from '/dtk_wgt_graph/static/data/dtk_data_bk.js';   // all data
+import { dtkTestRecord } from '/dtk_wgt_graph/static/data/dtk_data.js';      // 2 weeks
+
+console.log('window.location.pathname 2');
+console.log(window.location.pathname);
+
 
 const sortedArray = Object.keys(dtkTestRecord)
 .sort((a, b) => a - b)

@@ -1,4 +1,4 @@
-import { dtkChartData } from '/static/js_modules/content/dtk_data_process.js';
+import { dtkChartData } from '/dtk_wgt_graph/static/js_modules/content/dtk_data_process.js';
 
 const CHART_WIDTH_DAYS_DEFAULT = 7;
 const INDEX_END_DEFAULT = parseInt(dtkChartData.length);
