@@ -65,7 +65,9 @@ def get_nutridoc_list_rtf(base_dir):
     
     print('\n')
 
-    return file_LUT
+    sorted_file_LUT = dict(sorted(file_LUT.items()))
+
+    return sorted_file_LUT
 
 nutridocs_base_dir = Path('/Users/simon/Desktop/supperclub/foodlab/_MENUS/_courses_components/')
 file_LUT = get_nutridoc_list_rtf(nutridocs_base_dir)
@@ -76,7 +78,15 @@ def get_text_content_of_file(rtf_filepath):
     with open(rtf_filepath,'r') as f:
         rtf = f.read()
 
-    return rtf_to_text(rtf) 
+    content = rtf_to_text(rtf)
+    # _course_cost_end_ remove text after this point
+    content_data, content_notes = content.split('_course_cost_end_')
+
+    # print('\n\n\n\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ')
+    # pprint(content_notes)
+    # print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n\n\n\n\n')
+
+    return  content_data
 
 record = {}
 c = 0
