@@ -9,31 +9,8 @@ console.log(sortedArray); // TODO bump to level 4 HOWTO
 
 const MS_IN_ONE_DAY = 24 * 60 * 60 * 1000;
 console.log(`MS_IN_ONE_DAY: ${MS_IN_ONE_DAY}`);
-// const CUT_OFF = 1694390300000; // 40 days data - keep it small
-// const FIRST_DAY = {
-//     "synthetic": false,
-//     "dtk_pc_fat": "14.6",
-//     "dtk_pc_h2o": "55.3",
-//     "dtk_rcp": {
-//         "dt_date": CUT_OFF,
-//         "dt_date_readable": "2023 09 10",
-//         "dt_day": "sun"
-//     },
-//     "dtk_user_info": {
-//         "UUID": "x-x-x-x-xxx",
-//         "name": "AGCT"
-//     },
-//     "dtk_weight": "105.8",
-//     "i": 8,
-//     "dtk_kg_fat": "15.4",
-//     "dtk_kg_h2o": "58.5",
-//     "dtk_pc_fat_av7": "NaN",
-//     "dtk_pc_h2o_av7": "NaN",
-//     "dtk_weight_av7": "104.9",
-//     "dtk_kg_fat_av7": "NaN",
-//     "dtk_kg_h2o_av7": "NaN"
-// };
-const CUT_OFF = 1546307200000; // 40 days data - keep it small
+
+const CUT_OFF = 1546307200000; 
 const FIRST_DAY = {
     "synthetic": false,
     "dtk_pc_fat": "14.6",
@@ -212,64 +189,25 @@ function add7DayRollingAverages() {
 
     let keysToAverage = ["dtk_pc_fat", "dtk_pc_h2o", "dtk_weight", "dtk_kg_fat", "dtk_kg_h2o"];
     let sortedKeys = Object.keys(data).sort();
-    // console.log(`sortedKeys.length: <${sortedKeys.length}>`);
-    // let sIdx = sortedKeys.length - 16; // 19637;
-    // let eIdx = sortedKeys.length;
-    
-    // for (let i = sIdx; i < eIdx; i++) {
-    //     console.log(`[${i}]: ${sortedKeys[i]}`); 
-    // }
 
     for (let i = 0; i < sortedKeys.length; i++) {
         let item = data[sortedKeys[i]];
-        // if ((i >= sIdx) && (i < eIdx)){ 
-        //     console.log(`[${i}]: ${data[sortedKeys[i]].dtk_rcp.dt_date_readable} ${sortedKeys[i]} ${data[sortedKeys[i]].dtk_weight} > - - - - - - - - - - - - - - - - \\ `); 
-        // }
 
         for (let key of keysToAverage) {
             let sum = 0;
             let count = 0;
-            // let last7 = []; // TODO remove
-            // let last7acc = []; // TODO remove
 
-            //for (let j = i - 1; j >= 0 && j >= i - 7; j--) {
             for (let j = i; j >= 0 && j >= i - 6; j--) {
                 let prevItem = data[sortedKeys[j]];                
   
                 if (prevItem[key]) {
-                    //sum += parseFloat(prevItem[key]);
-                    sum += parseFloat(prevItem[key]) * 10;      // TODO DEBUG DECIMAL CHECK
+                    sum += parseFloat(prevItem[key]) * 10;
                     count++;
-                    // if ((i >= sIdx) && (i < eIdx) && (key === "dtk_weight")) {
-                    //     last7.push(prevItem[key]);
-                    //     last7acc.push(sum.toFixed(1))
-                    //     console.log(`sum: <${sum.toFixed(1)}>`);
-                    // }                    
                 }
-
-                // if ((i >= sIdx) && (i < eIdx) && (key === "dtk_weight")) {
-                //     console.log(`[${i}]-last7(${j}): ${last7.length} <`);
-                //     console.log('prevItem[key] - - - \\ ');
-                //     console.log(prevItem[key]);
-                //     console.log(prevItem);
-                //     console.log('prevItem[key] - - - | ');
-                //     console.log(last7);
-                //     console.log(last7acc);
-                //     console.log('prevItem[key] - - - / ');
-                // }                
             }
-
-            // if ((i >= sIdx) && (i < eIdx) && (key === "dtk_weight")) {
-            //     console.log(`END-LOOP[${i}]-last7: ${last7.length} <`);
-            //     console.log(last7);
-            // }
             
             if (count > 0) {
-                //item[key + "_av7"] = (sum / count).toFixed(1);
-                item[key + "_av7"] = ((sum / count)/ 10).toFixed(1);  // TODO DEBUG DECIMAL CHECK
-                // if ((i >= sIdx) && (i < eIdx) && (key === "dtk_weight")) {
-                //     console.log(`c[${count}] - AVERAGE_7:${item[key + "_av7"]}`);
-                // }                
+                item[key + "_av7"] = ((sum / count)/ 10).toFixed(1);
             }
         }
     }
@@ -294,7 +232,6 @@ function processDataSet(){
 }
 
 export let dtkChartData = processDataSet();
-//export let dtkChartData = sortedArray;
 
 console.log('dtkChartData');
 console.log(dtkChartData);

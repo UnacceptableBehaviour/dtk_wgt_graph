@@ -8,23 +8,23 @@ import { dtkChartData } from './dtk_data_process.js';
 // https://exerror.com/uncaught-syntaxerror-cannot-use-import-statement-outside-a-module-when-importing-ecmascript-6/
 
 
-document.addEventListener('DOMContentLoaded', (e) => {    
-    //new DtkChartWithControls( chartName, parentDivId, settings );
-    //const dtkClip = new DtkChartWithControls( "wic-lip", "weigh-in-chart", {selectedDataSources: ['dtk_pc_fat','dtk_kg_fat']} );
-    const dtkClip = new DtkChartWithControls( "wic-lip", "weigh-in-chart", {selectedDataSources: ['dtk_kg_fat','dtk_kg_fat_av7']} );
-});
+// document.addEventListener('DOMContentLoaded', (e) => {    
+//     //new DtkChartWithControls( chartName, parentDivId, settings );
+//     //const dtkClip = new DtkChartWithControls( "wic-lip", "weigh-in-chart", {selectedDataSources: ['dtk_pc_fat','dtk_kg_fat']} );
+//     const dtkClip = new DtkChartWithControls( "wic-lip", "weigh-in-chart", {selectedDataSources: ['dtk_kg_fat','dtk_kg_fat_av7']} );
+// });
 
-document.addEventListener('DOMContentLoaded', (e) => {    
-    const dtkCh20 = new DtkChartWithControls( "wic-h2o", "weigh-in-chart", {selectedDataSources: ['dtk_kg_h2o', 'dtk_kg_h2o_av7']} );
-});
+// document.addEventListener('DOMContentLoaded', (e) => {    
+//     const dtkCh20 = new DtkChartWithControls( "wic-h2o", "weigh-in-chart", {selectedDataSources: ['dtk_kg_h2o', 'dtk_kg_h2o_av7']} );
+// });
 
 document.addEventListener('DOMContentLoaded', (e) => {    
     const dtkCwgt = new DtkChartWithControls( "wic-wgt", "weigh-in-chart", {selectedDataSources: ['dtk_weight', 'dtk_weight_av7']} );
 });
 
-document.addEventListener('DOMContentLoaded', (e) => {    
-    const dtkCw = new DtkChartWithControls( "wic-tur", "weigh-in-chart", {selectedDataSources: ['dtk_weight', 'dtk_weight_av7','dtk_pc_h2o','dtk_pc_h2o_av7']} );
-});
+// document.addEventListener('DOMContentLoaded', (e) => {    
+//     const dtkCw = new DtkChartWithControls( "wic-tur", "weigh-in-chart", {selectedDataSources: ['dtk_weight', 'dtk_weight_av7','dtk_pc_h2o','dtk_pc_h2o_av7']} );
+// });
 
 
 
