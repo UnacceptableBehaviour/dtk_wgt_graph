@@ -1,6 +1,6 @@
 import { dtkChartData } from './dtk_data_process.js';
 
-const CHART_WIDTH_DAYS_DEFAULT = 7;
+const CHART_WIDTH_DAYS_DEFAULT = 14;
 const INDEX_END_DEFAULT = parseInt(dtkChartData.length);
 const INDEX_START_DEFAULT = parseInt(INDEX_END_DEFAULT - CHART_WIDTH_DAYS_DEFAULT);
 
@@ -614,6 +614,10 @@ class TargetBand extends DisplayObject {
 
 
 class SummaryBar extends DisplayObject {
+  static AV7_LW = 4;  // LW Line Width
+  static LPAV7_LW = 2;
+  static MINMAX_LW = 1;
+
   // display rolling average for period length
   constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
                 dtkChart, dataSourceKey )
@@ -642,7 +646,8 @@ class SummaryBar extends DisplayObject {
     }
   }
 
-  minMaxAveFroPeriod(startIndex, endIndex){
+  minMaxAveForPeriod(startIndex, endIndex){
+    console.log(`sBar.minMaxAveForPeriod:dataSourceKey:${this.dataSourceKey}`);
     let min = parseFloat(dtkChartData[startIndex][this.dataSourceKey]);
     let max = parseFloat(dtkChartData[startIndex][this.dataSourceKey]);
     
@@ -656,16 +661,21 @@ class SummaryBar extends DisplayObject {
       if (min > dataPoint) min = dataPoint;
       if (max < dataPoint) max = dataPoint;
     }
-    let ave = total / steps;
+    let ave = (total / steps).toFixed(1);
     
     return [min, ave, max];
   }
 
   calculateBands(){
-    [this.dataSourceMin,this.dataSourceAve,this.dataSourceMax] = this.minMaxAveFroPeriod(this.startIndex, this.endIndex);
+    [this.dataSourceMin,this.dataSourceAve,this.dataSourceMax] = this.minMaxAveForPeriod(this.startIndex, this.endIndex);
+    console.log(`Min:${this.dataSourceMin} - Ave:${this.dataSourceAve} - Max:${this.dataSourceMax} - CALC`);
+    // console.log(dtkChartData[this.endIndex-1]);
+    // console.log(dtkChartData[this.endIndex-1][this.dataSourceKey]);
+    // console.log(dtkChartData[this.endIndex-1][`${this.dataSourceKey}_av7`]);
+    //console.log(`Min:${this.endIndex} - Ave:${this.endIndex} - Max:${this.endIndex} - DATA`);
     let startIndexLP  = this.startIndex - this.periodWindow;
     let endIndexLP    = this.endIndex - this.periodWindow;
-    [this.dataSourceMinLP,this.dataSourceAveLP,this.dataSourceMaxLP] = this.minMaxAveFroPeriod(startIndexLP, endIndexLP);
+    [this.dataSourceMinLP,this.dataSourceAveLP,this.dataSourceMaxLP] = this.minMaxAveForPeriod(startIndexLP, endIndexLP);
 
     this.dataSourceMinDelta = this.dataSourceMin - this.dataSourceMinLP;
     this.dataSourceAveDelta = this.dataSourceAve - this.dataSourceAveLP;
@@ -707,19 +717,52 @@ class SummaryBar extends DisplayObject {
 
   draw(){
     this.getBoundaryValues(); 
-    this.calculateBands();
+    this.calculateBands();      // calculates bands for period window 7,14,28,3m etc 
     super.draw()
-    this.drawSummaryDataLine(this.dataSourceMax, 'red',[],4);
-    this.drawSummaryDataLineJoin(this.dataSourceMaxLP, this.dataSourceMax, 30,'rgb(244, 61, 128)',[5,5], 2);
-    this.drawSummaryDataLine(this.dataSourceMaxLP, 'rgb(244, 61, 128)',[5,5],2);
 
-    this.drawSummaryDataLine(this.dataSourceAve, 'blue',[],4);
-    this.drawSummaryDataLineJoin(this.dataSourceAveLP, this.dataSourceAve, 50,'rgb(6, 136, 212)',[5,5], 2);
-    this.drawSummaryDataLine(this.dataSourceAveLP, 'pastel blue',[5,5],2);
+    console.log(`sBar.draw:dataSourceKey:${this.dataSourceKey} - ink:${this.col_ink}`);
 
-    this.drawSummaryDataLine(this.dataSourceMin, 'green',[],4);
-    this.drawSummaryDataLineJoin(this.dataSourceMinLP, this.dataSourceMin, 70,'yellowgreen',[5,5], 2);
-    this.drawSummaryDataLine(this.dataSourceMinLP, 'yellowgreen',[5,5],2);
+    // weight colours
+    let lineCol     = this.dtkChart.chartSettings.col_ink[`${this.dataSourceKey}_av7`];
+    let minMaxCol   = this.dtkChart.chartSettings.col_ink[this.dataSourceKey];
+
+    let ave7day     = parseFloat(dtkChartData[this.endIndex-1][`${this.dataSourceKey}_av7`]);
+    let endIndexLP  = this.endIndex - 7; // - this.periodWindow; use calculateBands() for periodWindow!
+    let ave7dayLP   = parseFloat(dtkChartData[endIndexLP-1][`${this.dataSourceKey}_av7`]);
+    
+
+    // data max
+    this.drawSummaryDataLine(this.dataSourceMax,minMaxCol,[], SummaryBar.MINMAX_LW);    
+
+    // current periodWindow average    
+    //this.drawSummaryDataLine(this.dataSourceAve,lineCol,[], SummaryBar.AV7_LW);
+    // current 7 day average
+    this.drawSummaryDataLine(ave7day,lineCol,[], SummaryBar.AV7_LW);
+
+    // periodWindow delta line    
+    //this.drawSummaryDataLineJoin(this.dataSourceAve, this.dataSourceAveLP, 30,lineCol,[5,5], SummaryBar.LPAV7_LW);    
+    // 7 day delta line    
+    this.drawSummaryDataLineJoin(ave7day, ave7dayLP, 30,lineCol,[5,5], SummaryBar.LPAV7_LW);    
+
+    // previous periodWindow ave    
+    //this.drawSummaryDataLine(this.dataSourceAveLP, lineCol,[5,5], SummaryBar.LPAV7_LW);    
+    // previous 7 day ave    
+    this.drawSummaryDataLine(ave7dayLP, lineCol,[5,5], SummaryBar.LPAV7_LW);    
+
+    // data min
+    this.drawSummaryDataLine(this.dataSourceMin,minMaxCol,[], SummaryBar.MINMAX_LW);
+
+    // this.drawSummaryDataLine(this.dataSourceMax, 'red',[],4);
+    // this.drawSummaryDataLineJoin(this.dataSourceMaxLP, this.dataSourceMax, 30,'rgb(244, 61, 128)',[5,5], 2);
+    // this.drawSummaryDataLine(this.dataSourceMaxLP, 'rgb(244, 61, 128)',[5,5],2);
+
+    // this.drawSummaryDataLine(this.dataSourceAve, 'blue',[],4);
+    // this.drawSummaryDataLineJoin(this.dataSourceAveLP, this.dataSourceAve, 50,'rgb(6, 136, 212)',[5,5], 2);
+    // this.drawSummaryDataLine(this.dataSourceAveLP, 'pastel blue',[5,5],2);
+
+    // this.drawSummaryDataLine(this.dataSourceMin, 'green',[],4);
+    // this.drawSummaryDataLineJoin(this.dataSourceMinLP, this.dataSourceMin, 70,'yellowgreen',[5,5], 2);
+    // this.drawSummaryDataLine(this.dataSourceMinLP, 'yellowgreen',[5,5],2);
   }
 }
 
@@ -738,38 +781,38 @@ class DtkChart extends DisplayObject { // hold curent state
               startIndex: INDEX_START_DEFAULT,
               endIndex:   INDEX_END_DEFAULT,
               chartWidthDays: CHART_WIDTH_DAYS_DEFAULT,
-              selectedDataSources: ['dtk_weight', 'dtk_kg_fat', 'dtk_kg_h2o'],
+              selectedDataSources: ['turd'],// OVER WRITTEN BY caller ['dtk_weight'], //, 'dtk_kg_fat', 'dtk_kg_h2o'],
               fontSize: fontSize,
               availableDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o', 'dtk_kg_fat', 'dtk_kg_h2o'],
-              col_ink: {dtk_weight:     'rgb(255, 132, 0)', 
-                        dtk_weight_av7: 'rgba(255, 221, 0, 0.749)', 
-                        dtk_pc_fat:     'rgb(219, 0, 84)',                        
-                        dtk_kg_fat:     'rgb(219, 0, 0)',
-                        dtk_kg_fat_av7: 'rgb(219, 0, 84)',                        
-                        dtk_pc_h2o:     'rgb(0, 214, 233)', 
-                        dtk_kg_h2o:     'rgb(0, 132, 233)', 
-                        dtk_kg_h2o_av7: 'rgb(0, 214, 233)',                         
+              col_ink: {dtk_weight:     'rgb(249, 149, 43)', 
+                        dtk_weight_av7: 'rgb(167, 86, 0)',  
+                        dtk_pc_fat:     'rgb(229, 17, 144)',                        
+                        dtk_kg_fat:     'rgb(229, 17, 144)',
+                        dtk_kg_fat_av7: 'rgb(169, 0, 0)',                        
+                        dtk_pc_h2o:     'rgb(0, 222, 243)', 
+                        dtk_kg_h2o:     'rgb(0, 222, 243)', 
+                        dtk_kg_h2o_av7: 'rgb(0, 101, 179)',                         
                         dtk_frame:      'rgb(107, 214, 0)'},
               band_ink:{dtk_weight: { top: 'rgb(200, 140, 85)', 
                                       bot: 'rgb(250, 190, 125)' }, 
-                        // dtk_pc_fat: { top: 'rgb(160, 55, 55)',
-                        //               bot: 'rgb(210, 105, 105)' },
+                        dtk_pc_fat: { top: 'rgb(160, 55, 55)',
+                                      bot: 'rgb(210, 105, 105)' },
                         dtk_kg_fat: { top: 'rgb(160, 55, 55)',
                                       bot: 'rgb(210, 105, 105)' },
-                        // dtk_pc_h2o: { top: 'rgb(65, 130, 180)', 
-                        //               bot: 'rgb(115, 180, 230)' },                         
+                        dtk_pc_h2o: { top: 'rgb(65, 130, 180)', 
+                                      bot: 'rgb(115, 180, 230)' },                         
                         dtk_kg_h2o: { top: 'rgb(65, 130, 180)', 
                                       bot: 'rgb(115, 180, 230)' }, 
                         dtk_frame:  { top:  'rgb(100, 160, 60)',
                                       bot:  'rgb(160, 210, 110)'}},
               target_band:{ dtk_weight: { top: 95.0,  // kg
                                           bot: 88.0 }, 
-                            // dtk_pc_fat: { top: 16.0,   // %
-                            //               bot: 10.0  },
+                            dtk_pc_fat: { top: 16.0,   // %
+                                          bot: 10.0  },
                             dtk_kg_fat: { top: 15.2,   // kg
                                           bot: 8.8  },
-                            // dtk_pc_h2o: { top: 55.0, 
-                            //               bot: 45.0 }, 
+                            dtk_pc_h2o: { top: 55.0, 
+                                          bot: 45.0 }, 
                             dtk_kg_h2o: { top: 55.0, 
                                           bot: 45.0 }, 
                             dtk_frame:  { top: 18.0,
@@ -814,13 +857,6 @@ class DtkChart extends DisplayObject { // hold curent state
     // let a4 = new DisplayObject(dsObjConfig);
     // this.zList.push(a4);
 
-    dsObjConfig = { display:display, doName:'sBar', 
-                    //x_pc:80, y_pc:0, w_pc:20, h_pc:100, arc_rad:0, 
-                    x_pc:94, y_pc:0, w_pc:6, h_pc:100, arc_rad:0, 
-                    col_ink:'maroon', col_bk:col_bk, alpha:alpha, fontSize:fontSize, col_bbox:'rgb(0, 40, 119)', dbgOn:true}
-    let sBar = new SummaryBar(dsObjConfig, this, this.chartSettings.selectedDataSources[0]);
-    this.zList.push(sBar);
-
     dsObjConfig = { display:display, doName:'vBarS', 
                     x_pc:0, y_pc:0, w_pc:100, h_pc:100, arc_rad:0, 
                     col_ink:'orangeRed', col_bk:col_bk, alpha:alpha, fontSize:this.chartSettings.fontSize, col_bbox:'purple', dbgOn:true}
@@ -840,6 +876,17 @@ class DtkChart extends DisplayObject { // hold curent state
 
       let singlePlot = new DataPlot(dsObjConfig, this, dataSourceKey, 'test label');
       this.zList.push(singlePlot);
+
+      if (!dataSourceKey.includes('_av7')){ // only create SummaryBar for main datasource not the 7 day average
+        dsObjConfig = { display:display, doName:'sBar', 
+                        //x_pc:80, y_pc:0, w_pc:20, h_pc:100, arc_rad:0, 
+                        x_pc:94, y_pc:0, w_pc:6, h_pc:100, arc_rad:0, 
+                        col_ink:dataSourceInk, col_bk:col_bk, alpha:alpha,
+                        fontSize:fontSize, col_bbox:'rgb(0, 40, 119)', dbgOn:false}
+
+        let sBar = new SummaryBar(dsObjConfig, this, dataSourceKey);
+        this.zList.push(sBar);      
+      }
 
       if (dataSourceKey in this.chartSettings.target_band) { // add the target band
         dsObjConfig = { display:display, doName:'tBand', 
