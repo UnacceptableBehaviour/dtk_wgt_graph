@@ -93,7 +93,28 @@ class DisplayObject {
     }    
     this.ctx.restore();
   }
+
+  placeText(ctx=null, text, x, y, color, fontSize, align='center', baseline='middle') {    
+    if (ctx==null){ ctx = this.ctx };
+    ctx.save();
+    
+    // font def
+    ctx.font = `${fontSize}px Arial`;
+    ctx.textBaseline = baseline; // hanging
+    ctx.textAlign = align;  // 'left' 'center'
+      
+    let textMetrics = ctx.measureText(text);
+    console.log('textMetrics');
+    console.log(textMetrics);
   
+    // place text between if it fits below if not
+    ctx.fillStyle = color;
+    ctx.fillText(text, x, y);
+    ctx.restore();
+
+    return textMetrics;
+  }    
+
   // const baselines = ["top","hanging","middle","alphabetic","ideographic","bottom"];
   placeCentreTextNoMk(ctx=null, text, xl, xr, y, color, fontSize, align='center', baseline='middle') {    
     if (ctx==null){ ctx = this.ctx };
@@ -526,6 +547,80 @@ class DataPlot extends DisplayObject {
 }
 
 
+class ChartKey extends DisplayObject {
+  // display rolling average for period length
+  constructor( {display, doName, x_pc, y_pc, w_pc, h_pc, arc_rad, col_ink, col_bk, alpha, fontSize, col_bbox, dbgOn} = {},
+                dtkChart, title='#' )
+  {
+    super({ display, doName,
+      x_pc, y_pc, w_pc, h_pc, arc_rad,
+      col_ink, col_bk, alpha, fontSize,
+      col_bbox, dbgOn
+    });
+
+    this.dtkChart = dtkChart;
+    this.title    = title;
+    this.keyTxt   = [];
+    this.keyCol   = [];
+    this.keyCount = 0;
+    this.longestText = title.length;    
+
+    this.spacer = this.fontSize *1.5; 
+    this.colRectSz = this.spacer * 0.7;
+    this.vOffset = this.spacer * 0.3;
+
+    this.w = (this.spacer * 2.5) + (this.longestText * 6);
+
+    console.log(`ChartKey   : ${this.x},${this.y},${this.w},${this.h} <`);
+    console.log(`ChartKey pc: ${this.x_pc},${this.y_pc},${this.w_pc},${this.h_pc} <`);
+  }
+
+  addKey(label, col){
+    this.keyTxt[this.keyCount] = label;
+    this.keyCol[this.keyCount] = col;
+    this.keyCount++;
+    
+    if (label.length > this.longestText) this.longestText = label.length;
+
+    this.h = this.vOffset + this.spacer + (this.spacer * this.keyCount);
+    this.w = (this.spacer * 2.5) + (this.longestText * 6);
+    
+    console.log(`ChartKey[${this.keyCount}]ADD: ${label}(${label.length})(${this.longestText}),${col} w:${this.w},h:${this.h}<`);
+  }
+
+  clearKeys(){
+    this.keyTxt   = [];
+    this.keyCol   = [];
+    this.keyCount = 0;
+    this.h = this.vOffset + this.spacer;
+    this.longestText = this.title.length;
+  }
+
+  draw(){
+    //super.draw();
+    const ctx = this.display.canvas.getContext("2d");
+
+    // blank out background
+    ctx.fillStyle = 'white';
+    ctx.globalAlpha = 0.8;
+    ctx.fillRect(this.x, this.y, this.w, this.h);
+    ctx.globalAlpha = 1;                                        // TODO - sort propert geometry calculation out for text placement
+
+
+    this.col_ink = 'black';
+    this.placeText(ctx, this.title, this.x + this.spacer *2, this.y + this.vOffset, this.col_ink, this.fontSize, 'left', 'top' )
+
+    for (let k=0; k<this.keyCount; k++){
+      this.col_ink = 'black';
+      this.placeText(ctx, this.keyTxt[k], this.x + this.spacer *2, this.y + this.spacer *(k+1) + this.vOffset, this.col_ink, this.fontSize, 'left', 'top' );
+      ctx.fillStyle = this.keyCol[k];
+      ctx.fillRect(this.x + this.spacer/2, this.y + this.spacer *(k+1) + this.vOffset, this.colRectSz, this.colRectSz);  
+    }
+
+    console.log(`w:${this.w}, h:${this.h}, spacer:${this.spacer}, vOffset:${this.vOffset}, font:${this.fontSize}`)
+  }
+}
+
 class TargetBand extends DisplayObject {
   // display rolling average for period length
   constructor( {display, doName,
@@ -781,7 +876,7 @@ class DtkChart extends DisplayObject { // hold curent state
               startIndex: INDEX_START_DEFAULT,
               endIndex:   INDEX_END_DEFAULT,
               chartWidthDays: CHART_WIDTH_DAYS_DEFAULT,
-              selectedDataSources: ['turd'],// OVER WRITTEN BY caller ['dtk_weight'], //, 'dtk_kg_fat', 'dtk_kg_h2o'],
+              selectedDataSources: ['error'],// OVER WRITTEN BY caller ['dtk_weight'], //, 'dtk_kg_fat', 'dtk_kg_h2o'],
               fontSize: fontSize,
               availableDataSources: ['dtk_weight', 'dtk_pc_fat', 'dtk_pc_h2o', 'dtk_kg_fat', 'dtk_kg_h2o'],
               col_ink: {dtk_weight:     'rgb(249, 149, 43)', 
@@ -859,10 +954,17 @@ class DtkChart extends DisplayObject { // hold curent state
 
     dsObjConfig = { display:display, doName:'vBarS', 
                     x_pc:0, y_pc:0, w_pc:100, h_pc:100, arc_rad:0, 
-                    col_ink:'orangeRed', col_bk:col_bk, alpha:alpha, fontSize:this.chartSettings.fontSize, col_bbox:'purple', dbgOn:true}
+                    col_ink:'orangeRed', col_bk:col_bk, alpha:alpha, 
+                    fontSize:this.chartSettings.fontSize, col_bbox:'purple', dbgOn:true}
     let verticalLabelBars = new VertLabelBars(dsObjConfig, this);
     this.zList.push(verticalLabelBars);
 
+    dsObjConfig = { display:display, doName:'key', 
+                    x_pc:5, y_pc:5, w_pc:30, h_pc:15, arc_rad:0, 
+                    col_ink:'orangeRed', col_bk:col_bk, alpha:alpha,
+                    fontSize:this.chartSettings.fontSize+2, col_bbox:'purple', dbgOn:false}
+    let chartKey = new ChartKey(dsObjConfig, this, 'KEY');
+    // push onto zList at end
 
     for (let dsIdx = 0; dsIdx < this.chartSettings.selectedDataSources.length; dsIdx++) {
       let dataSourceKey = this.chartSettings.selectedDataSources[dsIdx];
@@ -876,6 +978,8 @@ class DtkChart extends DisplayObject { // hold curent state
 
       let singlePlot = new DataPlot(dsObjConfig, this, dataSourceKey, 'test label');
       this.zList.push(singlePlot);
+      chartKey.addKey(dataSourceKey, dataSourceInk)
+      //chartKey.addKey(singlePlot.label, dataSourceInk)
 
       if (!dataSourceKey.includes('_av7')){ // only create SummaryBar for main datasource not the 7 day average
         dsObjConfig = { display:display, doName:'sBar', 
@@ -900,13 +1004,16 @@ class DtkChart extends DisplayObject { // hold curent state
 
         this.zList.push(targetBand);
       }
+                  
     }
     
     dsObjConfig = { display:display, doName:'yAxNum', 
                     x_pc:0, y_pc:0, w_pc:15, h_pc:100, arc_rad:0, 
                     col_ink:'black', col_bk:col_bk, alpha:0.5, fontSize:this.chartSettings.fontSize, col_bbox:'orange'}
     let yAxisNumbering = new YAxisNumbering(dsObjConfig, this);
-    this.zList.push(yAxisNumbering);    
+    this.zList.push(yAxisNumbering);  
+
+    this.zList.push(chartKey);
 
   } // olive navy maroon lime
 
