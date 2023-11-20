@@ -37,6 +37,7 @@ DATA_FILE_JSON = Path('./docs/static/js_modules/content/dtk_data.json')
 #DATA_FILE_JS = Path('./docs/static/js_modules/content/dtk_data.js')
 DATA_FILE_JS_SINGLE_PAGE = Path('./single_page_canvas/dtk_data.js')
 DATA_FILE_JS_TEST_PWA = Path('./docs/static/js_modules/content/dtk_data.js')
+DATA_FILE_JS_TEST_MYSQL = Path('/Users/simon/a_syllabus/lang/python/mysql_python/static/dtk_data.js')
 
 
 
@@ -47,10 +48,7 @@ DATA_FILE_JS_TEST_PWA = Path('./docs/static/js_modules/content/dtk_data.js')
 # with open(DATA_FILE_JSON, 'w') as f:
 #     f.write(record_to_json_file)
 
-def get_nutridoc_list_rtf(base_dir):    
-
-    #y971_NUTRITEST_recipes_20191123-06.rtf
-
+def get_nutridoc_list_rtf(base_dir):    #EG filename: y971_NUTRITEST_recipes_20191123-06.rtf
     file_LUT = {}
     nutri_doc_ref =''
 
@@ -144,3 +142,31 @@ with open(DATA_FILE_JS_SINGLE_PAGE, 'w') as f:
 
 with open(DATA_FILE_JS_TEST_PWA, 'w') as f:
     f.write(record_js)
+
+with open(DATA_FILE_JS_TEST_MYSQL, 'w') as f:
+    f.write(record_js)
+
+
+# leave a record of time we ran last
+TIMESTAMP_FILE = Path('./scratch/create_test_data_from_nutridocs_last_ran.json')
+now = datetime.now()
+try:
+    todays_weight = record[nix_time_ms(datetime(int(now.year),int(now.month),int(now.day)))]['dtk_weight']
+except:
+    todays_weight = 95.0
+
+timestamp = {
+  '_read': f"{now.year}-{now.month}-{now.day}--{now.hour}{now.minute}",
+  'y': now.year,
+  'm': now.month,
+  'd': now.day,
+  'h': now.hour,
+  'min': now.minute,
+  'utc': str(now.utcnow()),
+  'weight_in_kg': todays_weight
+}
+
+with open(TIMESTAMP_FILE, 'w') as f:
+  json.dump(timestamp, f)
+
+pprint(timestamp)
